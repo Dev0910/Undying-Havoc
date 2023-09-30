@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
     void HitTarget()
     {
         //GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        EnemyMovement e = target.GetComponent<EnemyMovement>();
+        Enemy1 e = target.GetComponent<Enemy1>();
         if (e != null)
         {
             e.TakeDamage(damage);
