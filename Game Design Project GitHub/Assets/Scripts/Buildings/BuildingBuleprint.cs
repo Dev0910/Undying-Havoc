@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class BuildingBuleprint : MonoBehaviour
 {
+    [Header("Building Blueprint")]
     public int cost;
     public int sellPrice;
     public GameObject upgradedPrefab;

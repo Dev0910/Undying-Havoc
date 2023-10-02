@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6376485047918762658}
   - component: {fileID: 4351733553774784872}
   - component: {fileID: 7184692427525041644}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 6373214600518976183}
   - component: {fileID: 4859022391249987352}
   - component: {fileID: 3099412015910092003}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Sell Or Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 6217506142723240501}
   - component: {fileID: 5651643135039868566}
   - component: {fileID: 5414407526762403838}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7364418702073232706}
   m_Layer: 0
   m_Name: Wooden Wall
-  m_TagString: Wall
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 476196640045808774}
   - component: {fileID: 3773876076539170874}
   - component: {fileID: 2371105882383387306}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Detail Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 7787024432661228561}
   - component: {fileID: 6989119051782902467}
   - component: {fileID: 149012246298361454}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 4427056872161858079}
   - component: {fileID: 2825174269366971696}
   - component: {fileID: 3457341247030425153}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 1819520957658356931}
   - component: {fileID: 4798555562164104151}
   - component: {fileID: 4429834081024692488}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 1926509976688354813}
   - component: {fileID: 4680455128637442960}
   - component: {fileID: 5325431249846849997}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

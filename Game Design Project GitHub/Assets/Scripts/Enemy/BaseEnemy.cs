@@ -11,21 +11,25 @@ public class BaseEnemy : MonoBehaviour
     public float attackSpeed;
     public float damage;
     public float minimumDistance;
-
-    public void Awake()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player");
-    }
+    protected bool isBuilding;
+    protected Rigidbody2D rb;
+    public float obstacleDetectionDistance = 1f;
     public void TakeDamage(float damage)
     {
 
     }
 
-    public void FollowTarget(Vector2 target)
+    public void FollowTarget(Vector2 target , Vector2 selfPos)
     {
-        if (Vector2.Distance(transform.position,target) > minimumDistance)
+        Vector2 dir;
+        if (Vector2.Distance(transform.position, target) > minimumDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+            dir = target - selfPos;
         }
+        else
+        {
+            dir = Vector2.zero;
+        }
+        rb.velocity = (dir.normalized) * moveSpeed;
     }
 }
