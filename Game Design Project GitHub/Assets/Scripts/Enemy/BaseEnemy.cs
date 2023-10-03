@@ -7,7 +7,7 @@ public class BaseEnemy : MonoBehaviour
 {
     public float maxHealth;
     public float currentHealth;
-    public GameObject Player;
+    protected GameObject Player;
     public float moveSpeed;
     public float attackSpeed;
     public float damage;
@@ -17,6 +17,7 @@ public class BaseEnemy : MonoBehaviour
     protected Rigidbody2D rb;
     public float obstacleDetectionDistance = 1f;
     protected float lastAttackTime;
+    
     public void TakeDamage(float damage)
     {
 

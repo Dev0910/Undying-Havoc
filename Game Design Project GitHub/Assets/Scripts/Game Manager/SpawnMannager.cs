@@ -4,15 +4,18 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Enemy
-{
-    public GameObject enemyPrefab;
-    public int cost;
-}
+//public class Enemy
+//{
+//    public GameObject enemyPrefab;
+//    public int cost;
+//}
 public class SpawnMannager : MonoBehaviour
 {
-    public List<Enemy> enemies = new List<Enemy>();
+    //public List<Enemy> enemies = new List<Enemy>();
+
+    private EnemyData[] enemies;
     //public int currWave;
+
     private int waveValue;
     public int incrementInWaveValu = 10;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
@@ -31,6 +34,7 @@ public class SpawnMannager : MonoBehaviour
     //private GameManager gameManager;
     private void Start()
     {
+        enemies = GameManager.enemyDatas;
         //gameManager = GetComponent<GameManager>();
         //InvokeRepeating("SpawnWave", 0, gameManager.timeBetweenDayAndNight);
     }
@@ -53,8 +57,8 @@ public class SpawnMannager : MonoBehaviour
         List<GameObject> generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
         {
-            int randEnemyId = Random.Range(0, enemies.Count);
-            int randEnemyCost = enemies[randEnemyId].cost;
+            int randEnemyId = Random.Range(0, enemies.Length);
+            int randEnemyCost = enemies[randEnemyId].costToSpawn;
 
             if (waveValue - randEnemyCost >= 0)
             {
@@ -72,6 +76,6 @@ public class SpawnMannager : MonoBehaviour
 
     private void SpawnEnemy(GameObject _enemy)
     {
-
+        Debug.Log("Spawn Enemy");
     }
 }

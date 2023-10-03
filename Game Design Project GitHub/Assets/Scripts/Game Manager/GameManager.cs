@@ -14,11 +14,15 @@ public class GameManager : MonoBehaviour
     public int currentWave;
     public bool isNight = false;
     public float timeBetweenDayAndNight = 15f;
+    public EnemyScriptableObject enemyScriptableObject;
+    public static EnemyData[] enemyDatas;
 
     public CustomCurser customCurser;
     // Start is called before the first frame update
     void Start()
     {
+        enemyDatas = enemyScriptableObject.enemyData;
+        //enemyScriptableObjects =GetComponent<EnemyScriptableObject>();
         spawnMannager = GetComponent<SpawnMannager>();
         currentWave = 0;
         isNight = false;

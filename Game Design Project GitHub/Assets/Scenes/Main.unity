@@ -395,6 +395,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1872483330}
+  spawnMannager: {fileID: 0}
+  currentWave: 0
+  isNight: 0
+  timeBetweenDayAndNight: 15
+  enemyScriptableObject: {fileID: 11400000, guid: 85c8bc4da88432c4995f23aa54bddf0e, type: 2}
   customCurser: {fileID: 1341024519}
 --- !u!114 &650213614
 MonoBehaviour:
@@ -408,7 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042fddafd97e3e14bae6a4cd8200efc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDayOrNight: 15
   nightPanel: {fileID: 5218214948363017099}
   timeCycle: {fileID: 8390377942679788991}
   currentTimeText: {fileID: 4983523876342628105}

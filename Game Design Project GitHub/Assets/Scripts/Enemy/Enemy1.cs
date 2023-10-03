@@ -6,6 +6,8 @@ public class Enemy1 : BaseEnemy
 {
     private void Awake()
     {
+        
+        GetEnemyData();
         isBuilding = false;
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -36,6 +38,31 @@ public class Enemy1 : BaseEnemy
             theBuilding = null;
         }
     }
+    
+    private void GetEnemyData()
+    {
+        EnemyData[] enemyDataArray = GameManager.enemyDatas;
+
+        foreach (EnemyData enemy in enemyDataArray)
+        {
+            if (enemy != null && enemy.enemyType == EEnemyType.Enemy1)
+            {
+                maxHealth = enemy.maxHealth;
+                moveSpeed = enemy.moveSpeed;
+                attackSpeed = enemy.attackSpeed;
+                damage = enemy.damage;
+                minimumDistanceFromPlayer = enemy.minimumDistanceFromPlayer;
+                break;
+            }
+
+        }
+    }
+    
+        
+
+
+    
+
 
     
 
