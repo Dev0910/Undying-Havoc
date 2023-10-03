@@ -2,109 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class Enemy
+{
+    public GameObject enemyPrefab;
+    public int cost;
+}
 public class SpawnMannager : MonoBehaviour
 {
-    public enum SpawnState { SPAWNING, WAITING, COUNTING };
+    public List<Enemy> enemies = new List<Enemy>();
+    //public int currWave;
+    private int waveValue;
+    public int incrementInWaveValu = 10;
+    public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
-    [System.Serializable]
-    public class Wave
+    public Transform[] spawnLocation;
+    public int spawnIndex;
+
+    
+    public int waveDuration;
+    private float waveTimer;
+    private float spawnInterval;
+    private float spawnTimer;
+
+    public List<GameObject> spawnedEnemies = new List<GameObject>();
+
+    //private GameManager gameManager;
+    private void Start()
     {
-        public string name;
-        public Transform enemy;
-        public int count;
-        public float rate;
+        //gameManager = GetComponent<GameManager>();
+        //InvokeRepeating("SpawnWave", 0, gameManager.timeBetweenDayAndNight);
     }
-    public Wave[] waves;
-    public int nextWave = 0;
 
-    public float timeBetweenWaves = 5f;
-    public float waveCountdown;
-
-    private float searchCountdown = 1f;
-    private SpawnState state = SpawnState.COUNTING;
-
-    void Start()
+    public void SpawnWave(int currentWave)
     {
-        waveCountdown = timeBetweenWaves;
-    }
-    void Update()
-    {
-        if (state == SpawnState.WAITING)
+        GetEnemysToSpawn(currentWave);
+        for(int i = 0;i<enemiesToSpawn.Count;i++)
         {
-            if (!EnemyIsAlive())
+            SpawnEnemy(enemiesToSpawn[i]);
+        }
+    }
+
+
+
+    private void GetEnemysToSpawn(int currentWave)
+    {
+        waveValue = incrementInWaveValu * currentWave;
+
+        List<GameObject> generatedEnemies = new List<GameObject>();
+        while (waveValue > 0)
+        {
+            int randEnemyId = Random.Range(0, enemies.Count);
+            int randEnemyCost = enemies[randEnemyId].cost;
+
+            if (waveValue - randEnemyCost >= 0)
             {
-                WaveCompleted();
+                generatedEnemies.Add(enemies[randEnemyId].enemyPrefab);
+                waveValue -= randEnemyCost;
             }
-            else
+            else if (waveValue <= 0)
             {
-                return;
-            }
-        }
-
-        if (waveCountdown <= 0)
-        {
-            if (state != SpawnState.SPAWNING)
-            {
-                StartCoroutine(SpawnWave(waves[nextWave]));
-            }
-        }
-        else
-        {
-            waveCountdown -= Time.deltaTime;
-        }
-    }
-    void WaveCompleted()
-    {
-        Debug.Log("Wave Completed");
-
-        state = SpawnState.COUNTING;
-        waveCountdown = timeBetweenWaves;
-
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            nextWave = 0;
-            Debug.Log("All Waves Complete! Looping.");
-        }
-        else
-        {
-            nextWave++;
-        }
-
-    }
-
-    bool EnemyIsAlive()
-    {
-        searchCountdown -= Time.deltaTime;
-        if (searchCountdown <= 0f)
-        {
-            searchCountdown = 1f;
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-            {
-                return false;
+                break;
             }
         }
-        return true;
+        enemiesToSpawn.Clear();
+        enemiesToSpawn = generatedEnemies;
     }
 
-    IEnumerator SpawnWave(Wave _wave)
+    private void SpawnEnemy(GameObject _enemy)
     {
-        Debug.Log("Spawning Wave:" + _wave.name);
-        state = SpawnState.SPAWNING;
-
-        for (int i = 0; i < _wave.count; i++)
-        {
-            SpawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds(1f / _wave.rate);
-        }
-
-        state = SpawnState.WAITING;
-        yield break;
-    }
-
-    void SpawnEnemy(Transform _enemy)
-    {
-        Debug.Log("Spawning Enemy" + _enemy.name);
-        Instantiate(_enemy, transform.position, transform.rotation);
 
     }
 }

@@ -7,19 +7,21 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     
-
-    
-
     private GameObject buildingToPlace;
     public GameObject player;
     public static GameManager instance;
-    
+    public SpawnMannager spawnMannager;
+    public int currentWave;
+    public bool isNight = false;
+    public float timeBetweenDayAndNight = 15f;
+
     public CustomCurser customCurser;
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        spawnMannager = GetComponent<SpawnMannager>();
+        currentWave = 0;
+        isNight = false;
     }
 
     private void Update()

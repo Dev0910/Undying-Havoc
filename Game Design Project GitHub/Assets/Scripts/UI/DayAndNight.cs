@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DayAndNight : MonoBehaviour
 {
-    public float timeToDayOrNight = 15f;
+    
     private float currentTime = 0f;
-    bool isNight = false;
+    private GameManager gameManager;
     public GameObject nightPanel;
     public Text timeCycle;
     public Text currentTimeText;
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = timeToDayOrNight;
-        isNight = false;
+        gameManager = GetComponent<GameManager>();
+        currentTime = gameManager.timeBetweenDayAndNight;
+        
     }
 
     // Update is called once per frame
@@ -24,18 +25,19 @@ public class DayAndNight : MonoBehaviour
         currentTimeText.text = currentTime+"";
         if(currentTime < 0f)
         {
-            currentTime = timeToDayOrNight;
-            if(isNight )
+            currentTime = gameManager.timeBetweenDayAndNight;
+            if(gameManager.isNight)
             {
                 timeCycle.text = "Night In : ";
-                isNight = false;
+                gameManager.isNight = false;
                 nightPanel.SetActive(false);
             }
-            else if(!isNight)
+            else if(!gameManager.isNight)
             {
                 timeCycle.text = "Day In : ";
-
-                isNight = true;
+                gameManager.isNight = true;
+                gameManager.currentWave++;
+                gameManager.spawnMannager.SpawnWave(gameManager.currentWave);
                 nightPanel.SetActive(true);
             }
         }
