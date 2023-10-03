@@ -1157,6 +1157,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034157044001199432, guid: d281004c57536804583fef9d49233390, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034157044001199432, guid: d281004c57536804583fef9d49233390, type: 3}
+      propertyPath: minimumDistanceFromPlayer
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
       propertyPath: m_Name
       value: enemy

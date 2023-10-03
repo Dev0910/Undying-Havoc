@@ -19,6 +19,7 @@ public class Turret : BuildingBuleprint
 
     void Start()
     {
+        //currentHealth = maxHealth;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         qbullet = new Queue<GameObject>();
     }

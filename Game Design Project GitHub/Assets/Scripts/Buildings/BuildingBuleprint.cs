@@ -11,7 +11,14 @@ public class BuildingBuleprint : MonoBehaviour
     public GameObject upgradedPrefab;
     public int upgradeCost;
     public Sprite spriteTOBuild;
+    public float maxHealth = 100f;
+    public float currentHealth = 0f;
 
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
     private void OnMouseDown()
     {
         if(ClickHandler.xDown)
@@ -42,6 +49,20 @@ public class BuildingBuleprint : MonoBehaviour
             Stats.currentGold -= upgradeCost;
             Instantiate(upgradedPrefab, this.transform.position , upgradedPrefab.transform.rotation);
             Destroy(this.gameObject);
+        }
+    }
+
+    public void TakeDamage(float Damage)
+    {
+        if(currentHealth > 0)
+        {
+            currentHealth -= Damage;
+        }
+        else if(currentHealth <= 0)
+        {
+            //currentHealth = 0;
+            Debug.Log("Building Destroyed");
+            this.gameObject.SetActive(false);
         }
     }
 }
