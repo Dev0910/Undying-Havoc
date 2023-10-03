@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 650213615}
   - component: {fileID: 650213616}
   - component: {fileID: 650213617}
+  - component: {fileID: 650213618}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -456,6 +457,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelToDesable: {fileID: 4334498637054154366}
   pauseMenuUI: {fileID: 1641345579122678148}
+--- !u!114 &650213618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650213610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb67c70e9441d409aca9d8e3d42fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemyPrefab: {fileID: 0}
+    cost: 0
+  incrementInWaveValu: 10
+  enemiesToSpawn: []
+  spawnIndex: 0
+  waveDuration: 0
 --- !u!1001 &1081035646
 PrefabInstance:
   m_ObjectHideFlags: 0
