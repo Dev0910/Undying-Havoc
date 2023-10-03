@@ -4,23 +4,23 @@ using UnityEngine;
 
 
 [System.Serializable]
-//public class Enemy
-//{
-//    public GameObject enemyPrefab;
-//    public int cost;
-//}
+public class Enemy
+{
+    public GameObject enemyPrefab;
+    public int cost;
+}
 public class SpawnMannager : MonoBehaviour
 {
-    //public List<Enemy> enemies = new List<Enemy>();
+    public List<Enemy> enemies = new List<Enemy>();
 
-    private EnemyData[] enemies;
+    //private EnemyData[] enemies;
     //public int currWave;
 
     private int waveValue;
     public int incrementInWaveValu = 10;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
-    public Transform[] spawnLocation;
+    //public Transform[] spawnLocation;
     public int spawnIndex;
 
     
@@ -29,12 +29,12 @@ public class SpawnMannager : MonoBehaviour
     private float spawnInterval;
     private float spawnTimer;
 
-    public List<GameObject> spawnedEnemies = new List<GameObject>();
+    //public List<GameObject> spawnedEnemies = new List<GameObject>();
 
     //private GameManager gameManager;
     private void Start()
     {
-        enemies = GameManager.enemyDatas;
+        //enemies = GameManager.enemyDatas;
         //gameManager = GetComponent<GameManager>();
         //InvokeRepeating("SpawnWave", 0, gameManager.timeBetweenDayAndNight);
     }
@@ -57,8 +57,8 @@ public class SpawnMannager : MonoBehaviour
         List<GameObject> generatedEnemies = new List<GameObject>();
         while (waveValue > 0)
         {
-            int randEnemyId = Random.Range(0, enemies.Length);
-            int randEnemyCost = enemies[randEnemyId].costToSpawn;
+            int randEnemyId = Random.Range(0, enemies.Count);
+            int randEnemyCost = enemies[randEnemyId].cost;
 
             if (waveValue - randEnemyCost >= 0)
             {
