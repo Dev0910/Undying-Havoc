@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         enemyDatas = enemyScriptableObject.enemyData;
+        player = GameObject.FindGameObjectWithTag("Player");
         //enemyScriptableObjects =GetComponent<EnemyScriptableObject>();
         spawnMannager = GetComponent<SpawnMannager>();
         currentWave = 0;

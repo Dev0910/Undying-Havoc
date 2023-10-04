@@ -470,12 +470,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - enemyPrefab: {fileID: 0}
-    cost: 0
-  incrementInWaveValu: 10
+  - enemyPrefab: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
+    cost: 1
+  incrementInWaveValu: 5
   enemiesToSpawn: []
-  spawnIndex: 0
   waveDuration: 0
+  spawnEnemySecBeforeDay: 5
+  spawnRadius: 10
 --- !u!1001 &1081035646
 PrefabInstance:
   m_ObjectHideFlags: 0

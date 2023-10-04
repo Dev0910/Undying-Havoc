@@ -7,7 +7,7 @@ public class Enemy1 : BaseEnemy
     private void Awake()
     {
         
-        GetEnemyData();
+        //GetEnemyData();
         isBuilding = false;
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");

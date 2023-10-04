@@ -37,7 +37,7 @@ public class DayAndNight : MonoBehaviour
                 timeCycle.text = "Day In : ";
                 gameManager.isNight = true;
                 gameManager.currentWave++;
-                gameManager.spawnMannager.SpawnWave(gameManager.currentWave);
+                gameManager.spawnMannager.SpawnWave();
                 nightPanel.SetActive(true);
             }
         }

@@ -147,7 +147,9 @@ MonoBehaviour:
   sellPrice: 20
   upgradedPrefab: {fileID: 0}
   upgradeCost: 0
-  spriteTOBuild: {fileID: 21300000, guid: 6516662b08c1a0543ba0a04daec1a174, type: 3}
+  spriteTOBuild: {fileID: 21300000, guid: 7ddac7c502d299d4f8af0be7b89b3ed5, type: 3}
+  maxHealth: 100
+  currentHealth: 0
   target: {fileID: 0}
   range: 5
   fireRate: 0.5
