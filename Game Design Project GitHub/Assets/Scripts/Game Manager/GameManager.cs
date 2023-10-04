@@ -16,11 +16,12 @@ public class GameManager : MonoBehaviour
     public float timeBetweenDayAndNight = 15f;
     public EnemyScriptableObject enemyScriptableObject;
     public static EnemyData[] enemyDatas;
-
+    public static GridSystem gridSystem;
     public CustomCurser customCurser;
     // Start is called before the first frame update
     void Start()
     {
+        gridSystem = GetComponent<GridSystem>();
         enemyDatas = enemyScriptableObject.enemyData;
         player = GameObject.FindGameObjectWithTag("Player");
         //enemyScriptableObjects =GetComponent<EnemyScriptableObject>();

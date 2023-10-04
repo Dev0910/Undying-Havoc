@@ -13,37 +13,29 @@ public class BuildingBuleprint : MonoBehaviour
     public Sprite spriteTOBuild;
     public float maxHealth = 100f;
     public float currentHealth = 0f;
-
+    GameObject nearestTile = null;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        nearestTile = GameManager.gridSystem.GetNearestTile(this.transform.position);
     }
     private void OnMouseDown()
     {
+        //to sell the building 
         if(ClickHandler.xDown)
         {
             Stats.currentGold += sellPrice;
             Destroy(this.gameObject);
 
 
-            GameObject nearestTile = null;
-            float nearestDistence = float.MaxValue;
-            foreach (GameObject tile in GridSystem.tileArray)
-            {
-                float dis = Vector2.Distance(tile.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                if (dis < nearestDistence)
-                {
-                    nearestDistence = dis;
-                    nearestTile = tile;
-                }
-            }
+            
             if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
             {
                 nearestTile.GetComponent<Tile>().isOccupied = false;
             }
         }
-
+        //to upgrade the building
         if(ClickHandler.vDown && Stats.currentGold >= upgradeCost && upgradedPrefab != null)
         {
             Stats.currentGold -= upgradeCost;
@@ -62,7 +54,9 @@ public class BuildingBuleprint : MonoBehaviour
         {
             //currentHealth = 0;
             Debug.Log("Building Destroyed");
+            nearestTile.GetComponent<Tile>().isOccupied = false;
             this.gameObject.SetActive(false);
         }
     }
+
 }

@@ -81,6 +81,22 @@ public class GridSystem : MonoBehaviour
         }
 
     }
+
+    public GameObject GetNearestTile(Vector2 position)
+    {
+        GameObject nearestTile = null;
+        float nearestDistence = float.MaxValue;
+        foreach (GameObject tile in GridSystem.tileArray)
+        {
+            float dis = Vector2.Distance(tile.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (dis < nearestDistence)
+            {
+                nearestDistence = dis;
+                nearestTile = tile;
+            }
+        }
+        return nearestTile;
+    }
     
 
 

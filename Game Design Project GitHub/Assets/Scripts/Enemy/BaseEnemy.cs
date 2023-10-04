@@ -43,7 +43,8 @@ public class BaseEnemy : MonoBehaviour
         Debug.Log(damage + " damage to " + target.name);
         if(isBuilding)
         {
-            target.GetComponent<BuildingBuleprint>().TakeDamage(damage);
+            BuildingBuleprint bp =  target.GetComponent<BuildingBuleprint>();
+            bp.TakeDamage(damage);
         }
         
     }

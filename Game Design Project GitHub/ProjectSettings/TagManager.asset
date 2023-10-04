@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Stone
   - Building
+  - EnemyHolder
   layers:
   - Default
   - TransparentFX
