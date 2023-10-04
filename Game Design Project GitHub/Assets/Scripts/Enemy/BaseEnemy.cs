@@ -47,4 +47,16 @@ public class BaseEnemy : MonoBehaviour
         }
         
     }
+
+    public void TakeDamage(int damage)
+    {
+        if(currentHealth - damage >=0)
+        {
+            currentHealth -= damage;
+        }
+        else if(currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

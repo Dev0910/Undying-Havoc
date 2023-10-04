@@ -152,11 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  Player: {fileID: 0}
   moveSpeed: 1
   attackSpeed: 1
-  damage: 1
-  minimumDistance: 2
+  damage: 20
+  minimumDistanceFromPlayer: 1.5
   obstacleDetectionDistance: 1
 --- !u!50 &8258023360573501037
 Rigidbody2D:

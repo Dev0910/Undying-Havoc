@@ -6,8 +6,9 @@ public class Enemy1 : BaseEnemy
 {
     private void Awake()
     {
-        
+
         //GetEnemyData();
+        currentHealth = maxHealth;
         isBuilding = false;
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
