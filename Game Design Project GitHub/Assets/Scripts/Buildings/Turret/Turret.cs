@@ -15,54 +15,57 @@ public class Turret : BuildingBuleprint
     public string enemyTag = "Enemy";
     public GameObject bulletPrefab;
 
-    public static Queue<GameObject> qbullet;
+    public static Queue<GameObject> qbullet;//creating the bullet queue for object pooling
 
     void Start()
     {
-        //currentHealth = maxHealth;
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        currentHealth = maxHealth;
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);//updating target every 0.5sec
         qbullet = new Queue<GameObject>();
     }
 
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
-        foreach (GameObject enemy in enemies)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);//creating array to store all the enemys
+        float shortestDistance = Mathf.Infinity;// to storing the shortest distance
+        GameObject nearestEnemy = null;// to store the nearest enemy
+        foreach (GameObject enemy in enemies)//run for each enemy stored in the enemies array
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);//calculate and temporary store the distance of the enemies and the turret
+            if (distanceToEnemy < shortestDistance)//if distance of this enemy is less then the shoetest Distance
             {
+                //save the values of this enemy 
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range)//if the nearest enemy is in range
         {
-            target = nearestEnemy.transform;
+            target = nearestEnemy.transform;//set target as that enemy
         }
         else
         {
-            target = null;
+            target = null;//or let the target be empty
         }
     }
 
     private void Update()
     {
+        //return if there is no target
         if (target == null)
         {
             return;
         }
 
-        if (fireCooldown <= 0f)
+        if (fireCooldown <= 0f)//ready to shoot 
         {
-            Shoot();
-            fireCooldown = 1f / fireRate;
+            Shoot();//call the shoot function
+            fireCooldown = 1f / fireRate;//reset the firecooldown
         }
         fireCooldown -= Time.deltaTime;
     }
+    //draw a circle of range size
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -71,27 +74,29 @@ public class Turret : BuildingBuleprint
 
     void Shoot()
     {
-        GameObject bulletGO;
+        GameObject bulletGO;//temporary gameobject
 
-        if (CheakQueue())
+        if (CheakQueue())//if the bullet queue is not empty
         {
-            bulletGO = qbullet.Dequeue();
-            bulletGO.SetActive(true);
-            bulletGO.transform.position = transform.position;
+            bulletGO = qbullet.Dequeue();//take the first bullet from the queue
+            bulletGO.SetActive(true);//set it active
+            bulletGO.transform.position = transform.position;//change the position to the turret position
         }
-        else
+        else//if it is empty spawn a new bullet
         {
             bulletGO = (GameObject)Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+            bulletGO.transform.parent = this.transform;//set the turret as the bullet's parent
         }
-
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+        
+        Bullet bullet = bulletGO.GetComponent<Bullet>();//creating an instance of the bullet script
 
         if (bullet != null)
         {
-            bullet.seek(target);
+            bullet.seek(target);//giving target to the bullet
         }
     }
 
+    //return if the queue is empty or not
     bool CheakQueue()
     {
         if (qbullet.Count > 0)

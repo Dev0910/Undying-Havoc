@@ -18,32 +18,34 @@ public class BuildingBuleprint : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        nearestTile = GameManager.gridSystem.GetNearestTile(this.transform.position);
+        nearestTile = GameManager.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
     }
     private void OnMouseDown()
     {
         //to sell the building 
-        if(ClickHandler.xDown)
+        if(ClickHandler.xDown)//taking refrence from the click Handler
         {
-            Stats.currentGold += sellPrice;
-            Destroy(this.gameObject);
+            Stats.currentGold += sellPrice;//adding the selling price of the turret 
+            Destroy(this.gameObject);//destroying the building
 
-
-            
+            //change the is Occuied bool in the class Tile
             if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
             {
                 nearestTile.GetComponent<Tile>().isOccupied = false;
             }
         }
+
         //to upgrade the building
         if(ClickHandler.vDown && Stats.currentGold >= upgradeCost && upgradedPrefab != null)
         {
-            Stats.currentGold -= upgradeCost;
-            Instantiate(upgradedPrefab, this.transform.position , upgradedPrefab.transform.rotation);
-            Destroy(this.gameObject);
+            Stats.currentGold -= upgradeCost;//removing the upgrade cost
+            Instantiate(upgradedPrefab, this.transform.position , upgradedPrefab.transform.rotation);//spawning the new building
+            Destroy(this.gameObject);//destroying old building
         }
     }
 
+
+    //function is called when building takes damage
     public void TakeDamage(float Damage)
     {
         if(currentHealth > 0)
@@ -52,9 +54,7 @@ public class BuildingBuleprint : MonoBehaviour
         }
         else if(currentHealth <= 0)
         {
-            //currentHealth = 0;
-            Debug.Log("Building Destroyed");
-            nearestTile.GetComponent<Tile>().isOccupied = false;
+            nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
             this.gameObject.SetActive(false);
         }
     }
