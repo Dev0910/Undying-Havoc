@@ -5,9 +5,9 @@ Game Design project
 Game Name : Undying Havoc
 
 Members :-
-Dev Patel
-Yash Jadhav
-Arpan Chakraborty
+Dev Patel,
+Yash Jadhav,
+Arpan Chakraborty,
 Sarthak Nagpure
 
 
