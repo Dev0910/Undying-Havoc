@@ -1,4 +1,13 @@
 # Game_Design_Group_Project
+
 Game Design project
 
-hi everyone
+Game Name : Undying Havoc
+
+Members :-
+Dev Patel
+Yash Jadhav
+Arpan Chakraborty
+Sarthak Nagpure
+
+
