@@ -516,6 +516,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4084846662406255346, guid: 2e18cf0e5008f0d479a19b8be07dfffe, type: 3}
+      propertyPath: m_TagString
+      value: WeaponHolder
+      objectReference: {fileID: 0}
     - target: {fileID: 4118816161463775340, guid: 2e18cf0e5008f0d479a19b8be07dfffe, type: 3}
       propertyPath: m_Mass
       value: 80
@@ -574,7 +578,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 758586847078935803, guid: 2e18cf0e5008f0d479a19b8be07dfffe, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1616760182335287497, guid: 2e18cf0e5008f0d479a19b8be07dfffe, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e18cf0e5008f0d479a19b8be07dfffe, type: 3}

@@ -9,22 +9,23 @@ public class Tile : MonoBehaviour
     public Color greenColor;
     public Color redColor;
 
-    private SpriteRenderer rend;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
+        //change the color of the tile according according to the status of the tile
         if(isOccupied==true)
         {
-            rend.color = redColor;
+            spriteRenderer.color = redColor;
         }
         else
         {
-            rend.color = greenColor;
+            spriteRenderer.color = greenColor;
         }
     }
 

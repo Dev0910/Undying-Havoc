@@ -9,6 +9,7 @@ TagManager:
   - Stone
   - Building
   - EnemyHolder
+  - WeaponHolder
   layers:
   - Default
   - TransparentFX

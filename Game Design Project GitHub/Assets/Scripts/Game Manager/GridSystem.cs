@@ -61,8 +61,8 @@ public class GridSystem : MonoBehaviour
 
                 for (int j = 0; j < tileArray.GetLength(1); j++)
                 {
-                    Vector3 screenPoint = Camera.main.WorldToViewportPoint(tileArray[i, j].transform.position);
-                    bool onScreen = screenPoint.x > -.2 && screenPoint.x < 1.2 && screenPoint.y > -0.2 && screenPoint.y < 1.2;
+                    Vector3 screenPoint = Camera.main.WorldToViewportPoint(tileArray[i, j].transform.position);//store the transform of the camera
+                    bool onScreen = screenPoint.x > -0.2 && screenPoint.x < 1.2 && screenPoint.y > -0.2 && screenPoint.y < 1.2;//cheak if the tile is in the view of the camera
                     if (onScreen)
                     {
                         tileArray[i, j].SetActive(true);
@@ -78,20 +78,22 @@ public class GridSystem : MonoBehaviour
 
     }
 
+    //return the nearest tile to the position given while calling the function
     public GameObject GetNearestTile(Vector2 position)
     {
-        GameObject nearestTile = null;
-        float nearestDistence = float.MaxValue;
-        foreach (GameObject tile in GridSystem.tileArray)
+        GameObject nearestTile = null;//temprory variable to store the nearest tile
+        float nearestDistence = float.MaxValue;//temprory variavle to store the distance of that tile
+        foreach (GameObject tile in GridSystem.tileArray)//run for each tile in grid system
         {
-            float dis = Vector2.Distance(tile.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (dis < nearestDistence)
+            float distance = Vector2.Distance(tile.transform.position, position);//calculate the distance of the current tile from th position
+            //store the values if the distance is less then the previos distances
+            if (distance < nearestDistence)
             {
-                nearestDistence = dis;
+                nearestDistence = distance;
                 nearestTile = tile;
             }
         }
-        return nearestTile;
+        return nearestTile;//return the nearest tile
     }
     
 
