@@ -19,11 +19,12 @@ public class SpawnMannager : MonoBehaviour
     public List<GameObject> enemiesToSpawn = new List<GameObject>();//to store the enemy to spawn each round
 
     public float waveDuration;//time between to waves
-    public float spawnEnemySecBeforeDay;
+    public float spawnEnemySecondsBeforeDay;
     public float spawnRadius = 10f;
     private float spawnInterval;
     private int currentWave;
     private GameObject parentGameObject;
+    private int enemySpawnIndex = 0;
     //public List<GameObject> spawnedEnemies = new List<GameObject>();
 
     private GameManager gameManager;
@@ -37,17 +38,17 @@ public class SpawnMannager : MonoBehaviour
         waveDuration = gameManager.timeBetweenDayAndNight;
     }
 
+    //start of the wave
+    //called by the GameManager
     public void SpawnWave()
     {
         GetEnemysToSpawn();//update the enemiesToSpawn List
 
-        spawnInterval = (waveDuration - spawnEnemySecBeforeDay)/ enemiesToSpawn.Count;
+        spawnInterval = (waveDuration - spawnEnemySecondsBeforeDay)/ enemiesToSpawn.Count;
 
         currentWave++;
-        for (int i = 0; i < enemiesToSpawn.Count; i++)
-        {
-            SpawnEnemy(enemiesToSpawn[i]);
-        }
+        
+        InvokeRepeating("SpawnEnemy", 0, spawnInterval);
     }
 
 
@@ -77,12 +78,25 @@ public class SpawnMannager : MonoBehaviour
         enemiesToSpawn = generatedEnemies;//passing the temp values to enemiesToSpawn
     }
 
-    private void SpawnEnemy(GameObject enemy)
+    private void SpawnEnemy()
     {
+        GameObject enemy = enemiesToSpawn[enemySpawnIndex];//temprory store the enemy to spawn
         float randomAngle = Random.Range(0f, 360f);//chose a random Angle at which the enemy will be spawned
         Vector2 spawnPosition = player.transform.position + (Quaternion.Euler(0, 0, randomAngle) * Vector2.right * spawnRadius);//I don't Know
         GameObject e = Instantiate(enemy, spawnPosition, Quaternion.identity);//spawn the enemy
         e.transform.parent = parentGameObject.transform;
+        if(enemySpawnIndex >= enemiesToSpawn.Count-1)
+        {
+            enemySpawnIndex = 0;//reset index
+            CancelInvoke();//stop Invoke
+        }
+        else
+        {
+            enemySpawnIndex++;//increase the spawn index
+        }
+        
+        
+
 
     }
     

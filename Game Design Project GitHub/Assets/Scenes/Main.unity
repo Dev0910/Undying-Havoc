@@ -506,8 +506,8 @@ MonoBehaviour:
   incrementInWaveValu: 5
   enemiesToSpawn: []
   waveDuration: 0
-  spawnEnemySecBeforeDay: 5
-  spawnRadius: 30
+  spawnEnemySecondsBeforeDay: 5
+  spawnRadius: 20
 --- !u!1001 &1140848796
 PrefabInstance:
   m_ObjectHideFlags: 0
