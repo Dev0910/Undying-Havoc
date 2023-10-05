@@ -10,60 +10,56 @@ public class GridSystem : MonoBehaviour
     public GameObject tilePrefab;
     public static GameObject[,] tileArray;
 
-    private int[,] gridArray;
     public static bool gridIsVisible;
     private Vector2 spawnPoint = new Vector2(-99.5f,-99.5f);
     private void Awake()
     { 
-        tileArray = new GameObject[width,height];
-        gridArray = new int[width,height];
-
-        for(int i = 0; i < gridArray.GetLength(0); i++)
+        tileArray = new GameObject[width,height];//array to store the tiles 
+        
+        //runs the for loop width*height times
+        //spawns tile for each element in tileArray
+        for(int i = 0; i < tileArray.GetLength(0); i++)
         {
-            
-            for(int j = 0; j < gridArray.GetLength(1); j++)
+            for(int j = 0; j < tileArray.GetLength(1); j++)
             {
-                GameObject tile =  Instantiate(tilePrefab, spawnPoint, tilePrefab.transform.rotation);
-                tile.transform.parent = GameObject.Find("Grid").transform;
-                tileArray[i,j] = tile;
-                tile.SetActive(false);
-                gridIsVisible = false;
-                spawnPoint.x += 1;
+                GameObject tile =  Instantiate(tilePrefab, spawnPoint, tilePrefab.transform.rotation);//spawn tiles
+                tile.transform.parent = GameObject.Find("Grid").transform;//set Grid as their parent gameobject
+                tileArray[i,j] = tile;//store the tiles in the array
+                tile.SetActive(false);//disable the tile
+                spawnPoint.x += 1;//increase the spawn point x by one unit
             }
-            spawnPoint.x = -99.5f;
-            spawnPoint.y += 1;
+            spawnPoint.x = -99.5f;//reset the x value of the spawn point
+            spawnPoint.y += 1;//increase the spawn point y by one
         }
-        spawnPoint = new Vector3(-99.5f, -99.5f);
+        spawnPoint = new Vector3(-99.5f, -99.5f);// reset the spawnpont
+        gridIsVisible = false;
     }
 
+    //disable all the visable grid
     public void RemoveGrid()
     {
-        
-            
-                
-                    if (gridIsVisible)
-                    {
-                        for (int i = 0; i < tileArray.GetLength(0); i++)
-                        {
-                            for (int j = 0; j < tileArray.GetLength(1); j++)
-                            {
-                                tileArray[i, j].SetActive(false);
-                            }
-                        }
-                        gridIsVisible = false;
-                    }
-                    
-
-             
+        if (gridIsVisible)
+        {
+            for (int i = 0; i < tileArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < tileArray.GetLength(1); j++)
+                {
+                    tileArray[i, j].SetActive(false);
+                }
+            }
+        gridIsVisible = false;
+        }     
     }
+
+    //enable the grid visible to the player/ on camera
     public void GetGrid()
     {
         if (!gridIsVisible)
         {
-            for (int i = 0; i < gridArray.GetLength(0); i++)
+            for (int i = 0; i < tileArray.GetLength(0); i++)
             {
 
-                for (int j = 0; j < gridArray.GetLength(1); j++)
+                for (int j = 0; j < tileArray.GetLength(1); j++)
                 {
                     Vector3 screenPoint = Camera.main.WorldToViewportPoint(tileArray[i, j].transform.position);
                     bool onScreen = screenPoint.x > -.2 && screenPoint.x < 1.2 && screenPoint.y > -0.2 && screenPoint.y < 1.2;

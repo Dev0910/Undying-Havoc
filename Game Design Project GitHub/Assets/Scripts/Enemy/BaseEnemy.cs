@@ -7,48 +7,52 @@ public class BaseEnemy : MonoBehaviour
 {
     public float maxHealth;
     public float currentHealth;
-    protected GameObject Player;
     public float moveSpeed;
     public float attackSpeed;
     public float damage;
     public float minimumDistanceFromPlayer;
+
+
+    protected GameObject Player;
     protected bool isBuilding = false;
-    protected GameObject theBuilding;
+    protected GameObject theBuilding;//temprory store the building in contact
     protected Rigidbody2D rb;
-    public float obstacleDetectionDistance = 1f;
-    protected float lastAttackTime;
+    protected float lastAttackTime;//temprory store the time last attacked
     
     public void TakeDamage(float damage)
     {
 
     }
 
+    //follow the target
     public void FollowTarget(Vector2 target , Vector2 selfPos)
     {
-        Vector2 dir;
-        if (Vector2.Distance(transform.position, target) > minimumDistanceFromPlayer)
+        Vector2 direction;//temprory store the direction
+        if (Vector2.Distance(transform.position, target) > minimumDistanceFromPlayer)//cheack if the distance between you and the taeget is more then the minimumDistance distance
         {
-            dir = target - selfPos;
+            direction = target - selfPos;//set the direction from self Position to target position
         }
-        else
+        else//if the enemy has reach the taeget
         {
-            dir = Vector2.zero;
+            direction = Vector2.zero;//set direction to zero
         }
-        rb.velocity = (dir.normalized) * moveSpeed;
+        rb.velocity = (direction.normalized) * moveSpeed;//make it move in the direction of the enemy
     }
 
-    protected void Attack(GameObject target , float damage)
+    //attack the building/Player
+    protected void Attack(GameObject target , float damage)//get the target to attack and the damage to been delt
     {
-        lastAttackTime = Time.time;
+        lastAttackTime = Time.time;//seting the time of the last attack
         Debug.Log(damage + " damage to " + target.name);
-        if(isBuilding)
+        if(isBuilding)//if it is a building 
         {
-            BuildingBuleprint bp =  target.GetComponent<BuildingBuleprint>();
-            bp.TakeDamage(damage);
+            BuildingBuleprint bp =  target.GetComponent<BuildingBuleprint>();//creating an instance of the class BuildingBlueprint
+            bp.TakeDamage(damage);//calling the function takedamage from the building script
         }
         
     }
 
+    //take damage from buildings/Player
     public void TakeDamage(int damage)
     {
         if(currentHealth - damage >=0)
