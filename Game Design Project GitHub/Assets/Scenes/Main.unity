@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db001cd1f0a5744b94979adfdd14bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 0}
+  coinPrefab: {fileID: 2775383414676185335, guid: ebf8259715d595049b9d9a93dbb0d212, type: 3}
 --- !u!114 &1966874526
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(other.CompareTag("Coin"))
+        if (collision.CompareTag("Coin"))
         {
-            GameManager.Instance.dropAndCollectionManager.CollectGold(other.gameObject);
+            GameManager.Instance.dropAndCollectionManager.CollectGold(collision.gameObject);
         }
     }
 }

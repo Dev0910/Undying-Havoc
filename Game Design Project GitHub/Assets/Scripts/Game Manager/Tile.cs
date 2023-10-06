@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public bool isOccupied;
-
     public Color greenColor;
     public Color redColor;
 
@@ -18,6 +17,7 @@ public class Tile : MonoBehaviour
 
     private void Update()
     {
+        
         //change the color of the tile according according to the status of the tile
         if(isOccupied==true)
         {
