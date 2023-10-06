@@ -9,7 +9,7 @@ public class Enemy1 : BaseEnemy
         //GetEnemyData();
         currentHealth = maxHealth;
         isBuilding = false;
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
@@ -46,7 +46,7 @@ public class Enemy1 : BaseEnemy
     //it is to get data from the scriptable object of this enemy
     private void GetEnemyData()//not currently used
     {
-        EnemyData[] enemyDataArray = GameManager.enemyDatas;
+        EnemyData[] enemyDataArray = GameManager.Instance.enemyDatas;
 
         foreach (EnemyData enemy in enemyDataArray)
         {

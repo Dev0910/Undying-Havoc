@@ -18,7 +18,7 @@ public class SpawnMannager : MonoBehaviour
     public int incrementInWaveValu = 10;//the Valu of wave increased each round
     public List<GameObject> enemiesToSpawn = new List<GameObject>();//to store the enemy to spawn each round
 
-    public float waveDuration;//time between to waves
+    private float waveDuration;//time between to waves
     public float spawnEnemySecondsBeforeDay;
     public float spawnRadius = 10f;
     private float spawnInterval;
@@ -27,15 +27,13 @@ public class SpawnMannager : MonoBehaviour
     private int enemySpawnIndex = 0;
     //public List<GameObject> spawnedEnemies = new List<GameObject>();
 
-    private GameManager gameManager;
     private GameObject player;
     private void Start()
     {
         currentWave = 1;
         parentGameObject = GameObject.FindGameObjectWithTag("EnemyHolder");
-        gameManager = GetComponent<GameManager>();
-        player = gameManager.player;
-        waveDuration = gameManager.timeBetweenDayAndNight;
+        player = GameManager.Instance.player;
+        waveDuration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
     }
 
     //start of the wave
@@ -94,10 +92,6 @@ public class SpawnMannager : MonoBehaviour
         {
             enemySpawnIndex++;//increase the spawn index
         }
-        
-        
-
-
     }
     
 }

@@ -6,16 +6,19 @@ public class DayAndNight : MonoBehaviour
 {
     
     private float currentTime = 0f;
-    private GameManager gameManager;
     public GameObject nightPanel;
     public Text timeCycle;
     public Text currentTimeText;
+
+    public int currentWave;
+    public bool isNight = false;
+    public float timeBetweenDayAndNight = 15f;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
-        currentTime = gameManager.timeBetweenDayAndNight;
-        
+        currentTime = timeBetweenDayAndNight;
+        currentWave = 0;
+        isNight = false;
     }
 
     // Update is called once per frame
@@ -25,19 +28,19 @@ public class DayAndNight : MonoBehaviour
         currentTimeText.text = currentTime+"";
         if(currentTime < 0f)
         {
-            currentTime = gameManager.timeBetweenDayAndNight;
-            if(gameManager.isNight)
+            currentTime = timeBetweenDayAndNight;
+            if(isNight)
             {
                 timeCycle.text = "Night In : ";
-                gameManager.isNight = false;
+                isNight = false;
                 nightPanel.SetActive(false);
             }
-            else if(!gameManager.isNight)
+            else if(!isNight)
             {
                 timeCycle.text = "Day In : ";
-                gameManager.isNight = true;
-                gameManager.currentWave++;
-                gameManager.spawnMannager.SpawnWave();
+                isNight = true;
+                currentWave++;
+                GameManager.Instance.spawnManager.SpawnWave();
                 nightPanel.SetActive(true);
             }
         }

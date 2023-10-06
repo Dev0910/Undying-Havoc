@@ -18,7 +18,7 @@ public class BuildingBuleprint : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        nearestTile = GameManager.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
+        nearestTile = GameManager.Instance.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
     }
     private void OnMouseDown()
     {

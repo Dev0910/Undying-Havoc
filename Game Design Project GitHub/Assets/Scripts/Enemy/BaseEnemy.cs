@@ -16,13 +16,9 @@ public class BaseEnemy : MonoBehaviour
     protected GameObject Player;
     protected bool isBuilding = false;
     protected GameObject theBuilding;//temprory store the building in contact
-    protected Rigidbody2D rb;
+    protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
     
-    public void TakeDamage(float damage)
-    {
-
-    }
 
     //follow the target
     public void FollowTarget(Vector2 target , Vector2 selfPos)
@@ -36,7 +32,7 @@ public class BaseEnemy : MonoBehaviour
         {
             direction = Vector2.zero;//set direction to zero
         }
-        rb.velocity = (direction.normalized) * moveSpeed;//make it move in the direction of the enemy
+        rigidBody.velocity = (direction.normalized) * moveSpeed;//make it move in the direction of the enemy
     }
 
     //attack the building/Player
@@ -53,7 +49,7 @@ public class BaseEnemy : MonoBehaviour
     }
 
     //take damage from buildings/Player
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if(currentHealth - damage >=0)
         {

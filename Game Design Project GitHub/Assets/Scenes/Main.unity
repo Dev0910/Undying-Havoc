@@ -370,13 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650213612}
-  - component: {fileID: 650213611}
   - component: {fileID: 650213613}
-  - component: {fileID: 650213614}
-  - component: {fileID: 650213615}
-  - component: {fileID: 650213616}
-  - component: {fileID: 650213617}
-  - component: {fileID: 650213618}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -384,21 +378,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &650213611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e6ec043ff361d459feb3cf939a3f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 200
-  height: 200
-  tilePrefab: {fileID: 119992183123585200, guid: 820dc88fe9c00f3468b721e8d4c78b16, type: 3}
 --- !u!4 &650213612
 Transform:
   m_ObjectHideFlags: 0
@@ -427,88 +406,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef46f160a8ae684abfb010a1e0bbd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnMannager: {fileID: 0}
+  enemyDatas: []
+  gridSystem: {fileID: 0}
+  spawnManager: {fileID: 0}
+  dayAndNight: {fileID: 0}
   enemyScriptableObject: {fileID: 11400000, guid: 85c8bc4da88432c4995f23aa54bddf0e, type: 2}
   player: {fileID: 1872483330}
-  currentWave: 0
-  isNight: 0
-  timeBetweenDayAndNight: 15
-  customCurser: {fileID: 1341024519}
---- !u!114 &650213614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042fddafd97e3e14bae6a4cd8200efc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nightPanel: {fileID: 6375072913924691543}
-  timeCycle: {fileID: 168785478322870153}
-  currentTimeText: {fileID: 7723296606108501715}
---- !u!114 &650213615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d246f26425a377640b004a4e8bc6b605, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startGold: 1000
-  goldText: {fileID: 8016982268313795551}
---- !u!114 &650213616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d64535bcc126d4642aa1809a2ed6eb2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &650213617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de959abae78bfff458fe2809ccba0601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panelToDesable: {fileID: 2249582994197503981}
-  pauseMenuUI: {fileID: 5853823516720280820}
---- !u!114 &650213618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650213610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb67c70e9441d409aca9d8e3d42fce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemies:
-  - enemyPrefab: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
-    cost: 1
-  incrementInWaveValu: 5
-  enemiesToSpawn: []
-  waveDuration: 0
-  spawnEnemySecondsBeforeDay: 5
-  spawnRadius: 20
 --- !u!1001 &1140848796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -978,6 +881,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966874516}
+  - component: {fileID: 1966874524}
+  - component: {fileID: 1966874523}
+  - component: {fileID: 1966874522}
+  - component: {fileID: 1966874521}
+  - component: {fileID: 1966874520}
+  - component: {fileID: 1966874519}
+  - component: {fileID: 1966874517}
+  - component: {fileID: 1966874518}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1000,6 +911,123 @@ Transform:
   m_Children: []
   m_Father: {fileID: 650213612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1966874517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139db1fbdf51ea47a8bbdbb90f6d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customCurser: {fileID: 1341024519}
+--- !u!114 &1966874518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62b32ceb99c06546852637e60934b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1966874519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb67c70e9441d409aca9d8e3d42fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemyPrefab: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
+    cost: 1
+  incrementInWaveValu: 5
+  enemiesToSpawn: []
+  spawnEnemySecondsBeforeDay: 5
+  spawnRadius: 20
+--- !u!114 &1966874520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de959abae78bfff458fe2809ccba0601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelToDesable: {fileID: 2249582994197503981}
+  pauseMenuUI: {fileID: 5853823516720280820}
+--- !u!114 &1966874521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64535bcc126d4642aa1809a2ed6eb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1966874522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d246f26425a377640b004a4e8bc6b605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGold: 1000
+  goldText: {fileID: 8016982268313795551}
+--- !u!114 &1966874523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042fddafd97e3e14bae6a4cd8200efc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nightPanel: {fileID: 6375072913924691543}
+  timeCycle: {fileID: 168785478322870153}
+  currentTimeText: {fileID: 7723296606108501715}
+  currentWave: 0
+  isNight: 0
+  timeBetweenDayAndNight: 15
+--- !u!114 &1966874524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e6ec043ff361d459feb3cf939a3f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 200
+  height: 200
+  tilePrefab: {fileID: 119992183123585200, guid: 820dc88fe9c00f3468b721e8d4c78b16, type: 3}
 --- !u!114 &149012247369528592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,8 +1340,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213613}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1966874518}
+        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
         m_MethodName: BuyWeapon
         m_Mode: 2
         m_Arguments:
@@ -2024,8 +2052,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213613}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1966874518}
+        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
         m_MethodName: BuyWeapon
         m_Mode: 2
         m_Arguments:
@@ -2581,7 +2609,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213617}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenue, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -3447,8 +3475,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213613}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1966874517}
+        m_TargetAssemblyTypeName: BuildingShop, Assembly-CSharp
         m_MethodName: BuyBuilding
         m_Mode: 2
         m_Arguments:
@@ -4788,7 +4816,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213617}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMenue, Assembly-CSharp
         m_MethodName: onBtnClick
         m_Mode: 3
@@ -5644,8 +5672,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213613}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1966874517}
+        m_TargetAssemblyTypeName: BuildingShop, Assembly-CSharp
         m_MethodName: BuyBuilding
         m_Mode: 2
         m_Arguments:
@@ -5877,8 +5905,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 650213613}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1966874518}
+        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
         m_MethodName: BuyWeapon
         m_Mode: 2
         m_Arguments:

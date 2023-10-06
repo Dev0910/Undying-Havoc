@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 7601188251029247848}
   - component: {fileID: 1619263976223611642}
   - component: {fileID: 3146673683699410787}
-  - component: {fileID: 7364418702073232706}
   m_Layer: 0
   m_Name: Wooden Wall
   m_TagString: Building
@@ -520,19 +519,8 @@ MonoBehaviour:
   upgradedPrefab: {fileID: 9222064988404137193, guid: 47a6cfdb85753084793ae85f393e9e16, type: 3}
   upgradeCost: 10
   spriteTOBuild: {fileID: 21300000, guid: 40076bd6c2a250841b76c815b8d674da, type: 3}
---- !u!114 &7364418702073232706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2965543297524116062}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5ca25979fbbb3449bdc38ef5f81b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  temp: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &3027965029224770393
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +720,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7364418702073232706}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SellOrUpgradeUI, Assembly-CSharp
         m_MethodName: Sell
         m_Mode: 1
@@ -999,7 +987,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7364418702073232706}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SellOrUpgradeUI, Assembly-CSharp
         m_MethodName: Sell
         m_Mode: 1
