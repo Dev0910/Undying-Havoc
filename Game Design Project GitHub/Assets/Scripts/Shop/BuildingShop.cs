@@ -17,14 +17,14 @@ public class BuildingShop : MonoBehaviour
             //get the nearest tile by calling the get nearest tile function in grid system
             GameObject nearestTile = GameManager.Instance.gridSystem.GetNearestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             //cheak the comditions to place a building
-            if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == false && Stats.currentGold >= buildingToPlace.GetComponent<BuildingBuleprint>().cost)
+            if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == false && GameStats.currentGold >= buildingToPlace.GetComponent<BuildingBuleprint>().cost)
             {
-                Stats.currentGold -= buildingToPlace.GetComponent<BuildingBuleprint>().cost;//take the cost of building
+                GameStats.currentGold -= buildingToPlace.GetComponent<BuildingBuleprint>().cost;//take the cost of building
                 Instantiate(buildingToPlace, nearestTile.transform.position, Quaternion.identity);//spawn the building
                 nearestTile.GetComponent<Tile>().isOccupied = true;//make the isOccupied tile true
 
                 //if you don't have the mony to buy the next building
-                if (Stats.currentGold - buildingToPlace.GetComponent<BuildingBuleprint>().cost < 0)
+                if (GameStats.currentGold - buildingToPlace.GetComponent<BuildingBuleprint>().cost < 0)
                 {
                     DeselectBuilding();
                 }
@@ -43,7 +43,7 @@ public class BuildingShop : MonoBehaviour
     public void BuyBuilding(GameObject building)
     {
         //cheaks the conditions to buy the building
-        if (Stats.currentGold >= building.GetComponent<BuildingBuleprint>().cost)
+        if (GameStats.currentGold >= building.GetComponent<BuildingBuleprint>().cost)
         {
             customCurser.gameObject.SetActive(true);
             customCurser.GetComponent<SpriteRenderer>().sprite = building.GetComponent<BuildingBuleprint>().spriteTOBuild;//sets the curser to the sprite of the building

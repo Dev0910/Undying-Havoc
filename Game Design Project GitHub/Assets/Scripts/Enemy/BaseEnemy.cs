@@ -11,6 +11,7 @@ public class BaseEnemy : MonoBehaviour
     public float attackSpeed;
     public float damage;
     public float minimumDistanceFromPlayer;
+    public int valueInGold;
 
 
     protected GameObject Player;
@@ -57,6 +58,7 @@ public class BaseEnemy : MonoBehaviour
         }
         else if(currentHealth <= 0)
         {
+            GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,valueInGold);
             Destroy(this.gameObject);
         }
     }

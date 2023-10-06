@@ -10,6 +10,8 @@ TagManager:
   - Building
   - EnemyHolder
   - WeaponHolder
+  - Coin
+  - CoinHolder
   layers:
   - Default
   - TransparentFX

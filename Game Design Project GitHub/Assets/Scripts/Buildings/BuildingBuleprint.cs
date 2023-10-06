@@ -25,7 +25,7 @@ public class BuildingBuleprint : MonoBehaviour
         //to sell the building 
         if(ClickHandler.xDown)//taking refrence from the click Handler
         {
-            Stats.currentGold += sellPrice;//adding the selling price of the turret 
+            GameStats.currentGold += sellPrice;//adding the selling price of the turret 
             Destroy(this.gameObject);//destroying the building
 
             //change the is Occuied bool in the class Tile
@@ -36,9 +36,9 @@ public class BuildingBuleprint : MonoBehaviour
         }
 
         //to upgrade the building
-        if(ClickHandler.vDown && Stats.currentGold >= upgradeCost && upgradedPrefab != null)
+        if(ClickHandler.vDown && GameStats.currentGold >= upgradeCost && upgradedPrefab != null)
         {
-            Stats.currentGold -= upgradeCost;//removing the upgrade cost
+            GameStats.currentGold -= upgradeCost;//removing the upgrade cost
             Instantiate(upgradedPrefab, this.transform.position , upgradedPrefab.transform.rotation);//spawning the new building
             Destroy(this.gameObject);//destroying old building
         }

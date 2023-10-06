@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Stats : MonoBehaviour
+public class GameStats : MonoBehaviour
 {
     public int startGold = 1000;
     public static int currentGold;

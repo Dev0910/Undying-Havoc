@@ -62,14 +62,4 @@ public class Enemy1 : BaseEnemy
 
         }
     }
-    
-        
-
-
-    
-
-
-    
-
-    
 }
