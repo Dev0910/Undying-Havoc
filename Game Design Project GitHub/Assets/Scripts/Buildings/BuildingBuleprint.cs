@@ -6,41 +6,32 @@ using UnityEngine;
 public class BuildingBuleprint : MonoBehaviour
 {
     [Header("Building Blueprint")]
+    public BuildingScriptableObjects buildingScriptableObjects;
+    protected BuildingData[] buildingData;
+    public Sprite currentSpriite;
+    public Sprite currentBulletSprite;
+    public int damage;
     public int cost;
     public int sellPrice;
-    public GameObject upgradedPrefab;
+    public Sprite upgradedSprite;
     public int upgradeCost;
-    public Sprite spriteTOBuild;
-    public float maxHealth = 100f;
+    public Sprite UI_Sprite;
     public float currentHealth = 0f;
-    GameObject nearestTile = null;
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
-        nearestTile = GameManager.Instance.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
-    }
+    public int currentLevel = 0;
+    protected GameObject nearestTile = null;
+    protected SpriteRenderer spriteRenderer;
     private void OnMouseDown()
     {
         //to sell the building 
         if(ClickHandler.xDown)//taking refrence from the click Handler
         {
-            GameStats.currentGold += sellPrice;//adding the selling price of the turret 
-            Destroy(this.gameObject);//destroying the building
-
-            //change the is Occuied bool in the class Tile
-            if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
-            {
-                nearestTile.GetComponent<Tile>().isOccupied = false;
-            }
+            SellBuilding();
         }
 
         //to upgrade the building
-        if(ClickHandler.vDown && GameStats.currentGold >= upgradeCost && upgradedPrefab != null)
+        if(ClickHandler.vDown && GameStats.currentGold >= upgradeCost && upgradedSprite != null)
         {
-            GameStats.currentGold -= upgradeCost;//removing the upgrade cost
-            Instantiate(upgradedPrefab, this.transform.position , upgradedPrefab.transform.rotation);//spawning the new building
-            Destroy(this.gameObject);//destroying old building
+            UpgradeBuilding();
         }
     }
 
@@ -57,6 +48,47 @@ public class BuildingBuleprint : MonoBehaviour
             nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
             this.gameObject.SetActive(false);
         }
+    }
+
+    void SellBuilding()
+    {
+        GameStats.currentGold += sellPrice;//adding the selling price of the turret 
+        Destroy(this.gameObject);//destroying the building
+
+        //change the isOccuied bool in the class Tile
+        if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
+        {
+            nearestTile.GetComponent<Tile>().isOccupied = false;
+        }
+    }
+    void UpgradeBuilding()
+    {
+        GameStats.currentGold -= upgradeCost;//removing the upgrade cost
+        currentLevel++;
+        GetData();
+        spriteRenderer.sprite = currentSpriite;
+    }
+
+
+    protected void GetData()
+    {
+        currentSpriite = buildingData[currentLevel].buildingSprite;
+        currentBulletSprite = buildingData[currentLevel].bulletSprite;
+        currentHealth = buildingData[currentLevel].health;
+        UI_Sprite = buildingData[currentLevel].UI_Sprite;
+        cost = buildingData[currentLevel].cost;
+        sellPrice = buildingData[currentLevel].sellingPrice;
+        damage = buildingData[currentLevel].damage;
+        if (currentLevel < buildingData.Length - 1)
+        {
+            upgradedSprite = buildingData[currentLevel + 1].buildingSprite;
+            upgradeCost = buildingData[currentLevel + 1].cost;
+        }
+        else
+        {
+            upgradeCost = 1000000;
+        }
+        
     }
 
 }

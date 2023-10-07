@@ -381,9 +381,9 @@ GameObject:
   - component: {fileID: 8290122507437861007}
   - component: {fileID: 7601188251029247848}
   - component: {fileID: 1619263976223611642}
-  - component: {fileID: 3146673683699410787}
+  - component: {fileID: 2827633195376396455}
   m_Layer: 0
-  m_Name: Wooden Wall
+  m_Name: Wall
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,7 +502,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.15}
   m_EdgeRadius: 0
---- !u!114 &3146673683699410787
+--- !u!114 &2827633195376396455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,16 +511,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2965543297524116062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c881a6848666c94f9f3ffc374269fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c75d189471adb43a88f64ece3b14c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 10
-  sellPrice: 5
-  upgradedPrefab: {fileID: 9222064988404137193, guid: 47a6cfdb85753084793ae85f393e9e16, type: 3}
-  upgradeCost: 10
-  spriteTOBuild: {fileID: 21300000, guid: 40076bd6c2a250841b76c815b8d674da, type: 3}
-  maxHealth: 100
+  buildingScriptableObjects: {fileID: 11400000, guid: c66c5513df93d2745bb4706d4ba5cc6a, type: 2}
+  currentSpriite: {fileID: 0}
+  currentBulletSprite: {fileID: 0}
+  cost: 0
+  sellPrice: 0
+  upgradedSprite: {fileID: 0}
+  upgradeCost: 0
+  UI_Sprite: {fileID: 0}
   currentHealth: 0
+  currentLevel: 0
 --- !u!1 &3027965029224770393
 GameObject:
   m_ObjectHideFlags: 0

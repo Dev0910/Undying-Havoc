@@ -19,7 +19,12 @@ public class Turret : BuildingBuleprint
 
     void Start()
     {
-        currentHealth = maxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        buildingData = buildingScriptableObjects.buildingData;
+        currentLevel = 0;
+        GetData();
+        spriteRenderer.sprite = currentSpriite;
+        nearestTile = GameManager.Instance.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
         InvokeRepeating("UpdateTarget", 0f, 0.5f);//updating target every 0.5sec
         qbullet = new Queue<GameObject>();
     }
@@ -92,7 +97,7 @@ public class Turret : BuildingBuleprint
 
         if (bullet != null)
         {
-            bullet.seek(target);//giving target to the bullet
+            bullet.seek(target,currentBulletSprite,damage);//giving target to the bullet
         }
     }
 

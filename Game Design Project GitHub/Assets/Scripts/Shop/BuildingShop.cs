@@ -46,7 +46,7 @@ public class BuildingShop : MonoBehaviour
         if (GameStats.currentGold >= building.GetComponent<BuildingBuleprint>().cost)
         {
             customCurser.gameObject.SetActive(true);
-            customCurser.GetComponent<SpriteRenderer>().sprite = building.GetComponent<BuildingBuleprint>().spriteTOBuild;//sets the curser to the sprite of the building
+            customCurser.GetComponent<SpriteRenderer>().sprite = building.GetComponent<BuildingBuleprint>().buildingScriptableObjects.buildingData[0].UI_Sprite;//sets the curser to the sprite of the building
             Cursor.visible = false;
 
 
