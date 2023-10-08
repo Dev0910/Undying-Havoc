@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
 
      void Start()
     {
+        weaponsData = weaponScriptableObjects.weaponsData;
         currentLevel = 0;
         WeaponGetData();
     }
@@ -56,4 +57,3 @@ public class Weapon : MonoBehaviour
         damage = weaponsData[currentLevel].damage;
     } 
 }
-
