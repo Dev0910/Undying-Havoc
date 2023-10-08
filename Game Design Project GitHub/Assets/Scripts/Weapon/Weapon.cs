@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //public int damagetaken = 20;  // Damage of the weapon
-    public float attackrange = 0.4f; // Range for the weapon
-    public LayerMask enemylayers;
-    public int costToBuy; // cost to buy the weapon
-    public int costToUpgrade; // cost to upgrade the weapon
-
-    public WeaponScriptableObjects weaponScriptableObjects;
+    public WeaponScriptableObjects weaponScriptableObjects; // Taking reference for the scriptable Objects
     private WeaponData[] weaponsData;
-    public Sprite currentWeaponSpriite;
-    public int damage;
-    public int cost;
-    public Sprite upgradedSprite;
-    public int upgradeCost;
-    public int currentLevel = 0;
+    public float attackrange = 0.4f; // Range for the weapon
+    public LayerMask enemylayers; // Enemy Layer for attacking the enemy
+    public Sprite currentWeaponSpriite; // Base weapon Sprite
+    public int costToBuy; // cost to buy the weapon
+    public int damage; // Damage dealt by weapon
+    public Sprite upgradedSprite; // New sprite for Upgraded Weapon
+    public int costToUpgrade; // cost to upgrade the weapon
+    public int currentLevel = 0; // Index for weaponsData
+    public bool isBought;
 
      void Start()
     {
+        isBought = false;
         weaponsData = weaponScriptableObjects.weaponsData;
         currentLevel = 0;
         WeaponGetData();
@@ -50,10 +48,27 @@ public class Weapon : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackrange); // This function helps to make the imaginary circle visible
     }
 
+    public void UpgradeWeapon()
+    {
+        GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
+        currentLevel++;
+        WeaponGetData();
+    }
+
     void WeaponGetData()
     {
         currentWeaponSpriite = weaponsData[currentLevel].weaponSprite;
-        cost = weaponsData[currentLevel].cost;
+        costToBuy = weaponsData[currentLevel].cost;
         damage = weaponsData[currentLevel].damage;
+
+        if (currentLevel < weaponsData.Length - 1)
+        {
+            upgradedSprite = weaponsData[currentLevel + 1].weaponSprite;
+            costToUpgrade = weaponsData[currentLevel + 1].cost;
+        }
+        else
+        {
+            costToUpgrade = 1000000;
+        }
     } 
 }
