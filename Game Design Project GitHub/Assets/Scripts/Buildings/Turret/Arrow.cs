@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Arrow : MonoBehaviour
 {
     public Transform target;
 
@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         if (target == null)//if there is no target
         {
             gameObject.SetActive(false);
-            Turret.qbullet.Enqueue(gameObject);//add to the bullet queue
+            ArrowTurret.qbullet.Enqueue(gameObject);//add to the bullet queue
             return;
         }
 
@@ -51,6 +51,6 @@ public class Bullet : MonoBehaviour
         //Destroy(gameObject);
 
         gameObject.SetActive(false);
-        Turret.qbullet.Enqueue(gameObject);//adding to the bullet queue
+        ArrowTurret.qbullet.Enqueue(gameObject);//adding to the bullet queue
     }
 }

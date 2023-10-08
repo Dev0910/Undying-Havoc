@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 757d50260baf2224ab2636d28622a8a7, type: 3}
-  m_Name: Turret
+  m_Name: Arrow Turret
   m_EditorClassIdentifier: 
   buildingData:
   - buildingSprite: {fileID: 21300000, guid: 6516662b08c1a0543ba0a04daec1a174, type: 3}
