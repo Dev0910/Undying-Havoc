@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5142089692971345589}
   - component: {fileID: 6146916244615433605}
   - component: {fileID: 6155603931770915268}
+  - component: {fileID: 6708666821754971587}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Untagged
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7310452219824101537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d9f7800de7eade4db4f5d75c73af066, type: 3}
   m_Name: 
@@ -148,6 +149,24 @@ MonoBehaviour:
   enemylayers:
     serializedVersion: 2
     m_Bits: 0
-  isBought: 0
   costToBuy: 150
+  costToUpgrade: 0
+--- !u!114 &6708666821754971587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310452219824101537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c142efc0a07a3b4b99a37366e6f375f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagetaken: 30
+  attackrange: 0.6
+  enemylayers:
+    serializedVersion: 2
+    m_Bits: 0
+  costToBuy: 0
   costToUpgrade: 0
