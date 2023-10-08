@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5216957395298379809}
   - component: {fileID: 9069802995440976434}
   m_Layer: 6
-  m_Name: Turret
+  m_Name: Arrow Turret
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

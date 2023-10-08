@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : BuildingBuleprint
+public class ArrowTurret : BuildingBuleprint
 {
     public Transform target;
 
@@ -93,11 +93,11 @@ public class Turret : BuildingBuleprint
             bulletGO.transform.parent = this.transform;//set the turret as the bullet's parent
         }
         
-        Bullet bullet = bulletGO.GetComponent<Bullet>();//creating an instance of the bullet script
+        Arrow arrow = bulletGO.GetComponent<Arrow>();//creating an instance of the bullet script
 
-        if (bullet != null)
+        if (arrow != null)
         {
-            bullet.seek(target,currentBulletSprite,damage);//giving target to the bullet
+            arrow.seek(target,currentBulletSprite,damage);//giving target to the bullet
         }
     }
 
