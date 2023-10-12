@@ -23,7 +23,6 @@ public class SpawnMannager : MonoBehaviour
     public float spawnRadius = 10f;
     private float spawnInterval;
     private int currentWave;
-    private GameObject parentGameObject;
     private int enemySpawnIndex = 0;
     //public List<GameObject> spawnedEnemies = new List<GameObject>();
 
@@ -31,7 +30,6 @@ public class SpawnMannager : MonoBehaviour
     private void Start()
     {
         currentWave = 1;
-        parentGameObject = GameObject.FindGameObjectWithTag("EnemyHolder");
         player = GameManager.Instance.player;
         waveDuration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
     }
@@ -82,7 +80,7 @@ public class SpawnMannager : MonoBehaviour
         float randomAngle = Random.Range(0f, 360f);//chose a random Angle at which the enemy will be spawned
         Vector2 spawnPosition = player.transform.position + (Quaternion.Euler(0, 0, randomAngle) * Vector2.right * spawnRadius);//I don't Know
         GameObject e = Instantiate(enemy, spawnPosition, Quaternion.identity);//spawn the enemy
-        e.transform.parent = parentGameObject.transform;
+        e.transform.parent = GameObject.Find("EnemyHolder").transform;
         if(enemySpawnIndex >= enemiesToSpawn.Count-1)
         {
             enemySpawnIndex = 0;//reset index

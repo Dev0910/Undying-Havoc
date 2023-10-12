@@ -25,7 +25,7 @@ public class DropAndCollectionManager : MonoBehaviour
         else
         {
             temperory = Instantiate(coinPrefab , spawnPosition , coinPrefab.transform.rotation);
-            temperory.transform.parent = GameObject.FindGameObjectWithTag("CoinHolder").transform;
+            temperory.transform.parent = GameObject.Find("CoinHolder").transform;
         }
         if(temperory != null)
         {

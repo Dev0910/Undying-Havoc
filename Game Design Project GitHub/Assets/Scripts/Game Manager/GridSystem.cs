@@ -35,6 +35,19 @@ public class GridSystem : MonoBehaviour
         gridIsVisible = false;
     }
 
+    public void UpDateGrid()
+    {
+        if(gridIsVisible)
+        {
+            GetGrid();
+        }
+        else
+        {
+            RemoveGrid();
+            CancelInvoke();
+        }
+    }
+
     //disable all the visable grid
     public void RemoveGrid()
     {
@@ -47,14 +60,13 @@ public class GridSystem : MonoBehaviour
                     tileArray[i, j].SetActive(false);
                 }
             }
-        gridIsVisible = false;
         }     
     }
 
     //enable the grid visible to the player/ on camera
     public void GetGrid()
     {
-        if (!gridIsVisible)
+        //if (!gridIsVisible)
         {
             for (int i = 0; i < tileArray.GetLength(0); i++)
             {
@@ -73,7 +85,7 @@ public class GridSystem : MonoBehaviour
                     }
                 }
             }
-            gridIsVisible = true;
+            //gridIsVisible = true;
         }
 
     }

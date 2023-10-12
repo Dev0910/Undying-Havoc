@@ -18,7 +18,7 @@ public class WeaponShop : MonoBehaviour
         {
             GameStats.currentGold -= prefab.GetComponent<Weapon>().costToBuy;//reduse the weapon cost
             GameObject instantiatedPrefab = Instantiate(prefab, GameManager.Instance.player.transform.position, GameManager.Instance.player.transform.rotation);//spawns the weapon
-            instantiatedPrefab.transform.parent = GameObject.FindWithTag("WeaponHolder").transform;//set player as the parent gameobject
+            instantiatedPrefab.transform.parent = GameObject.Find("WeaponHolder").transform;//set player as the parent gameobject
             //isBought = true;
         }
 

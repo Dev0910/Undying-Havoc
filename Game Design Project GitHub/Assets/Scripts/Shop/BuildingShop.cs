@@ -51,7 +51,9 @@ public class BuildingShop : MonoBehaviour
 
 
             buildingToPlace = building;//set the buildingToPlace to this building
-            gameObject.GetComponent<GridSystem>().GetGrid();//draws the grid
+            GridSystem.gridIsVisible = true;
+            GameManager.Instance.gridSystem.InvokeRepeating("UpDateGrid", 0, 1);
+            //gameObject.GetComponent<GridSystem>().GetGrid();//draws the grid
         }
     }
 
@@ -61,6 +63,7 @@ public class BuildingShop : MonoBehaviour
         buildingToPlace = null;
         customCurser.gameObject.SetActive(false);
         Cursor.visible = true;
-        gameObject.GetComponent<GridSystem>().RemoveGrid();
+        GridSystem.gridIsVisible = false;
+        //gameObject.GetComponent<GridSystem>().RemoveGrid();
     }
 }

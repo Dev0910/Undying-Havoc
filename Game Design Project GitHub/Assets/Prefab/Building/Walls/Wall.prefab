@@ -517,7 +517,8 @@ MonoBehaviour:
   buildingScriptableObjects: {fileID: 11400000, guid: c66c5513df93d2745bb4706d4ba5cc6a, type: 2}
   currentSpriite: {fileID: 0}
   currentBulletSprite: {fileID: 0}
-  cost: 0
+  damage: 0
+  cost: 20
   sellPrice: 0
   upgradedSprite: {fileID: 0}
   upgradeCost: 0

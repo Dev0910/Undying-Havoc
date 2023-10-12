@@ -13,7 +13,6 @@ public class Weapon : MonoBehaviour
     public int damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
-
     public int currentLevel = 0; // Index for weaponsData
     //public bool isBought;
     //public int currentLevel; // Index for weaponsData
@@ -32,7 +31,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack();
-            Debug.Log(damage);
+            Debug.Log("Weapon Damage : " + damage);
         }
     }
 
@@ -72,7 +71,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            costToUpgrade = 1000000;
+            costToUpgrade = int.MaxValue;
         }
     } 
 }

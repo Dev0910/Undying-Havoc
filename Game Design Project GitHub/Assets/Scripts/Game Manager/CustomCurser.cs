@@ -6,7 +6,7 @@ public class CustomCurser : MonoBehaviour
 {
     private void Start()
     {
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
