@@ -14,11 +14,11 @@ public class Weapon : MonoBehaviour
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
     public int currentLevel = 0; // Index for weaponsData
-    public bool isBought;
+    //public bool isBought;
 
      void Start()
     {
-        isBought = false;
+        //isBought = false;
         weaponsData = weaponScriptableObjects.weaponsData;
         currentLevel = 0;
         WeaponGetData();
