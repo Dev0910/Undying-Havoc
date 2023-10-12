@@ -86,7 +86,7 @@ public class BuildingBuleprint : MonoBehaviour
         }
         else
         {
-            upgradeCost = 1000000;
+            upgradeCost = int.MaxValue;
         }
         
     }
