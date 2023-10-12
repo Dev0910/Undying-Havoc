@@ -6,15 +6,19 @@ public class Weapon : MonoBehaviour
 {
     public WeaponScriptableObjects weaponScriptableObjects; // Taking reference for the scriptable Objects
     private WeaponData[] weaponsData;
-    public float attackrange = 0.4f; // Range for the weapon
+    public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
     public Sprite currentWeaponSpriite; // Base weapon Sprite
     public int costToBuy; // cost to buy the weapon
     public int damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
+
     public int currentLevel = 0; // Index for weaponsData
     //public bool isBought;
+    //public int currentLevel; // Index for weaponsData
+    //public bool isBought;
+
 
      void Start()
     {
