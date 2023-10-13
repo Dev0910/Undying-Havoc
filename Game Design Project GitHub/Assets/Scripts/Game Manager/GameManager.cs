@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     
     public GameObject player;
+    public GameObject weaponHolder;
     
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         uiManager = GetComponentInChildren<UIManager>();
 
         player = GameObject.FindGameObjectWithTag("Player");
+        weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
         enemyDatas = enemyScriptableObject.enemyData;
     }
 }

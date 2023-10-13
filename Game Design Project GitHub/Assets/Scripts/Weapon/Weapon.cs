@@ -10,10 +10,10 @@ public class Weapon : MonoBehaviour
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
     public Sprite currentWeaponSpriite; // Base weapon Sprite
     public int costToBuy; // cost to buy the weapon
-    public int damage; // Damage dealt by weapon
+    public float damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
-    public int currentLevel = 0; // Index for weaponsData
+    public int currentLevel; // Index for weaponsData
     //public bool isBought;
     //public int currentLevel; // Index for weaponsData
     //public bool isBought;
@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     {
         //isBought = false;
         weaponsData = weaponScriptableObjects.weaponsData;
-        currentLevel = 0;
+        //currentLevel = 0;
         WeaponGetData();
     }
     void Update()
@@ -31,19 +31,37 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack();
-            Debug.Log("Weapon Damage : " + damage);
         }
     }
 
     void Attack()
     {
+        /* Collider2D[] hitenemies = Physics2D.OverlapCircleAll(transform.position, attackrange, enemylayers); // collecting all the colliders in an array which have an enemy layer by creating an imaginary circle with radius attackrange
 
-        Collider2D[] hitenemies = Physics2D.OverlapCircleAll(transform.position, attackrange, enemylayers); // collecting all the colliders in an array which have an enemy layer by creating an imaginary circle with radius attackrange
+         foreach (Collider2D enemy in hitenemies)
+         {
+             Debug.Log("Weapon Damage : " + damage);
+             enemy.GetComponent<Enemy1>().TakeDamage(damage); // Running through the loop and each time we get an collider in the array the enemy take damage
+         }*/
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackrange, enemylayers);
 
-        foreach (Collider2D enemy in hitenemies)
-        {
-            enemy.GetComponent<Enemy1>().TakeDamage(damage); // Running through the loop and each time we get an collider in the array the enemy take damage
-        }
+            Debug.Log("Number of enemies hit: " + hitEnemies.Length);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                BaseEnemy enemyScript = enemy.GetComponent<BaseEnemy>();
+                if (enemyScript != null)
+                {
+                    Debug.Log("Weapon Damage: " + damage);
+                    enemyScript.TakeDamage(damage);
+                }
+                else
+                {
+                    Debug.LogWarning("Enemy does not have the Enemy1 component.");
+                }
+            }
+        
+
     }
 
     void OnDrawGizmosSelected()

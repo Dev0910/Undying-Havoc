@@ -13,6 +13,6 @@ public class WeaponData
 {
     public Sprite weaponSprite;
     public int cost;
-    public int damage;
+    public float damage;
 }
 

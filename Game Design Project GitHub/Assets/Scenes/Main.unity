@@ -429,6 +429,7 @@ MonoBehaviour:
   gameStats: {fileID: 0}
   uiManager: {fileID: 0}
   player: {fileID: 4084846663457688174}
+  weaponHolder: {fileID: 0}
 --- !u!1 &670047707
 GameObject:
   m_ObjectHideFlags: 0
@@ -4574,7 +4575,7 @@ Transform:
   m_GameObject: {fileID: 4084846663457688174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.64799994, y: -0.8769999, z: 0}
+  m_LocalPosition: {x: -0.43, y: -1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4896,7 +4897,7 @@ GameObject:
   - component: {fileID: 8684777398932598747}
   m_Layer: 7
   m_Name: WeaponHolder
-  m_TagString: Untagged
+  m_TagString: WeaponHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
