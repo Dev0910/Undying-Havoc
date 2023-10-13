@@ -27,17 +27,19 @@ public class BaseEnemy : MonoBehaviour
     protected void Attack(GameObject target , float damage)//get the target to attack and the damage to been delt
     {
         lastAttackTime = Time.time;//seting the time of the last attack
-        Debug.Log(damage + " damage to " + target.name);
+        
 
         if(target.gameObject.CompareTag("Building"))//if it is a building 
         {
             BuildingBuleprint bp =  target.GetComponent<BuildingBuleprint>();//creating an instance of the class BuildingBlueprint
             bp.TakeDamage(damage);//calling the function takedamage from the building script
+            Debug.Log(damage + " damage to " + target.name);
         }
         else if(target.gameObject.CompareTag("Player"))
         {
             PlayerController pc = player.GetComponent<PlayerController>();
             pc.TakeDamage(damage);
+            Debug.Log(damage + " damage to " + target.name);
         }
         
     }

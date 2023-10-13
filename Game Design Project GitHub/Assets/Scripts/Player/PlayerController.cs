@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damage;
         uiManager.UpdatePlayerHP(startHealth);
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             currentHealth -= damage;
             Debug.Log("Game Over");
