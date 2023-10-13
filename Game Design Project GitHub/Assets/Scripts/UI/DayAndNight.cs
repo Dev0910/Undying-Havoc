@@ -6,10 +6,11 @@ public class DayAndNight : MonoBehaviour
 {
     
     private float currentTime = 0f;
+    public float speedOfAnimation = 1f;
     public GameObject nightPanel;
     private Image nightPanelImage;
     public Text timeCycle;
-    private int currentAlpha;
+    private float currentAlpha;
     private int changesToAplha;
     public Text currentTimeText;
 
@@ -24,7 +25,7 @@ public class DayAndNight : MonoBehaviour
         nightPanelImage = nightPanel.GetComponent<Image>();
         currentWave = 0;
         isNight = false;
-        UpdateColor(currentAlpha);
+        UpdateColor();
     }
 
     // Update is called once per frame
@@ -38,7 +39,8 @@ public class DayAndNight : MonoBehaviour
             if(isNight)
             {
                 timeCycle.text = "Night In : ";
-                InvokeRepeating(nameof(MakePanalDisappear), 0, 1);
+                InvokeRepeating(nameof(MakePanalDisappear), 0, 0.01f);
+                Debug.Log("Trying to make Day");
                 //nightPanel.SetActive(false);
 
             }
@@ -46,8 +48,9 @@ public class DayAndNight : MonoBehaviour
             {
                 timeCycle.text = "Day In : ";
                 currentWave++;
-                InvokeRepeating(nameof(MakePanalVisible), 0, 1);
+                InvokeRepeating(nameof(MakePanalVisible), 0, 0.01f);
                 GameManager.Instance.spawnManager.SpawnWave();
+                Debug.Log("Trying to make night");
                 //nightPanel.SetActive(true);
             }
             
@@ -57,37 +60,35 @@ public class DayAndNight : MonoBehaviour
     }
     private void MakePanalVisible()
     {
-        Debug.Log("Trying to make night");
-        currentAlpha++;
-        if(currentAlpha >= 200)
+        currentAlpha += speedOfAnimation;
+        if(currentAlpha < 200)
         {
-            isNight = true;
-            CancelInvoke();
+            UpdateColor();
         }
         else
         {
-            UpdateColor(currentAlpha);
+            isNight = true;
+            CancelInvoke();
         }
 
     }
 
     private void MakePanalDisappear()
     {
-        Debug.Log("Trying to make Day");
-        currentAlpha--;
-        if (currentAlpha <= 0)
+        currentAlpha -= speedOfAnimation;
+        if (currentAlpha > 0)
+        {
+            UpdateColor();
+        }
+        else
         {
             isNight = false;
             CancelInvoke();
         }
-        else
-        {
-            UpdateColor(currentAlpha);
-        }
     }
 
-    private void UpdateColor(int Alpha)
+    private void UpdateColor()
     {
-        nightPanelImage.color = new Color(nightPanelImage.color.r, nightPanelImage.color.g, nightPanelImage.color.b, Alpha/255);
+        nightPanelImage.color = new Color(nightPanelImage.color.r, nightPanelImage.color.g, nightPanelImage.color.b, currentAlpha/255);
     }
 }

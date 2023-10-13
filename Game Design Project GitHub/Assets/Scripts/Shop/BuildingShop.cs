@@ -20,7 +20,8 @@ public class BuildingShop : MonoBehaviour
             if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == false && GameStats.currentGold >= buildingToPlace.GetComponent<BuildingBuleprint>().cost)
             {
                 GameStats.currentGold -= buildingToPlace.GetComponent<BuildingBuleprint>().cost;//take the cost of building
-                Instantiate(buildingToPlace, nearestTile.transform.position, Quaternion.identity);//spawn the building
+                GameObject temp = Instantiate(buildingToPlace, nearestTile.transform.position, Quaternion.identity);//spawn the building
+                temp.transform.parent = GameObject.Find("BuildingHolder").transform;
                 nearestTile.GetComponent<Tile>().isOccupied = true;//make the isOccupied tile true
 
                 //if you don't have the mony to buy the next building
@@ -52,7 +53,7 @@ public class BuildingShop : MonoBehaviour
 
             buildingToPlace = building;//set the buildingToPlace to this building
             GridSystem.gridIsVisible = true;
-            GameManager.Instance.gridSystem.InvokeRepeating("UpDateGrid", 0, 1);
+            GameManager.Instance.gridSystem.InvokeRepeating("UpDateGrid", 0, 0.5f);
             //gameObject.GetComponent<GridSystem>().GetGrid();//draws the grid
         }
     }
@@ -63,7 +64,8 @@ public class BuildingShop : MonoBehaviour
         buildingToPlace = null;
         customCurser.gameObject.SetActive(false);
         Cursor.visible = true;
-        GridSystem.gridIsVisible = false;
+        GameManager.Instance.gridSystem.RemoveGrid();
+
         //gameObject.GetComponent<GridSystem>().RemoveGrid();
     }
 }

@@ -43,7 +43,6 @@ public class GridSystem : MonoBehaviour
         }
         else
         {
-            RemoveGrid();
             CancelInvoke();
         }
     }
@@ -60,7 +59,8 @@ public class GridSystem : MonoBehaviour
                     tileArray[i, j].SetActive(false);
                 }
             }
-        }     
+        }  
+        gridIsVisible = false;
     }
 
     //enable the grid visible to the player/ on camera
