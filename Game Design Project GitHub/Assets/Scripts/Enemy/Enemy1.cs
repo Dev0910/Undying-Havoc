@@ -4,42 +4,38 @@ using UnityEngine;
 
 public class Enemy1 : BaseEnemy
 {
+    
     private void Awake()
     {
         //GetEnemyData();
+        collisionCount = 0;
         currentHealth = maxHealth;
-        isBuilding = false;
         rigidBody = GetComponent<Rigidbody2D>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameManager.Instance.player;
     }
     private void Update()
     {
-        FollowTarget(Player.transform.position , this.transform.position);//calling the follow function from the base class
-        if (lastAttackTime + attackSpeed < Time.time && isBuilding)//cheak if it can attack the building
+        FollowTarget(player.transform.position);//calling the follow function from the base class
+        if (lastAttackTime + attackSpeed < Time.time && targetToAttack != null)//cheak if it can attack the building
         {
-            Attack(theBuilding,damage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+            Attack(targetToAttack,damage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
         }
     }
 
     //cheak for collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if it is a building then set the isBuilding true and temprory store it in the building
-        if(collision.gameObject.CompareTag("Building"))
-        {
-            isBuilding = true;
-            theBuilding = collision.gameObject;
-        }
+        targetToAttack = collision.gameObject;
+        collisionCount++;
     }
 
     //cheak for exit from a collision
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //reset the temperory building values
-        if(collision.gameObject.CompareTag("Building"))
+        collisionCount--;
+        if(collisionCount <= 0)
         {
-            isBuilding = false;
-            theBuilding = null;
+            targetToAttack = null;
         }
     }
     
@@ -59,7 +55,22 @@ public class Enemy1 : BaseEnemy
                 minimumDistanceFromPlayer = enemy.minimumDistanceFromPlayer;
                 break;
             }
-
         }
+    }
+
+    //follow the target
+    public void FollowTarget(Vector2 target)
+    {
+        Vector2 selfPosition = transform.position;
+        Vector2 direction;//temprory store the direction
+        if (Vector2.Distance(selfPosition, target) > minimumDistanceFromPlayer)//cheack if the distance between you and the taeget is more then the minimumDistance distance
+        {
+            direction = target - selfPosition;//set the direction from self Position to target position
+        }
+        else//if the enemy has reach the taeget
+        {
+            direction = Vector2.zero;//set direction to zero
+        }
+        rigidBody.velocity = (direction.normalized) * moveSpeed;//make it move in the direction of the enemy
     }
 }

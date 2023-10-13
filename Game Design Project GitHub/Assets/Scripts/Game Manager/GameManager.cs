@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public EnemyScriptableObject enemyScriptableObject;
     public DropAndCollectionManager dropAndCollectionManager;
     public GameStats gameStats;
+    public PlayerController playerController;
 
     
     public GameObject player;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         gameStats = GetComponentInChildren<GameStats>();
 
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
 
         enemyDatas = enemyScriptableObject.enemyData;
     }

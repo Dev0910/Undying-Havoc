@@ -155,7 +155,7 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   damage: 20
-  minimumDistanceFromPlayer: 1.5
+  minimumDistanceFromPlayer: 0.5
   valueInGold: 10
 --- !u!50 &8258023360573501037
 Rigidbody2D:

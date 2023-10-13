@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float startHealth;
+    public static float currentHealth;
+
+    private void Start()
+    {
+        currentHealth = startHealth;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Coin"))
         {
             GameManager.Instance.dropAndCollectionManager.CollectGold(collision.gameObject);
+        }
+    }
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0)
+        {
+            currentHealth -= damage;
+            Debug.Log("Game Over");
+            Time.timeScale = 0f;
         }
     }
 }
