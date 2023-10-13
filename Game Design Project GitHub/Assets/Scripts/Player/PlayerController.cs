@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float startHealth;
-    public static float currentHealth;
-
+    public static float currentHealth;  //playerHealth
+    private UIManager uiManager;
     private void Start()
     {
+        uiManager = GameManager.Instance.uiManager;
         currentHealth = startHealth;
+        uiManager.UpdatePlayerHP(startHealth);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        uiManager.UpdatePlayerHP(startHealth);
         if (currentHealth < 0)
         {
             currentHealth -= damage;

@@ -1,53 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-public class UIMenue : MonoBehaviour
+
+public class UIManager : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public GameObject panelToDesable;
-    public GameObject pauseMenuUI;
-    void Update()
+    public Image playerHealthBar;
+    // Start is called before the first frame update
+   /* void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
+        healthBar.fillAmount = PlayerController.currentHealth / GameManager.Instance.player.GetComponent<PlayerController>().startHealth;
+    }*/
 
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
-
-    public void Resume()
+    // Update is called once per frame
+    public void UpdatePlayerHP(float maxHP)
     {
-        panelToDesable.SetActive(true);
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+        playerHealthBar.fillAmount = PlayerController.currentHealth / maxHP;
     }
-
-    public void Pause()
-    {
-        panelToDesable.SetActive(false);
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    public void onBtnClick(int scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
-
 }
