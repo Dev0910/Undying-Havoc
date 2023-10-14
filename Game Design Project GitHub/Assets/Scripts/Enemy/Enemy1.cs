@@ -13,6 +13,7 @@ public class Enemy1 : BaseEnemy
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameManager.Instance.player;
         currentMoveSpeed = moveSpeed;
+        healthbar.fillAmount = currentHealth / maxHealth;
     }
     private void Update()
     {

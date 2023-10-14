@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -20,8 +21,7 @@ public class BaseEnemy : MonoBehaviour
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
 
-   
-
+    public Image healthbar;
 
     //follow the target
     public void FollowTarget(Vector2 target)
@@ -63,7 +63,8 @@ public class BaseEnemy : MonoBehaviour
     //take damage from buildings/Player
     public void TakeDamage(float damage)
     {
-        if(currentHealth  > 0)
+        healthbar.fillAmount = currentHealth / maxHealth;
+        if (currentHealth  > 0)
         {
             currentHealth -= damage;
         }
