@@ -44,18 +44,25 @@ public class BuildingShop : MonoBehaviour
     public void BuyBuilding(GameObject building)
     {
         //cheaks the conditions to buy the building
-        if (GameStats.currentGold >= building.GetComponent<BuildingBuleprint>().cost)
+        if(building.gameObject.CompareTag("Building") || building.gameObject.CompareTag("Trap"))
         {
-            customCurser.gameObject.SetActive(true);
-            customCurser.GetComponent<SpriteRenderer>().sprite = building.GetComponent<BuildingBuleprint>().buildingScriptableObjects.buildingData[0].UI_Sprite;//sets the curser to the sprite of the building
-            Cursor.visible = false;
+            BuildingBuleprint bp = building.GetComponent<BuildingBuleprint>();
+            if (GameStats.currentGold >= bp.cost)
+            {
+                customCurser.gameObject.SetActive(true);
+                
+                customCurser.GetComponent<SpriteRenderer>().sprite = bp.UI_Sprite;//sets the curser to the sprite of the building
+                Cursor.visible = false;
 
 
-            buildingToPlace = building;//set the buildingToPlace to this building
-            GridSystem.gridIsVisible = true;
-            GameManager.Instance.gridSystem.InvokeRepeating("UpDateGrid", 0, 0.5f);
-            //gameObject.GetComponent<GridSystem>().GetGrid();//draws the grid
+                buildingToPlace = building;//set the buildingToPlace to this building
+                GridSystem.gridIsVisible = true;
+                GameManager.Instance.gridSystem.InvokeRepeating("UpDateGrid", 0, 0.5f);
+                //gameObject.GetComponent<GridSystem>().GetGrid();//draws the grid
+            }
+            return;
         }
+        
     }
 
     //Deselect the Building from the curser

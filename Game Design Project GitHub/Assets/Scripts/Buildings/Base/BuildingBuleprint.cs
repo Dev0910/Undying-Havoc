@@ -8,8 +8,8 @@ public class BuildingBuleprint : MonoBehaviour
     [Header("Building Blueprint")]
     public BuildingScriptableObjects buildingScriptableObjects;
     protected BuildingData[] buildingData;
-    public Sprite currentSpriite;
-    public Sprite currentBulletSprite;
+    protected Sprite currentSpriite;
+    protected Sprite currentBulletSprite;
     public int damage;
     public int cost;
     public int sellPrice;

@@ -13,15 +13,31 @@ public class BaseEnemy : MonoBehaviour
     public float minimumDistanceFromPlayer;
     public int valueInGold;
 
-
+    protected float currentMoveSpeed;
     protected GameObject player;
     protected int collisionCount;//to count the collision
     protected GameObject targetToAttack;//temprory store the building in contact
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
-    
 
-    
+   
+
+
+    //follow the target
+    public void FollowTarget(Vector2 target)
+    {
+        Vector2 selfPosition = transform.position;
+        Vector2 direction;//temprory store the direction
+        if (Vector2.Distance(selfPosition, target) > minimumDistanceFromPlayer)//cheack if the distance between you and the taeget is more then the minimumDistance distance
+        {
+            direction = target - selfPosition;//set the direction from self Position to target position
+        }
+        else//if the enemy has reach the taeget
+        {
+            direction = Vector2.zero;//set direction to zero
+        }
+        rigidBody.velocity = (direction.normalized) * currentMoveSpeed;//make it move in the direction of the enemy
+    }
 
     //attack the building/Player
     protected void Attack(GameObject target , float damage)//get the target to attack and the damage to been delt
@@ -57,4 +73,14 @@ public class BaseEnemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void ChangeMoveSpeed(float changeInMoveSpeed)
+    {
+        currentMoveSpeed *= changeInMoveSpeed;
+    }
+    public void DefaultMoveSpeed()
+    {
+        currentMoveSpeed = moveSpeed;
+    }
+
 }

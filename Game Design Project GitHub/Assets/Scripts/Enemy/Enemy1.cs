@@ -12,6 +12,7 @@ public class Enemy1 : BaseEnemy
         currentHealth = maxHealth;
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameManager.Instance.player;
+        currentMoveSpeed = moveSpeed;
     }
     private void Update()
     {
@@ -38,7 +39,7 @@ public class Enemy1 : BaseEnemy
             targetToAttack = null;
         }
     }
-    
+
     //it is to get data from the scriptable object of this enemy
     private void GetEnemyData()//not currently used
     {
@@ -58,19 +59,6 @@ public class Enemy1 : BaseEnemy
         }
     }
 
-    //follow the target
-    public void FollowTarget(Vector2 target)
-    {
-        Vector2 selfPosition = transform.position;
-        Vector2 direction;//temprory store the direction
-        if (Vector2.Distance(selfPosition, target) > minimumDistanceFromPlayer)//cheack if the distance between you and the taeget is more then the minimumDistance distance
-        {
-            direction = target - selfPosition;//set the direction from self Position to target position
-        }
-        else//if the enemy has reach the taeget
-        {
-            direction = Vector2.zero;//set direction to zero
-        }
-        rigidBody.velocity = (direction.normalized) * moveSpeed;//make it move in the direction of the enemy
-    }
+    
+    
 }
