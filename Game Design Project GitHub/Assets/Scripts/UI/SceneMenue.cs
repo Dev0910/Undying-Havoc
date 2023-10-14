@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class UIMenue : MonoBehaviour
+public class SceneMenue : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject panelToDesable;
@@ -45,7 +45,7 @@ public class UIMenue : MonoBehaviour
         Application.Quit();
     }
 
-    public void onBtnClick(int scene)
+    public void OnBtnClick(int scene)
     {
         SceneManager.LoadScene(scene);
     }
