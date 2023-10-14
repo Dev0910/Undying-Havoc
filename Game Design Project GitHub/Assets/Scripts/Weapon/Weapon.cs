@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
         {
             enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
-            Debug.Log(enemyToAttack.name+" : " + damage);
+            //Debug.Log(enemyToAttack.name+" : " + damage);
         }
     }
 

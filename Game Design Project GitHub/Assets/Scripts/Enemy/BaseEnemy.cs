@@ -63,11 +63,11 @@ public class BaseEnemy : MonoBehaviour
     //take damage from buildings/Player
     public void TakeDamage(float damage)
     {
-        if(currentHealth - damage >=0)
+        if(currentHealth  > 0)
         {
             currentHealth -= damage;
         }
-        else if(currentHealth <= 0)
+        if(currentHealth <= 0)
         {
             GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,valueInGold);
             Destroy(this.gameObject);

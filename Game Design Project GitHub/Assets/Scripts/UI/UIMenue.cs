@@ -47,7 +47,7 @@ public class UIMenue : MonoBehaviour
 
     public void onBtnClick(int scene)
     {
-        //SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(scene);
     }
 
 }
