@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
     public int currentLevel; // Index for weaponsData
+    private GameObject enemyToAttack;
     //public bool isBought;
     //public int currentLevel; // Index for weaponsData
     //public bool isBought;
@@ -21,6 +22,7 @@ public class Weapon : MonoBehaviour
 
      void Start()
     {
+        enemyToAttack = null;
         //isBought = false;
         weaponsData = weaponScriptableObjects.weaponsData;
         //currentLevel = 0;
@@ -28,41 +30,30 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
         {
-            Attack();
+            enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
+            Debug.Log(enemyToAttack.name+" : " + damage);
         }
     }
 
-    void Attack()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        /* Collider2D[] hitenemies = Physics2D.OverlapCircleAll(transform.position, attackrange, enemylayers); // collecting all the colliders in an array which have an enemy layer by creating an imaginary circle with radius attackrange
-
-         foreach (Collider2D enemy in hitenemies)
-         {
-             Debug.Log("Weapon Damage : " + damage);
-             enemy.GetComponent<Enemy1>().TakeDamage(damage); // Running through the loop and each time we get an collider in the array the enemy take damage
-         }*/
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackrange, enemylayers);
-
-            Debug.Log("Number of enemies hit: " + hitEnemies.Length);
-
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                BaseEnemy enemyScript = enemy.GetComponent<BaseEnemy>();
-                if (enemyScript != null)
-                {
-                    Debug.Log("Weapon Damage: " + damage);
-                    enemyScript.TakeDamage(damage);
-                }
-                else
-                {
-                    Debug.LogWarning("Enemy does not have the Enemy1 component.");
-                }
-            }
-        
-
+        if (collision.gameObject.tag == "Enemy")
+        {
+            enemyToAttack = collision.gameObject;
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            enemyToAttack = null;
+        }
+    }
+
+
 
     void OnDrawGizmosSelected()
     {
