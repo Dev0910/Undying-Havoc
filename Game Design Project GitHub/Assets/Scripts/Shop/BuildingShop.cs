@@ -51,7 +51,7 @@ public class BuildingShop : MonoBehaviour
             {
                 customCurser.gameObject.SetActive(true);
                 
-                customCurser.GetComponent<SpriteRenderer>().sprite = bp.UI_Sprite;//sets the curser to the sprite of the building
+                customCurser.GetComponent<SpriteRenderer>().sprite = bp.GetComponent<SpriteRenderer>().sprite;//sets the curser to the sprite of the building
                 Cursor.visible = false;
 
 
