@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8554669055351502603}
   - component: {fileID: 3655300088587609595}
   - component: {fileID: 7776094886497892224}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2843683215416535248}
   - component: {fileID: 3225193468929830158}
   - component: {fileID: 6217649684658931523}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 8176419016873052749}
   - component: {fileID: 5603376138768283572}
   - component: {fileID: 3794855527109413316}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Slow Trap
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -411,10 +411,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370dc3f130c04374ab7e7ee7cb9c52d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  buildingScriptableObjects: {fileID: 0}
+  damage: 0
   cost: 50
   sellPrice: 30
+  upgradedSprite: {fileID: 0}
+  upgradeCost: 0
   UI_Sprite: {fileID: 21300000, guid: a4623557662e51547b25b0841c548368, type: 3}
+  currentHealth: 0
+  currentLevel: 0
+  type: 1
   enemySpeed: 0.5
 --- !u!1 &2835274611962821428
 GameObject:
@@ -428,7 +434,7 @@ GameObject:
   - component: {fileID: 7485483173632357146}
   - component: {fileID: 5420847357054414759}
   - component: {fileID: 2550640732229683374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sell Or Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +536,7 @@ GameObject:
   - component: {fileID: 5177094032426786108}
   - component: {fileID: 2856127987856204637}
   - component: {fileID: 5133677439992276872}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +668,7 @@ GameObject:
   - component: {fileID: 3292426878477641321}
   - component: {fileID: 4686505078620813265}
   - component: {fileID: 6103321220827711041}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +803,7 @@ GameObject:
   - component: {fileID: 2461770330663763932}
   - component: {fileID: 1287390092617503427}
   - component: {fileID: 589470227251316490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +934,7 @@ GameObject:
   - component: {fileID: 3461454087718794129}
   - component: {fileID: 2026740066131647427}
   - component: {fileID: 7048369709608235192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1068,7 @@ GameObject:
   - component: {fileID: 1121135443503177689}
   - component: {fileID: 5542627403455905945}
   - component: {fileID: 1601070279195903078}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Detail Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

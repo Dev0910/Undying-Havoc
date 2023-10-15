@@ -63,7 +63,6 @@ public class BaseEnemy : MonoBehaviour
     //take damage from buildings/Player
     public void TakeDamage(float damage)
     {
-        healthbar.fillAmount = currentHealth / maxHealth;
         if (currentHealth  > 0)
         {
             currentHealth -= damage;
@@ -73,6 +72,7 @@ public class BaseEnemy : MonoBehaviour
             GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,valueInGold);
             Destroy(this.gameObject);
         }
+        healthbar.fillAmount = currentHealth / maxHealth;
     }
 
     public void ChangeMoveSpeed(float changeInMoveSpeed)
