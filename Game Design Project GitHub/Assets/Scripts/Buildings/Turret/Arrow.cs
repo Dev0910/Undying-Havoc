@@ -40,7 +40,7 @@ public class Arrow : MonoBehaviour
     void HitTarget()
     {
         //GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Enemy1 e = target.GetComponent<Enemy1>();//creating a instence of the Enemy1 script
+        Enemy e = target.GetComponent<Enemy>();//creating a instence of the Enemy1 script
         if (e != null)
         {
             e.TakeDamage(damage);//calling the take damage function from the enemy script

@@ -5,8 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public EnemyData[] enemyDatas;
-
     public GridSystem gridSystem;
     public SpawnMannager spawnManager;
     public DayAndNight dayAndNight;
@@ -39,6 +37,5 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
-        enemyDatas = enemyScriptableObject.enemyData;
     }
 }

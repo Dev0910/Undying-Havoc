@@ -40,7 +40,6 @@ public class DayAndNight : MonoBehaviour
             {
                 timeCycle.text = "Night In : ";
                 InvokeRepeating(nameof(MakePanalDisappear), 0, 0.01f);
-                Debug.Log("Trying to make Day");
                 //nightPanel.SetActive(false);
 
             }
@@ -50,7 +49,6 @@ public class DayAndNight : MonoBehaviour
                 currentWave++;
                 InvokeRepeating(nameof(MakePanalVisible), 0, 0.01f);
                 GameManager.Instance.spawnManager.SpawnWave();
-                Debug.Log("Trying to make night");
                 //nightPanel.SetActive(true);
             }
             

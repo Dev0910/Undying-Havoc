@@ -27,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitenemies) 
         {
-            enemy.GetComponent<Enemy1>().TakeDamage(damagetaken); // Running through the loop and each time we get an collider in the array the enemy take damage
+            enemy.GetComponent<Enemy>().TakeDamage(damagetaken); // Running through the loop and each time we get an collider in the array the enemy take damage
         }  
     }
 

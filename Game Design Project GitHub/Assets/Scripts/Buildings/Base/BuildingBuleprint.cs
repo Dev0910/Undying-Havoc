@@ -5,20 +5,31 @@ using UnityEngine;
 [System.Serializable]
 public class BuildingBuleprint : MonoBehaviour
 {
-    [Header("Building Blueprint")]
+    [Header("Unity Things")]
     public BuildingScriptableObjects buildingScriptableObjects;
+    public Sprite upgradedSprite;
+
+    [Header("Details")]
+    public float currentHealth = 0f;
+    public int currentLevel = 0;
+
+    [Header("Money")]
+    public int cost;
+    public int sellPrice;
+    public int upgradeCost;
+
+    [Header("Attack")]
+    public int damage;
+    
+    
+
+
+    protected GameObject nearestTile = null;
+    protected SpriteRenderer spriteRenderer;
     protected BuildingData[] buildingData;
     protected Sprite currentSpriite;
     protected Sprite currentBulletSprite;
-    public int damage;
-    public int cost;
-    public int sellPrice;
-    public Sprite upgradedSprite;
-    public int upgradeCost;
-    public float currentHealth = 0f;
-    public int currentLevel = 0;
-    protected GameObject nearestTile = null;
-    protected SpriteRenderer spriteRenderer;
+
     private void OnMouseDown()
     {
         //to sell the building 

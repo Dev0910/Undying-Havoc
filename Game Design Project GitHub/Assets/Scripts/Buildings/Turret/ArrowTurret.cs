@@ -6,12 +6,13 @@ public class ArrowTurret : BuildingBuleprint
 {
     public Transform target;
 
-    [Header("shooting")]
+    [Header("Turret Shooting")]
     public float range = 15f;
     public float fireRate = 1f;
     private float fireCooldown = 1f;
 
-    [Header("unity things")]
+
+    [Header("Turret Things")]
     public string enemyTag = "Enemy";
     public GameObject bulletPrefab;
 

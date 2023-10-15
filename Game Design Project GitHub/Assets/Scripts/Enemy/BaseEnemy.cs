@@ -6,13 +6,24 @@ using UnityEngine.UI;
 
 public class BaseEnemy : MonoBehaviour
 {
+    [Header("Details")]
     public float maxHealth;
     public float currentHealth;
+    public int valueInGold;
+
+    [Header("Movement")]
     public float moveSpeed;
+    public float minimumDistanceFromPlayer;
+
+    [Header("Attack")]
     public float attackSpeed;
     public float damage;
-    public float minimumDistanceFromPlayer;
-    public int valueInGold;
+    public float attackAfterSecondsOfContact;
+
+    [Header("UI")]
+    public Image healthbar;
+
+
 
     protected float currentMoveSpeed;
     protected GameObject player;
@@ -20,8 +31,10 @@ public class BaseEnemy : MonoBehaviour
     protected GameObject targetToAttack;//temprory store the building in contact
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
+    protected float timeFromContact;
 
-    public Image healthbar;
+
+    
 
     //follow the target
     public void FollowTarget(Vector2 target)
@@ -82,6 +95,11 @@ public class BaseEnemy : MonoBehaviour
     public void DefaultMoveSpeed()
     {
         currentMoveSpeed = moveSpeed;
+    }
+
+    protected void OnMagmaTrap(float damage)
+    {
+
     }
 
 }

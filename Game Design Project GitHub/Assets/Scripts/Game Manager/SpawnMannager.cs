@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Enemy
+public class StoreEnemy
 {
     public GameObject enemyPrefab;
     public int cost;
@@ -12,7 +12,7 @@ public class Enemy
 public class SpawnMannager : MonoBehaviour
 {
     
-    public List<Enemy> enemies = new List<Enemy>();//To get the list of enemy from inspecter
+    public List<StoreEnemy> enemies = new List<StoreEnemy>();//To get the list of enemy from inspecter
 
     private int waveValue;
     public int incrementInWaveValu = 10;//the Valu of wave increased each round
