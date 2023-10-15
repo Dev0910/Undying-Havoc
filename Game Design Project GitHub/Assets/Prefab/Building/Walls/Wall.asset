@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   buildingData:
-  - buildingSprite: {fileID: 21300000, guid: 40076bd6c2a250841b76c815b8d674da, type: 3}
-    UI_Sprite: {fileID: 21300000, guid: 40076bd6c2a250841b76c815b8d674da, type: 3}
+  - buildingSprite: {fileID: 21300000, guid: df95de8cc3fb70b44a88556e85235d5e, type: 3}
     bulletSprite: {fileID: 0}
     health: 100
     cost: 20
     sellingPrice: 10
     damage: 0
-  - buildingSprite: {fileID: 21300000, guid: 0ee7d250d5582aa49a58facea3f085a8, type: 3}
-    UI_Sprite: {fileID: 0}
+  - buildingSprite: {fileID: 21300000, guid: 4190f1a18f565474f81fd44aefbf1c1d, type: 3}
     bulletSprite: {fileID: 0}
     health: 200
-    cost: 30
-    sellingPrice: 30
+    cost: 20
+    sellingPrice: 20
+    damage: 0
+  - buildingSprite: {fileID: 21300000, guid: 29f9b2fdcee8e5046963061c4a2ef68d, type: 3}
+    bulletSprite: {fileID: 0}
+    health: 400
+    cost: 40
+    sellingPrice: 40
+    damage: 0
+  - buildingSprite: {fileID: 21300000, guid: fe7650a93b828d54c968bd2090a5c764, type: 3}
+    bulletSprite: {fileID: 0}
+    health: 800
+    cost: 80
+    sellingPrice: 80
     damage: 0

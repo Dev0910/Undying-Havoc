@@ -15,7 +15,6 @@ public class BuildingBuleprint : MonoBehaviour
     public int sellPrice;
     public Sprite upgradedSprite;
     public int upgradeCost;
-    public Sprite UI_Sprite;
     public float currentHealth = 0f;
     public int currentLevel = 0;
     protected GameObject nearestTile = null;
@@ -75,7 +74,6 @@ public class BuildingBuleprint : MonoBehaviour
         currentSpriite = buildingData[currentLevel].buildingSprite;
         currentBulletSprite = buildingData[currentLevel].bulletSprite;
         currentHealth = buildingData[currentLevel].health;
-        UI_Sprite = buildingData[currentLevel].UI_Sprite;
         cost = buildingData[currentLevel].cost;
         sellPrice = buildingData[currentLevel].sellingPrice;
         damage = buildingData[currentLevel].damage;

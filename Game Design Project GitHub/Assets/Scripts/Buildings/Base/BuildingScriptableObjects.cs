@@ -12,7 +12,6 @@ public class BuildingScriptableObjects : ScriptableObject
 public class BuildingData
 {
     public Sprite buildingSprite;
-    public Sprite UI_Sprite;
     public Sprite bulletSprite;
     public int health;
     public int cost;

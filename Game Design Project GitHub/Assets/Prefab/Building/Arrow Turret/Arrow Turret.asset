@@ -13,10 +13,27 @@ MonoBehaviour:
   m_Name: Arrow Turret
   m_EditorClassIdentifier: 
   buildingData:
-  - buildingSprite: {fileID: 21300000, guid: 6516662b08c1a0543ba0a04daec1a174, type: 3}
-    UI_Sprite: {fileID: 21300000, guid: 7ddac7c502d299d4f8af0be7b89b3ed5, type: 3}
+  - buildingSprite: {fileID: 21300000, guid: 5c24baab491457348ade03fbe6be7b92, type: 3}
     bulletSprite: {fileID: 21300000, guid: 2786db7efc77b7e48b94ce6d9a102e70, type: 3}
     health: 100
     cost: 60
     sellingPrice: 40
     damage: 20
+  - buildingSprite: {fileID: 21300000, guid: 643bd001f1518fd409476c5878bf63a7, type: 3}
+    bulletSprite: {fileID: 21300000, guid: 2786db7efc77b7e48b94ce6d9a102e70, type: 3}
+    health: 200
+    cost: 60
+    sellingPrice: 60
+    damage: 40
+  - buildingSprite: {fileID: 21300000, guid: 643bd001f1518fd409476c5878bf63a7, type: 3}
+    bulletSprite: {fileID: 21300000, guid: 2786db7efc77b7e48b94ce6d9a102e70, type: 3}
+    health: 400
+    cost: 120
+    sellingPrice: 120
+    damage: 80
+  - buildingSprite: {fileID: 21300000, guid: af056d9e9598b094e8236f0f4096f449, type: 3}
+    bulletSprite: {fileID: 21300000, guid: 2786db7efc77b7e48b94ce6d9a102e70, type: 3}
+    health: 800
+    cost: 240
+    sellingPrice: 40
+    damage: 160
