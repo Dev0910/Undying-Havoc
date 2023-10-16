@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
         enemyToAttack = null;
         //isBought = false;
         weaponsData = weaponScriptableObjects.weaponsData;
-        //currentLevel = 0;
+        currentLevel = 0;
         WeaponGetData();
     }
     void Update()

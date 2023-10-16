@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c142efc0a07a3b4b99a37366e6f375f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponScriptableObjects: {fileID: 0}
+  weaponScriptableObjects: {fileID: 11400000, guid: d36d9e62541c39942ae357688c587565, type: 2}
   attackrange: 0.6
   enemylayers:
     serializedVersion: 2
