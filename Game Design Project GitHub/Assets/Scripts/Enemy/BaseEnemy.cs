@@ -23,7 +23,9 @@ public class BaseEnemy : MonoBehaviour
     [Header("UI")]
     public Image healthbar;
 
-
+    protected GameObject trap;
+    protected int trapCount;
+    protected float trapTimer;
 
     protected float currentMoveSpeed;
     protected GameObject player;
@@ -87,6 +89,25 @@ public class BaseEnemy : MonoBehaviour
         }
         healthbar.fillAmount = currentHealth / maxHealth;
     }
+    //public void TakeDamage(float damage, GameObject damageGiver)
+    //{
+    //    if (currentHealth > 0)
+    //    {
+    //        currentHealth -= damage;
+    //    }
+    //    if (currentHealth <= 0)
+    //    {
+    //        GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position, valueInGold);
+    //        if (damageGiver.CompareTag("Trap"))
+    //        {
+    //                    damageGiver.GetComponent<TrapBlueprint>().targets.Remove(this.gameObject);
+    //                    Destroy(this.gameObject);
+    //        }
+
+    //    }
+    //    healthbar.fillAmount = currentHealth / maxHealth;
+    //}
+
 
     public void ChangeMoveSpeed(float changeInMoveSpeed)
     {
@@ -97,9 +118,36 @@ public class BaseEnemy : MonoBehaviour
         currentMoveSpeed = moveSpeed;
     }
 
-    protected void OnMagmaTrap(float damage)
+    protected void Trap()
     {
+        if (trapCount > 0)
+        {
+            switch (trap.GetComponent<TrapBlueprint>().trapType)
+            {
+                case EType.None: break;
 
+                case EType.SlowTrap:
+                    {
+                        ChangeMoveSpeed(trap.GetComponent<TrapBlueprint>().enemySpeed);
+                        break;
+                    }
+
+                case EType.MagmaTrap:
+                    {
+                        if (trapTimer <= 0)
+                        {
+                            trapTimer = 1f / trap.GetComponent<TrapBlueprint>().attackRate;
+                            TakeDamage(trap.GetComponent<TrapBlueprint>().damage);
+
+                        }
+                        trapTimer -= Time.deltaTime;
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            DefaultMoveSpeed();
+        }
     }
-
 }

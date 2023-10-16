@@ -15,6 +15,7 @@ public class Enemy : BaseEnemy
         player = GameManager.Instance.player;
         currentMoveSpeed = moveSpeed;
         healthbar.fillAmount = currentHealth / maxHealth;
+        trapTimer = 0;
     }
     private void Update()
     {
@@ -23,6 +24,7 @@ public class Enemy : BaseEnemy
         {
             Attack(targetToAttack, damage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
         }
+        Trap();
     }
 
     //cheak for collision
@@ -40,6 +42,27 @@ public class Enemy : BaseEnemy
         if(collisionCount <= 0)
         {
             targetToAttack = null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+            trap=collision.gameObject;
+            trapCount++;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            trapCount--;
+            if (trapCount <= 0)
+            {
+                trap = null;
+            }
         }
     }
 
@@ -62,6 +85,6 @@ public class Enemy : BaseEnemy
     //    }
     //}
 
-    
-    
+
+
 }

@@ -30,6 +30,7 @@ public class BuildingBuleprint : MonoBehaviour
     protected Sprite currentSpriite;
     protected Sprite currentBulletSprite;
 
+
     private void OnMouseDown()
     {
         //to sell the building 
