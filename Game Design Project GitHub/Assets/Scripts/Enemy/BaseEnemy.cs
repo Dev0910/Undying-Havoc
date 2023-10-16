@@ -23,17 +23,19 @@ public class BaseEnemy : MonoBehaviour
     [Header("UI")]
     public Image healthbar;
 
+    //used for Traps
     protected GameObject trap;
-    protected int trapCount;
+    protected int trapCount;//to store the number of trap the enemy is on
     protected float trapTimer;
 
-    protected float currentMoveSpeed;
-    protected GameObject player;
+
+    protected float currentMoveSpeed;//update the speed in game
+    protected GameObject player;//instance of player
     protected int collisionCount;//to count the collision
     protected GameObject targetToAttack;//temprory store the building in contact
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
-    protected float timeFromContact;
+    protected float timeFromContact;//to count the time from the time plyer made contact
 
 
     
@@ -118,26 +120,30 @@ public class BaseEnemy : MonoBehaviour
         currentMoveSpeed = moveSpeed;
     }
 
+    //All the things to don when steped on a trap
     protected void Trap()
     {
+        //if stepping on Trap
         if (trapCount > 0)
         {
-            switch (trap.GetComponent<TrapBlueprint>().trapType)
+            TrapBlueprint trapBlueprint = trap.GetComponent<TrapBlueprint>();//set Instance
+            switch (trapBlueprint.trapType)
             {
                 case EType.None: break;
 
                 case EType.SlowTrap:
                     {
-                        ChangeMoveSpeed(trap.GetComponent<TrapBlueprint>().enemySpeed);
+                        ChangeMoveSpeed(trapBlueprint.enemySpeed);//slow the enemy
                         break;
                     }
 
                 case EType.MagmaTrap:
                     {
+                        //damage player according to the attack rate 
                         if (trapTimer <= 0)
                         {
-                            trapTimer = 1f / trap.GetComponent<TrapBlueprint>().attackRate;
-                            TakeDamage(trap.GetComponent<TrapBlueprint>().damage);
+                            trapTimer = 1f / trapBlueprint.attackRate;
+                            TakeDamage(trapBlueprint.damage);
 
                         }
                         trapTimer -= Time.deltaTime;
@@ -145,6 +151,8 @@ public class BaseEnemy : MonoBehaviour
                     }
             }
         }
+
+        //reset the enemy movement speed if not steping on a trap
         else
         {
             DefaultMoveSpeed();

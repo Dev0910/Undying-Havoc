@@ -81,6 +81,7 @@ public class BuildingBuleprint : MonoBehaviour
     }
 
 
+    //Get data from the scriptable object
     protected void GetData()
     {
         currentSpriite = buildingData[currentLevel].buildingSprite;

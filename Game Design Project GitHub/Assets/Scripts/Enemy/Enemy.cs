@@ -8,14 +8,18 @@ public class Enemy : BaseEnemy
     
     private void Awake()
     {
-        //GetEnemyData();
-        collisionCount = 0;
-        currentHealth = maxHealth;
+        //set Instance
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameManager.Instance.player;
+
+        //reset values
+        collisionCount = 0;
+        currentHealth = maxHealth;
         currentMoveSpeed = moveSpeed;
-        healthbar.fillAmount = currentHealth / maxHealth;
         trapTimer = 0;
+
+        //update UI
+        healthbar.fillAmount = currentHealth / maxHealth;
     }
     private void Update()
     {
@@ -27,7 +31,7 @@ public class Enemy : BaseEnemy
         Trap();
     }
 
-    //cheak for collision
+    //cheak for collision for Player or Buildings
     private void OnCollisionEnter2D(Collision2D collision)
     {
         timeFromContact = Time.time;
@@ -45,6 +49,8 @@ public class Enemy : BaseEnemy
         }
     }
 
+
+    //cheak for Traps
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Trap"))
@@ -53,7 +59,7 @@ public class Enemy : BaseEnemy
             trapCount++;
         }
     }
-
+    //cheak for exit from Traps
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
@@ -65,26 +71,4 @@ public class Enemy : BaseEnemy
             }
         }
     }
-
-    //it is to get data from the scriptable object of this enemy
-    //private void GetEnemyData()//not currently used
-    //{
-    //    EnemyData[] enemyDataArray = GameManager.Instance.enemyDatas;
-
-    //    foreach (EnemyData enemy in enemyDataArray)
-    //    {
-    //        if (enemy != null && enemy.enemyType == EEnemyType.Enemy1)
-    //        {
-    //            maxHealth = enemy.maxHealth;
-    //            moveSpeed = enemy.moveSpeed;
-    //            attackSpeed = enemy.attackSpeed;
-    //            damage = enemy.damage;
-    //            minimumDistanceFromPlayer = enemy.minimumDistanceFromPlayer;
-    //            break;
-    //        }
-    //    }
-    //}
-
-
-
 }
