@@ -5982,8 +5982,6 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 4118816160350226672}
   cam: {fileID: 519420031}
-  target: {fileID: 108327840}
-  temporary: {fileID: 0}
 --- !u!222 &5441760475413088175
 CanvasRenderer:
   m_ObjectHideFlags: 0

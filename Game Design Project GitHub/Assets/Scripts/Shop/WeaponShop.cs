@@ -18,8 +18,12 @@ public class WeaponShop : MonoBehaviour
         {
             GameStats.currentGold -= prefab.GetComponent<Weapon>().costToBuy;//reduse the weapon cost
             GameObject instantiatedPrefab = Instantiate(prefab,GameManager.Instance.weaponHolder.transform.position,GameManager.Instance.weaponHolder.transform.rotation);//spawns the weapon
-            instantiatedPrefab.transform.parent =GameObject.Find("WeaponHolder").transform;//set player as the parent gameobject
-            instantiatedPrefab.transform.rotation = Quaternion.Euler(0 ,0, -240); // Set rotation to identity
+            instantiatedPrefab.transform.parent =GameObject.Find("WeaponHolder").transform;//set player as the parent
+            if(prefab.name == "Axe")
+            {
+                instantiatedPrefab.transform.rotation = Quaternion.Euler(0, 0, -240); // Set rotation to identity
+            }
+           
             //isBought = true;
         }
 
