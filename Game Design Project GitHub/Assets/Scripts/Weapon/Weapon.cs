@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     
     public WeaponScriptableObjects[] weaponScriptableObjects; // Taking reference for the scriptable Objects
+    public int currentWeaponscriptableobjectIndex = 0;
     private WeaponData[] weaponsData;
     public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
@@ -28,9 +29,10 @@ public class Weapon : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyToAttack = null;
         //isBought = false;
-        weaponsData = weaponScriptableObjects[0].weaponsData;
+        weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
         currentLevel = 0;
         WeaponGetData();
+        spriteRenderer.sprite = currentWeaponSpriite;
     }
     void Update()
     {
@@ -39,7 +41,37 @@ public class Weapon : MonoBehaviour
             enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
             //Debug.Log(enemyToAttack.name+" : " + damage);
         }
+        // Mouse scroll wheel input
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scrollWheel > 0)
+        {
+            // Scroll up, switch to the next weapon
+            SwitchWeapon(1);
+        }
+        else if (scrollWheel < 0)
+        {
+            // Scroll down, switch to the previous weapon
+            SwitchWeapon(-1);
+        }
     }
+
+    void SwitchWeapon(int offset)
+    {
+        int newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex + offset;
+
+        // Ensure the new index is within the array bounds
+        if (newWeaponscriptableobjectIndex < 0)
+            newWeaponscriptableobjectIndex = weaponScriptableObjects.Length - 1;
+        else if (newWeaponscriptableobjectIndex >= weaponScriptableObjects.Length)
+            newWeaponscriptableobjectIndex = 0;
+
+        currentWeaponscriptableobjectIndex = newWeaponscriptableobjectIndex;
+        weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
+        WeaponGetData();
+        spriteRenderer.sprite = currentWeaponSpriite;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

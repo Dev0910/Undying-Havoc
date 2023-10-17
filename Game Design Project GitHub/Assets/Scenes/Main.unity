@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22891960}
   - component: {fileID: 22891961}
+  - component: {fileID: 22891962}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -171,6 +172,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cab8bcc052f87534f9b6fe03f7f16a65, type: 2}
   - {fileID: 11400000, guid: d36d9e62541c39942ae357688c587565, type: 2}
   - {fileID: 11400000, guid: 4d1207430f63ba64bbb6afcc097b3b82, type: 2}
+  currentWeaponscriptableobjectIndex: 0
   attackrange: 0
   enemylayers:
     serializedVersion: 2
@@ -181,6 +183,58 @@ MonoBehaviour:
   upgradedSprite: {fileID: 0}
   costToUpgrade: 0
   currentLevel: 0
+--- !u!212 &22891962
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22891959}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &98345154
 GameObject:
   m_ObjectHideFlags: 0
