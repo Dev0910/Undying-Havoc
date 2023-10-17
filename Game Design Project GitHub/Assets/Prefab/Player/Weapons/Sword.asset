@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponsData:
-  - weaponSprite: {fileID: 0}
+  - weaponSprite: {fileID: 21300000, guid: 5d4f16422bd242f4ea33700b9019a9a9, type: 3}
     cost: 200
     damage: 20
