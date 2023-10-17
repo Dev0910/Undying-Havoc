@@ -9,10 +9,14 @@ public class DayAndNight : MonoBehaviour
     public float speedOfAnimation = 1f;
     public GameObject nightPanel;
     private Image nightPanelImage;
-    public Text timeCycle;
+    //public Text timeCycle;
     private float currentAlpha;
     private int changesToAplha;
-    public Text currentTimeText;
+    //public Text currentTimeText;
+
+    [Header("Time Animation")]
+    [SerializeField] Sprite[] timeImage;
+    [SerializeField]private Image currentImage;
 
     public int currentWave;
     public bool isNight = false;
@@ -21,40 +25,13 @@ public class DayAndNight : MonoBehaviour
     void Start()
     {
         currentAlpha = 0;
+        currentImage = currentImage.GetComponent<Image>();
         currentTime = timeBetweenDayAndNight;
         nightPanelImage = nightPanel.GetComponent<Image>();
         currentWave = 0;
-        isNight = false;
+        isNight = true;
         UpdateColor();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currentTime -= Time.deltaTime;
-        currentTimeText.text = currentTime+"";
-        if(currentTime < 0f)
-        {
-            currentTime = timeBetweenDayAndNight;
-            if(isNight)
-            {
-                timeCycle.text = "Night In : ";
-                InvokeRepeating(nameof(MakePanalDisappear), 0, 0.01f);
-                //nightPanel.SetActive(false);
-
-            }
-            else if(!isNight)
-            {
-                timeCycle.text = "Day In : ";
-                currentWave++;
-                InvokeRepeating(nameof(MakePanalVisible), 0, 0.01f);
-                GameManager.Instance.spawnManager.SpawnWave();
-                //nightPanel.SetActive(true);
-            }
-            
-        }
-
-
+        StartCoroutine(StartTimer());
     }
     private void MakePanalVisible()
     {
@@ -88,5 +65,39 @@ public class DayAndNight : MonoBehaviour
     private void UpdateColor()
     {
         nightPanelImage.color = new Color(nightPanelImage.color.r, nightPanelImage.color.g, nightPanelImage.color.b, currentAlpha/255);
+    }
+
+
+    IEnumerator StartTimer()
+    {
+        //isNight = !isNight;
+        PanalAnimation();
+        currentImage.sprite = isNight ? timeImage[0] : timeImage[1];
+        //transform.localScale = isNight ? new Vector3(1, 1, 1) : new Vector3(0.7f, 0.7f, 0.7f);
+
+        while (currentTime >= 0)
+        {
+            currentImage.fillAmount = Mathf.InverseLerp(0, timeBetweenDayAndNight, currentTime);
+            yield return new WaitForSeconds(0.1f);
+            currentTime -= 0.1f;
+        }
+        currentTime = timeBetweenDayAndNight;
+        StartCoroutine(StartTimer());
+    }
+
+    private void PanalAnimation()
+    {
+        if (isNight)
+        {
+            InvokeRepeating(nameof(MakePanalDisappear), 0, 0.01f);
+            isNight = false;
+        }
+        else
+        {
+            currentWave++;
+            InvokeRepeating(nameof(MakePanalVisible), 0, 0.01f);
+            isNight = true;
+            GameManager.Instance.spawnManager.SpawnWave();
+        }
     }
 }
