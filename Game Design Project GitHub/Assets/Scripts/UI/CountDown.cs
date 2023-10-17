@@ -6,7 +6,7 @@ public class CountDown : MonoBehaviour
 {
     [SerializeField] Sprite[] timeImage;
     [SerializeField] Text timeText;
-    [SerializeField] float duration, currentTime;
+    private float duration, currentTime;
     [SerializeField] private bool day;
     private Image img;
 
@@ -14,6 +14,7 @@ public class CountDown : MonoBehaviour
     {
         day = false;
         img = GetComponent<Image>();
+        duration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
         currentTime = duration;
         timeText.text = currentTime.ToString();
         StartCoroutine(StartTimer());
@@ -30,8 +31,8 @@ public class CountDown : MonoBehaviour
         {
             img.fillAmount = Mathf.InverseLerp(0, duration, currentTime);
             timeText.text = currentTime.ToString();
-            yield return new WaitForSeconds(1f);
-            currentTime--;
+            yield return new WaitForSeconds(0.1f);
+            currentTime -= 0.1f;
         }
         currentTime = duration;
         StartCoroutine(StartTimer());

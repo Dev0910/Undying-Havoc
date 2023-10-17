@@ -2965,8 +2965,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce26cde24d452404e81736c4c32a9ee7, type: 3}
   - {fileID: 21300000, guid: 744c2627b226c1d45a33902506fdeec8, type: 3}
   timeText: {fileID: 7723296606108501715}
-  duration: 14
-  currentTime: 0
   day: 0
 --- !u!1 &2115107139
 GameObject:
