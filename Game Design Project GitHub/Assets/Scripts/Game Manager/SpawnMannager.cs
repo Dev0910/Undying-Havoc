@@ -22,7 +22,7 @@ public class SpawnMannager : MonoBehaviour
     public float spawnEnemySecondsBeforeDay;
     public float spawnRadius = 10f;
     private float spawnInterval;
-    private int currentWave;
+    public static int currentWave;
     private int enemySpawnIndex = 0;
     //public List<GameObject> spawnedEnemies = new List<GameObject>();
 

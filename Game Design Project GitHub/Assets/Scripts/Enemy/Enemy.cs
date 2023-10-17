@@ -13,8 +13,8 @@ public class Enemy : BaseEnemy
         player = GameManager.Instance.player;
 
         //reset values
+        GetData();
         collisionCount = 0;
-        currentHealth = maxHealth;
         currentMoveSpeed = moveSpeed;
         trapTimer = 0;
 
@@ -26,7 +26,7 @@ public class Enemy : BaseEnemy
         FollowTarget(player.transform.position);//calling the follow function from the base class
         if ((lastAttackTime + attackSpeed < Time.time) && (targetToAttack != null) && (timeFromContact + attackAfterSecondsOfContact < Time.time))//cheak if it can attack the building
         {
-            Attack(targetToAttack, damage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+            Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
         }
         Trap();
     }

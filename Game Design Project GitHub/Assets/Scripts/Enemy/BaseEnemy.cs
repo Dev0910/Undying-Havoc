@@ -1,15 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BaseEnemy : MonoBehaviour
 {
-    [Header("Details")]
-    public float maxHealth;
+    [Header("Health")]
+    public float startHealth;
     public float currentHealth;
-    public int valueInGold;
+    protected float maxHealth;
+    public float incrementInHpEachWaveInPercentage;
+
+    [Header("Gold")]
+    public float startValueInGold;
+    public int currentValueInGold;
+    public float incrementInGoldValueInPersentage;
+    protected float maxValueInGold;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -17,7 +26,10 @@ public class BaseEnemy : MonoBehaviour
 
     [Header("Attack")]
     public float attackSpeed;
-    public float damage;
+    public float startDamage;
+    public float currentDamage;
+    protected float maxDamage;
+    public float incrementInDamageEachWaveInPercentage;
     public float attackAfterSecondsOfContact;
 
     [Header("UI")]
@@ -86,36 +98,17 @@ public class BaseEnemy : MonoBehaviour
         }
         if(currentHealth <= 0)
         {
-            GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,valueInGold);
+            GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
             Destroy(this.gameObject);
         }
         healthbar.fillAmount = currentHealth / maxHealth;
     }
-    //public void TakeDamage(float damage, GameObject damageGiver)
-    //{
-    //    if (currentHealth > 0)
-    //    {
-    //        currentHealth -= damage;
-    //    }
-    //    if (currentHealth <= 0)
-    //    {
-    //        GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position, valueInGold);
-    //        if (damageGiver.CompareTag("Trap"))
-    //        {
-    //                    damageGiver.GetComponent<TrapBlueprint>().targets.Remove(this.gameObject);
-    //                    Destroy(this.gameObject);
-    //        }
 
-    //    }
-    //    healthbar.fillAmount = currentHealth / maxHealth;
-    //}
-
-
-    public void ChangeMoveSpeed(float changeInMoveSpeed)
+    protected void ChangeMoveSpeed(float changeInMoveSpeed)
     {
         currentMoveSpeed *= changeInMoveSpeed;
     }
-    public void DefaultMoveSpeed()
+    protected void DefaultMoveSpeed()
     {
         currentMoveSpeed = moveSpeed;
     }
@@ -157,5 +150,23 @@ public class BaseEnemy : MonoBehaviour
         {
             DefaultMoveSpeed();
         }
+    }
+
+    protected void GetData()
+    {
+        maxHealth = startHealth;
+        maxDamage = startDamage;
+        maxValueInGold = startValueInGold;
+
+        for(int i = 0;i < SpawnMannager.currentWave;i++)
+        {
+            maxHealth += (maxHealth * (incrementInHpEachWaveInPercentage / 100));
+            maxDamage += (maxDamage * (incrementInDamageEachWaveInPercentage / 100));
+            maxValueInGold += (maxValueInGold * (incrementInGoldValueInPersentage / 100));
+            
+        }
+        currentHealth = Mathf.Round(maxHealth * 100.00f) * 0.01f;
+        currentDamage = Mathf.Round(maxDamage * 100.00f) * 0.01f;
+        currentValueInGold = Mathf.RoundToInt(maxValueInGold);
     }
 }
