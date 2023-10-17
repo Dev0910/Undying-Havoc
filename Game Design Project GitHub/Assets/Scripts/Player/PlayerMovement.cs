@@ -13,25 +13,13 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     Vector2 mousepos;
 
-    private Quaternion initialRotation;
-    private Quaternion targetRotation;
-    private float rotationSpeed = 40.0f; // Degrees per second
-    private bool isRotating = false;
-    public Transform target;
-    public Transform temporary;
     private float rotationAngle = 45.0f;
 
-    private void Start()
-    {
-        initialRotation = transform.rotation;
-    }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //targetRotation = Quaternion.Euler(0, 0, -90) * Quaternion.Inverse(targetRotation);
-            //isRotating = true;
             transform.Rotate(Vector3.forward * rotationAngle);
         }
         movement.x = Input.GetAxisRaw("Horizontal");
