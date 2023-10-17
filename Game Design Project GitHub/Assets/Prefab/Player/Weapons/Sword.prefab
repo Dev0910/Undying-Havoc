@@ -163,7 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c142efc0a07a3b4b99a37366e6f375f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponScriptableObjects: {fileID: 11400000, guid: 4d1207430f63ba64bbb6afcc097b3b82, type: 2}
+  weaponScriptableObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   attackrange: 0.4
   enemylayers:
     serializedVersion: 2
@@ -173,4 +176,4 @@ MonoBehaviour:
   damage: 0
   upgradedSprite: {fileID: 0}
   costToUpgrade: 0
-  currentLevel: 14
+  currentLevel: 0

@@ -4,42 +4,48 @@ using UnityEngine;
 
 public class WeaponShop : MonoBehaviour
 {
-    //bool isBought;
+    private int weaponCount;
     private void Start()
     {
-        //isBought = false;
+        weaponCount = 0;
     }
     //buys weapon for the player
     //this function is called by the buttons in UI
     public void BuyWeapon(GameObject prefab)
     {
         //cheaks the conditions to buy the weapon
-        if (prefab.GetComponent<Weapon>().costToBuy <= GameStats.currentGold /*&& isBought == false*/)
+        if (prefab.GetComponent<Weapon>().costToBuy <= GameStats.currentGold)
         {
-            GameStats.currentGold -= prefab.GetComponent<Weapon>().costToBuy;//reduse the weapon cost
-            GameObject instantiatedPrefab = Instantiate(prefab,GameManager.Instance.weaponHolder.transform.position,GameManager.Instance.weaponHolder.transform.rotation);//spawns the weapon
-            instantiatedPrefab.transform.parent =GameObject.Find("WeaponHolder").transform;//set player as the parent
-            instantiatedPrefab.SetActive(false);
-            if(prefab.name == "Axe")
+            GameObject temp = GameObject.Find(prefab.name);
+            if(temp == null)
             {
-                instantiatedPrefab.transform.rotation = Quaternion.Euler(0, 0, -240); // Set rotation to identity
+                SpawnWeapon(prefab);
             }
-
-            if (prefab.name == "Sword")
+            else
             {
-                instantiatedPrefab.transform.rotation = Quaternion.Euler(0, 0, -223); // Set rotation to identity
+                temp.GetComponent<Weapon>().UpgradeWeapon();
             }
+        }
+    }
 
-            //isBought = true;
+    private void SpawnWeapon(GameObject prefab)
+    {
+        GameStats.currentGold -= prefab.GetComponent<Weapon>().costToBuy;//reduse the weapon cost
+        GameObject instantiatedPrefab = Instantiate(prefab, GameManager.Instance.weaponHolder.transform.position, GameManager.Instance.weaponHolder.transform.rotation);//spawns the weapon
+        instantiatedPrefab.name = prefab.name;
+        instantiatedPrefab.transform.parent = GameObject.Find("WeaponHolder").transform;//set player as the parent
+
+        
+        instantiatedPrefab.SetActive(false);
+        if (prefab.name == "Axe")
+        {
+            instantiatedPrefab.transform.rotation = Quaternion.Euler(0, 0, -240); // Set rotation to identity
         }
 
-
-        // Checks the conditions to upgrade the weapon
-       /* if (prefab.GetComponent<Weapon>().costToUpgrade <= GameStats.currentGold && isBought == true)
+        if (prefab.name == "Sword")
         {
-            prefab.GetComponent<Weapon>().UpgradeWeapon();
-        }*/
-
+            instantiatedPrefab.transform.rotation = Quaternion.Euler(0, 0, -223); // Set rotation to identity
+        }
     }
 }
 

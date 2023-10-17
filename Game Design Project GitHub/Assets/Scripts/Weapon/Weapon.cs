@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public WeaponScriptableObjects weaponScriptableObjects; // Taking reference for the scriptable Objects
+    
+    public WeaponScriptableObjects[] weaponScriptableObjects; // Taking reference for the scriptable Objects
     private WeaponData[] weaponsData;
     public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
@@ -16,14 +17,18 @@ public class Weapon : MonoBehaviour
     public int costToUpgrade; // cost to upgrade the weapon
     public int currentLevel; // Index for weaponsData
     private GameObject enemyToAttack;
+    private SpriteRenderer spriteRenderer;
     //public bool isBought;
     //public int currentLevel; // Index for weaponsData
     //public bool isBought;
+
+    
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         enemyToAttack = null;
         //isBought = false;
-        weaponsData = weaponScriptableObjects.weaponsData;
+        weaponsData = weaponScriptableObjects[0].weaponsData;
         currentLevel = 0;
         WeaponGetData();
     }
@@ -64,6 +69,7 @@ public class Weapon : MonoBehaviour
         GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
         currentLevel++;
         WeaponGetData();
+        spriteRenderer.sprite = currentWeaponSpriite;
     }
 
     void WeaponGetData()
