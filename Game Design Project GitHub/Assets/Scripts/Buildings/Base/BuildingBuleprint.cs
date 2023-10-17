@@ -30,6 +30,7 @@ public class BuildingBuleprint : MonoBehaviour
     protected Sprite currentSpriite;
     protected Sprite currentBulletSprite;
 
+
     private void OnMouseDown()
     {
         //to sell the building 
@@ -80,6 +81,7 @@ public class BuildingBuleprint : MonoBehaviour
     }
 
 
+    //Get data from the scriptable object
     protected void GetData()
     {
         currentSpriite = buildingData[currentLevel].buildingSprite;

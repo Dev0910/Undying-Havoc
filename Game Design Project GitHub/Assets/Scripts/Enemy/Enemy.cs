@@ -8,12 +8,17 @@ public class Enemy : BaseEnemy
     
     private void Awake()
     {
-        //GetEnemyData();
-        collisionCount = 0;
-        currentHealth = maxHealth;
+        //set Instance
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameManager.Instance.player;
+
+        //reset values
+        GetData();
+        collisionCount = 0;
         currentMoveSpeed = moveSpeed;
+        trapTimer = 0;
+
+        //update UI
         healthbar.fillAmount = currentHealth / maxHealth;
     }
     private void Update()
@@ -21,11 +26,12 @@ public class Enemy : BaseEnemy
         FollowTarget(player.transform.position);//calling the follow function from the base class
         if ((lastAttackTime + attackSpeed < Time.time) && (targetToAttack != null) && (timeFromContact + attackAfterSecondsOfContact < Time.time))//cheak if it can attack the building
         {
-            Attack(targetToAttack, damage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+            Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
         }
+        Trap();
     }
 
-    //cheak for collision
+    //cheak for collision for Player or Buildings
     private void OnCollisionEnter2D(Collision2D collision)
     {
         timeFromContact = Time.time;
@@ -43,25 +49,26 @@ public class Enemy : BaseEnemy
         }
     }
 
-    //it is to get data from the scriptable object of this enemy
-    //private void GetEnemyData()//not currently used
-    //{
-    //    EnemyData[] enemyDataArray = GameManager.Instance.enemyDatas;
 
-    //    foreach (EnemyData enemy in enemyDataArray)
-    //    {
-    //        if (enemy != null && enemy.enemyType == EEnemyType.Enemy1)
-    //        {
-    //            maxHealth = enemy.maxHealth;
-    //            moveSpeed = enemy.moveSpeed;
-    //            attackSpeed = enemy.attackSpeed;
-    //            damage = enemy.damage;
-    //            minimumDistanceFromPlayer = enemy.minimumDistanceFromPlayer;
-    //            break;
-    //        }
-    //    }
-    //}
-
-    
-    
+    //cheak for Traps
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+            trap=collision.gameObject;
+            trapCount++;
+        }
+    }
+    //cheak for exit from Traps
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            trapCount--;
+            if (trapCount <= 0)
+            {
+                trap = null;
+            }
+        }
+    }
 }

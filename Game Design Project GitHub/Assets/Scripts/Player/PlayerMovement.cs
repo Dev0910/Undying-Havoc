@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,9 +12,16 @@ public class PlayerMovement : MonoBehaviour
     //public GameObject target;
     Vector2 movement;
     Vector2 mousepos;
+
+    private float rotationAngle = 45.0f;
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            transform.Rotate(Vector3.forward * rotationAngle);
+        }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

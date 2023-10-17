@@ -227,14 +227,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1bf4d6e61486d4faca062f567e9ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  startHealth: 60
   currentHealth: 0
+  incrementInHpEachWaveInPercentage: 10
+  startValueInGold: 5
+  currentValueInGold: 0
+  incrementInGoldValueInPersentage: 10
   moveSpeed: 1.5
-  attackSpeed: 1
-  damage: 15
   minimumDistanceFromPlayer: 0.5
-  valueInGold: 15
-  attackAfterSecondsOfContact: 2
+  attackSpeed: 1
+  startDamage: 15
+  currentDamage: 0
+  incrementInDamageEachWaveInPercentage: 10
+  attackAfterSecondsOfContact: 1
   healthbar: {fileID: 1909178314825887456}
 --- !u!50 &7905979323850625812
 Rigidbody2D:
