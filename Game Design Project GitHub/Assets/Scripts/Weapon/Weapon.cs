@@ -8,8 +8,6 @@ public class Weapon : MonoBehaviour
 {
     
     public WeaponScriptableObjects[] weaponScriptableObjects;
-    private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
-    //public int currentWeaponscriptableobjectIndex = 0;
     public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
     public Sprite currentWeaponSpriite; // Base weapon Sprite
@@ -17,23 +15,20 @@ public class Weapon : MonoBehaviour
     public float damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
+
+    private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
     private GameObject enemyToAttack;
     private SpriteRenderer spriteRenderer;
-    //public bool isBought;
-    //public int currentLevel; // Index for weaponsData
-    //public bool isBought;
+    private BoxCollider2D boxCollider2D;
 
     
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+
         enemyToAttack = null;
         currentWeapon = null;
-        //isBought = false;
-        //currentWeapon = weaponScriptableObjects[0];
-        //currentWeapon.isBought = true;
-        //GetWeaponData(currentWeapon.weaponsData);
-        //spriteRenderer.sprite = currentWeaponSpriite;
 
         for(int i=0;i<weaponScriptableObjects.Length;i++)
         {
@@ -46,18 +41,19 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
         {
             enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
-            //Debug.Log(enemyToAttack.name+" : " + damage);
         }
-
         SwitchWeapon();
     }
 
     void SwitchWeapon()
     {
         if(currentWeapon == null) { return; }
+
+
         if(Input.GetKeyDown(KeyCode.Alpha1) && weaponScriptableObjects[0].isBought)
         {
             currentWeapon = weaponScriptableObjects[0];
+
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2) && weaponScriptableObjects[1].isBought)
         {
@@ -67,7 +63,6 @@ public class Weapon : MonoBehaviour
         {
             currentWeapon = weaponScriptableObjects[2];
         }
-
         GetWeaponData(currentWeapon.weaponsData);
     }
 
@@ -97,9 +92,12 @@ public class Weapon : MonoBehaviour
 
     public void UpgradeWeapon(int index)
     {
-        GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
-        weaponScriptableObjects[index].currentLevel++;
-        print("weapon upgarded");
+        if (weaponScriptableObjects[index].currentLevel < weaponScriptableObjects[index].weaponsData.Length)
+        {
+            GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
+            weaponScriptableObjects[index].currentLevel++;
+        }
+        
     }
 
     void GetWeaponData(WeaponData[] weaponsData)
@@ -110,16 +108,27 @@ public class Weapon : MonoBehaviour
         if(currentWeapon.currentLevel < weaponsData.Length - 1)
         {
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
-            costToUpgrade = weaponsData[currentWeapon.currentLevel].cost;
+        }
+        
+
+        boxCollider2D.offset = currentWeapon.colliderOffSet;
+        boxCollider2D.size = currentWeapon.colliderScale;
+        spriteRenderer.sprite = currentWeaponSpriite;
+     }
+
+    public float GetCostToUpgrade(WeaponScriptableObjects weaponSO)
+    {
+        if (weaponSO.currentLevel < weaponSO.weaponsData.Length - 1)
+        {
+
+            costToUpgrade = weaponSO.weaponsData[weaponSO.currentLevel + 1].cost;
         }
         else
         {
             costToUpgrade = int.MaxValue;
         }
-
-        spriteRenderer.sprite = currentWeaponSpriite;
-        
-   }
+        return costToUpgrade;
+    }
 
     public void BuyWeapon(int index)
     {

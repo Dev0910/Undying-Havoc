@@ -7,6 +7,8 @@ public class WeaponScriptableObjects : ScriptableObject
 {
     public bool isBought;
     public int currentLevel;
+    public Vector2 colliderOffSet;
+    public Vector2 colliderScale;
     public WeaponData[] weaponsData;
 }
 

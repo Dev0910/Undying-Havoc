@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
-  isBought: 1
+  isBought: 0
   currentLevel: 0
+  colliderOffSet: {x: 0.05, y: 0}
+  colliderScale: {x: 0.15, y: 1.33}
   weaponsData:
   - weaponSprite: {fileID: 0}
-    cost: 150
-    damage: 30
+    cost: 100
+    damage: 20
+  - weaponSprite: {fileID: 0}
+    cost: 200
+    damage: 40
+  - weaponSprite: {fileID: 0}
+    cost: 400
+    damage: 80
+  - weaponSprite: {fileID: 0}
+    cost: 800
+    damage: 160
