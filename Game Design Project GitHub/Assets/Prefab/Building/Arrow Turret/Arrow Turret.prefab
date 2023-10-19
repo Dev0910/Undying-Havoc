@@ -144,13 +144,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingScriptableObjects: {fileID: 11400000, guid: 29e376f0912497d43b3daa53698d0782, type: 2}
-  damage: 0
-  cost: 40
-  sellPrice: 20
   upgradedSprite: {fileID: 0}
-  upgradeCost: 0
   currentHealth: 0
   currentLevel: 0
+  cost: 40
+  sellPrice: 20
+  upgradeCost: 0
+  damage: 0
+  destructionEffect: {fileID: 5664469046887157037, guid: 1c97dfa0e8c4bca40981c8d49341785e, type: 3}
   target: {fileID: 0}
   range: 5
   fireRate: 0.5

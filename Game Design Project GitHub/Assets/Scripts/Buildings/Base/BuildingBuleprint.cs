@@ -20,9 +20,10 @@ public class BuildingBuleprint : MonoBehaviour
 
     [Header("Attack")]
     public int damage;
-    
-    
 
+
+    [Header("Particle Effect")]
+    public GameObject destructionEffect;
 
     protected GameObject nearestTile = null;
     protected SpriteRenderer spriteRenderer;
@@ -58,6 +59,7 @@ public class BuildingBuleprint : MonoBehaviour
         {
             nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
             this.gameObject.SetActive(false);
+            Instantiate(destructionEffect,transform.position, Quaternion.identity);
         }
     }
 
