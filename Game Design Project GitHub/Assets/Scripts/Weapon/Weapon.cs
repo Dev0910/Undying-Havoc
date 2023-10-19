@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     
-    public WeaponScriptableObjects[] weaponScriptableObjects; // Taking reference for the scriptable Objects
-    public int currentWeaponscriptableobjectIndex = 0;
-    private WeaponData[] weaponsData;
+    public WeaponScriptableObjects[] weaponScriptableObjects;
+    private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
+    //public int currentWeaponscriptableobjectIndex = 0;
     public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
     public Sprite currentWeaponSpriite; // Base weapon Sprite
@@ -16,7 +17,6 @@ public class Weapon : MonoBehaviour
     public float damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
-    public int currentLevel; // Index for weaponsData
     private GameObject enemyToAttack;
     private SpriteRenderer spriteRenderer;
     //public bool isBought;
@@ -29,10 +29,15 @@ public class Weapon : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyToAttack = null;
         //isBought = false;
-        weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
-        currentLevel = 0;
-        WeaponGetData();
+        currentWeapon = weaponScriptableObjects[0];
+        GetWeaponData(currentWeapon.weaponsData);
         spriteRenderer.sprite = currentWeaponSpriite;
+
+        for(int i=0;i<weaponScriptableObjects.Length;i++)
+        {
+            //weaponScriptableObjects[i].isBought = false;
+            weaponScriptableObjects[i].currentLevel = 0;
+        }
     }
     void Update()
     {
@@ -41,35 +46,69 @@ public class Weapon : MonoBehaviour
             enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
             //Debug.Log(enemyToAttack.name+" : " + damage);
         }
-        // Mouse scroll wheel input
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
-        if (scrollWheel > 0)
-        {
-            // Scroll up, switch to the next weapon
-            SwitchWeapon(1);
-        }
-        else if (scrollWheel < 0)
-        {
-            // Scroll down, switch to the previous weapon
-            SwitchWeapon(-1);
-        }
+        SwitchWeapon();
+        // Mouse scroll wheel input
+        //float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+
+        //if (scrollWheel > 0)
+        //{
+        //    // Scroll up, switch to the next weapon
+        //    SwitchWeapon(1);
+        //}
+        //else if (scrollWheel < 0)
+        //{
+        //    // Scroll down, switch to the previous weapon
+        //    SwitchWeapon(-1);
+        //}
     }
 
-    void SwitchWeapon(int offset)
+    void SwitchWeapon()
     {
-        int newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex + offset;
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentWeapon = weaponScriptableObjects[0];
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentWeapon = weaponScriptableObjects[1];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentWeapon = weaponScriptableObjects[2];
+        }
 
-        // Ensure the new index is within the array bounds
-        if (newWeaponscriptableobjectIndex < 0)
-            newWeaponscriptableobjectIndex = weaponScriptableObjects.Length - 1;
-        else if (newWeaponscriptableobjectIndex >= weaponScriptableObjects.Length)
-            newWeaponscriptableobjectIndex = 0;
-
-        currentWeaponscriptableobjectIndex = newWeaponscriptableobjectIndex;
-        weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
-        WeaponGetData();
+        GetWeaponData(currentWeapon.weaponsData);
         spriteRenderer.sprite = currentWeaponSpriite;
+        //int newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex + offset;
+        //while(newWeaponscriptableobjectIndex>=-weaponScriptableObjects.Length && newWeaponscriptableobjectIndex<=weaponScriptableObjects.Length)
+        //{
+        //    if (newWeaponscriptableobjectIndex < 0)
+        //        newWeaponscriptableobjectIndex = weaponScriptableObjects.Length - newWeaponscriptableobjectIndex;
+
+        //    else if (newWeaponscriptableobjectIndex >= weaponScriptableObjects.Length)
+        //        newWeaponscriptableobjectIndex = 0;
+        //    if (weaponScriptableObjects[newWeaponscriptableobjectIndex].isBought)
+        //    {
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        newWeaponscriptableobjectIndex += offset;
+        //    }
+        //}
+
+        //if(!(newWeaponscriptableobjectIndex > -weaponScriptableObjects.Length && newWeaponscriptableobjectIndex < weaponScriptableObjects.Length))
+        //{
+        //    newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex;
+        //}
+        //// Ensure the new index is within the array bounds
+
+
+        //currentWeaponscriptableobjectIndex = newWeaponscriptableobjectIndex;
+        //weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
+        //WeaponGetData();
+        //spriteRenderer.sprite = currentWeaponSpriite;
     }
 
 
@@ -99,25 +138,23 @@ public class Weapon : MonoBehaviour
     public void UpgradeWeapon()
     {
         GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
-        currentLevel++;
-        WeaponGetData();
         spriteRenderer.sprite = currentWeaponSpriite;
     }
 
-    void WeaponGetData()
+    void GetWeaponData(WeaponData[] weaponsData)
     {
-        currentWeaponSpriite = weaponsData[currentLevel].weaponSprite;
-        costToBuy = weaponsData[currentLevel].cost;
-        damage = weaponsData[currentLevel].damage;
-
-        if (currentLevel < weaponsData.Length - 1)
+        currentWeaponSpriite = weaponsData[currentWeapon.currentLevel].weaponSprite;
+        costToBuy = weaponsData[currentWeapon.currentLevel].cost;
+        damage = weaponsData[currentWeapon.currentLevel].damage;
+        if(currentWeapon.currentLevel < weaponsData.Length - 1)
         {
-            upgradedSprite = weaponsData[currentLevel + 1].weaponSprite;
-            costToUpgrade = weaponsData[currentLevel + 1].cost;
+            upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
+            costToUpgrade = weaponsData[currentWeapon.currentLevel].cost;
         }
         else
         {
             costToUpgrade = int.MaxValue;
         }
+        
    }
 }

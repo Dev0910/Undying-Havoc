@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class WeaponScriptableObjects : ScriptableObject
 {
+    public bool isBought;
     public int currentLevel;
     public WeaponData[] weaponsData;
 }
