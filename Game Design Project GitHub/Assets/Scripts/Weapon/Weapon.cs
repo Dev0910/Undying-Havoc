@@ -30,6 +30,7 @@ public class Weapon : MonoBehaviour
         enemyToAttack = null;
         currentWeapon = null;
         boxCollider2D.enabled = false;
+        spriteRenderer.sprite = null;
 
         for(int i=0;i<weaponScriptableObjects.Length;i++)
         {
@@ -111,6 +112,7 @@ public class Weapon : MonoBehaviour
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
         }
 
+        transform.localPosition = currentWeapon.weaponPosition;
         boxCollider2D.enabled = true;
         boxCollider2D.offset = currentWeapon.colliderOffSet;
         boxCollider2D.size = currentWeapon.colliderScale;

@@ -9,6 +9,7 @@ public class WeaponScriptableObjects : ScriptableObject
     public int currentLevel;
     public Vector2 colliderOffSet;
     public Vector2 colliderScale;
+    public Vector3 weaponPosition;
     public WeaponData[] weaponsData;
 }
 

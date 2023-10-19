@@ -45,7 +45,7 @@ public class SceneMenue : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnBtnClick(int scene)
+    public void OnBtnClick(string scene)
     {
         SceneManager.LoadScene(scene);
     }

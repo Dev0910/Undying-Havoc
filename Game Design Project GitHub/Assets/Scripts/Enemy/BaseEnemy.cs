@@ -106,7 +106,7 @@ public class BaseEnemy : MonoBehaviour
 
     protected void ChangeMoveSpeed(float changeInMoveSpeed)
     {
-        currentMoveSpeed *= changeInMoveSpeed;
+        currentMoveSpeed = moveSpeed * changeInMoveSpeed;
     }
     protected void DefaultMoveSpeed()
     {
@@ -132,6 +132,7 @@ public class BaseEnemy : MonoBehaviour
 
                 case EType.MagmaTrap:
                     {
+                        ChangeMoveSpeed(trapBlueprint.enemySpeed);//slow the enemy
                         //damage player according to the attack rate 
                         if (trapTimer <= 0)
                         {

@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
             currentHealth -= damage;
             Debug.Log("Game Over");
             Time.timeScale = 0f;
+            GameManager.Instance.sceneMenu.OnBtnClick("EndScene");
         }
     }
 }
