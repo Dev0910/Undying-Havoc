@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private UIManager uiManager;
     private void Start()
     {
+        Time.timeScale = 1f;
         uiManager = GameManager.Instance.uiManager;
         currentHealth = startHealth;
         uiManager.UpdatePlayerHP(startHealth);

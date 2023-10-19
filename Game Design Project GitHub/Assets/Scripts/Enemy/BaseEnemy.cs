@@ -99,6 +99,7 @@ public class BaseEnemy : MonoBehaviour
         if(currentHealth <= 0)
         {
             GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
+            GameStats.score++;
             Destroy(this.gameObject);
         }
         healthbar.fillAmount = currentHealth / maxHealth;

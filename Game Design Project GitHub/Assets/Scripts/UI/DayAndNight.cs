@@ -67,7 +67,6 @@ public class DayAndNight : MonoBehaviour
         nightPanelImage.color = new Color(nightPanelImage.color.r, nightPanelImage.color.g, nightPanelImage.color.b, currentAlpha/255);
     }
 
-
     IEnumerator StartTimer()
     {
         //isNight = !isNight;
