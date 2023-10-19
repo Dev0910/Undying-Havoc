@@ -15,11 +15,11 @@ public class WeaponShop : MonoBehaviour
             print("weapon shold buy");
             weapon.BuyWeapon(index);
         }
-        else if (canBuy && weaponSO.isBought)
+        else if (canBuy && weaponSO.isBought && weapon.GetCostToUpgrade(weaponSO) <= GameStats.currentGold)
         {
             weapon.UpgradeWeapon(index);
         }
-        else if(!canBuy)
+        else
         {
             print("Can not but");
         }

@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  isBought: 1
+  isBought: 0
   currentLevel: 0
+  colliderOffSet: {x: 0.05, y: 0}
+  colliderScale: {x: 0.15, y: 1.33}
   weaponsData:
   - weaponSprite: {fileID: 21300000, guid: df738b0f24ed25b42a50b1df0d8b0caf, type: 3}
+    cost: 50
+    damage: 10
+  - weaponSprite: {fileID: 21300000, guid: 6e243a262e7e1f74794f2821a2d79bdf, type: 3}
     cost: 100
+    damage: 20
+  - weaponSprite: {fileID: 21300000, guid: d454083e2608d6c4cb6ed1e0534b2e6c, type: 3}
+    cost: 200
     damage: 40
+  - weaponSprite: {fileID: 21300000, guid: ed2a03e27ffd7d54ca12486380338eee, type: 3}
+    cost: 400
+    damage: 80
