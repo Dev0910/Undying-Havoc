@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
+  isBought: 1
+  currentLevel: 0
   weaponsData:
   - weaponSprite: {fileID: 0}
     cost: 150
