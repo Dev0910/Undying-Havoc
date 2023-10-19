@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
+  isBought: 1
+  currentLevel: 0
   weaponsData:
   - weaponSprite: {fileID: 21300000, guid: df738b0f24ed25b42a50b1df0d8b0caf, type: 3}
     cost: 100

@@ -28,14 +28,16 @@ public class Weapon : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyToAttack = null;
+        currentWeapon = null;
         //isBought = false;
-        currentWeapon = weaponScriptableObjects[0];
-        GetWeaponData(currentWeapon.weaponsData);
-        spriteRenderer.sprite = currentWeaponSpriite;
+        //currentWeapon = weaponScriptableObjects[0];
+        //currentWeapon.isBought = true;
+        //GetWeaponData(currentWeapon.weaponsData);
+        //spriteRenderer.sprite = currentWeaponSpriite;
 
         for(int i=0;i<weaponScriptableObjects.Length;i++)
         {
-            //weaponScriptableObjects[i].isBought = false;
+            weaponScriptableObjects[i].isBought = false;
             weaponScriptableObjects[i].currentLevel = 0;
         }
     }
@@ -48,67 +50,25 @@ public class Weapon : MonoBehaviour
         }
 
         SwitchWeapon();
-        // Mouse scroll wheel input
-        //float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-
-        //if (scrollWheel > 0)
-        //{
-        //    // Scroll up, switch to the next weapon
-        //    SwitchWeapon(1);
-        //}
-        //else if (scrollWheel < 0)
-        //{
-        //    // Scroll down, switch to the previous weapon
-        //    SwitchWeapon(-1);
-        //}
     }
 
     void SwitchWeapon()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(currentWeapon == null) { return; }
+        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponScriptableObjects[0].isBought)
         {
             currentWeapon = weaponScriptableObjects[0];
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if(Input.GetKeyDown(KeyCode.Alpha2) && weaponScriptableObjects[1].isBought)
         {
             currentWeapon = weaponScriptableObjects[1];
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponScriptableObjects[2].isBought)
         {
             currentWeapon = weaponScriptableObjects[2];
         }
 
         GetWeaponData(currentWeapon.weaponsData);
-        spriteRenderer.sprite = currentWeaponSpriite;
-        //int newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex + offset;
-        //while(newWeaponscriptableobjectIndex>=-weaponScriptableObjects.Length && newWeaponscriptableobjectIndex<=weaponScriptableObjects.Length)
-        //{
-        //    if (newWeaponscriptableobjectIndex < 0)
-        //        newWeaponscriptableobjectIndex = weaponScriptableObjects.Length - newWeaponscriptableobjectIndex;
-
-        //    else if (newWeaponscriptableobjectIndex >= weaponScriptableObjects.Length)
-        //        newWeaponscriptableobjectIndex = 0;
-        //    if (weaponScriptableObjects[newWeaponscriptableobjectIndex].isBought)
-        //    {
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        newWeaponscriptableobjectIndex += offset;
-        //    }
-        //}
-
-        //if(!(newWeaponscriptableobjectIndex > -weaponScriptableObjects.Length && newWeaponscriptableobjectIndex < weaponScriptableObjects.Length))
-        //{
-        //    newWeaponscriptableobjectIndex = currentWeaponscriptableobjectIndex;
-        //}
-        //// Ensure the new index is within the array bounds
-
-
-        //currentWeaponscriptableobjectIndex = newWeaponscriptableobjectIndex;
-        //weaponsData = weaponScriptableObjects[currentWeaponscriptableobjectIndex].weaponsData;
-        //WeaponGetData();
-        //spriteRenderer.sprite = currentWeaponSpriite;
     }
 
 
@@ -135,10 +95,11 @@ public class Weapon : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackrange); // This function helps to make the imaginary circle visible
     }
 
-    public void UpgradeWeapon()
+    public void UpgradeWeapon(int index)
     {
         GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
-        spriteRenderer.sprite = currentWeaponSpriite;
+        weaponScriptableObjects[index].currentLevel++;
+        print("weapon upgarded");
     }
 
     void GetWeaponData(WeaponData[] weaponsData)
@@ -155,6 +116,17 @@ public class Weapon : MonoBehaviour
         {
             costToUpgrade = int.MaxValue;
         }
+
+        spriteRenderer.sprite = currentWeaponSpriite;
         
    }
+
+    public void BuyWeapon(int index)
+    {
+        print(this.name + " (" + transform.parent.name + ") : weapon with index " + index + " bought");
+        weaponScriptableObjects[index].isBought = true;
+        GameStats.currentGold -= weaponScriptableObjects[index].weaponsData[0].cost;//removing the cost
+        currentWeapon = weaponScriptableObjects[index];
+        GetWeaponData(currentWeapon.weaponsData);
+    }
 }

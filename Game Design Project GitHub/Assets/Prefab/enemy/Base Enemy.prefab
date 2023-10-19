@@ -229,7 +229,7 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   incrementInHpEachWaveInPercentage: 10
-  startValueInGold: 10
+  startValueInGold: 5
   currentValueInGold: 0
   incrementInGoldValueInPersentage: 10
   moveSpeed: 1
