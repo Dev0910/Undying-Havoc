@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
-
+    
     private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
     private GameObject enemyToAttack;
     private SpriteRenderer spriteRenderer;
@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
 
         enemyToAttack = null;
         currentWeapon = null;
+        boxCollider2D.enabled = false;
 
         for(int i=0;i<weaponScriptableObjects.Length;i++)
         {
@@ -109,8 +110,8 @@ public class Weapon : MonoBehaviour
         {
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
         }
-        
 
+        boxCollider2D.enabled = true;
         boxCollider2D.offset = currentWeapon.colliderOffSet;
         boxCollider2D.size = currentWeapon.colliderScale;
         spriteRenderer.sprite = currentWeaponSpriite;

@@ -17,15 +17,15 @@ MonoBehaviour:
   colliderOffSet: {x: 0.05, y: 0}
   colliderScale: {x: 0.15, y: 1.33}
   weaponsData:
-  - weaponSprite: {fileID: 0}
+  - weaponSprite: {fileID: 21300000, guid: a92ad40cdc2e6344e9d1d94f04d291bd, type: 3}
     cost: 100
     damage: 20
-  - weaponSprite: {fileID: 0}
+  - weaponSprite: {fileID: 21300000, guid: 4f080357aac5b8f46aa0fd3f36bef7dc, type: 3}
     cost: 200
     damage: 40
-  - weaponSprite: {fileID: 0}
+  - weaponSprite: {fileID: 21300000, guid: dc0f7fcf2ed8e6c43ae67c50e89278e6, type: 3}
     cost: 400
     damage: 80
-  - weaponSprite: {fileID: 0}
+  - weaponSprite: {fileID: 21300000, guid: fcb9c00766ac23246a6a2b59338f6437, type: 3}
     cost: 800
     damage: 160
