@@ -1962,7 +1962,7 @@ GameObject:
   - component: {fileID: 1109377413}
   - component: {fileID: 1109377414}
   m_Layer: 0
-  m_Name: Music Scource (1)
+  m_Name: SFX Scource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3581,10 +3581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77bee09c0f4e894a8997786ee499e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicAudio: []
-  sfxAudio: []
-  musicScource: {fileID: 0}
-  sfxScource: {fileID: 0}
+  musicScound: []
+  sfxScound: []
+  musicScource: {fileID: 1419842859}
+  sfxScource: {fileID: 1109377414}
 --- !u!1 &1855017843
 GameObject:
   m_ObjectHideFlags: 0
