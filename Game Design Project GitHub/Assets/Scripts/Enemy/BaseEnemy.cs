@@ -35,6 +35,9 @@ public class BaseEnemy : MonoBehaviour
     [Header("UI")]
     public Image healthbar;
 
+    [Header("Particle Effect")]
+    public GameObject Blood;
+
     //used for Traps
     protected GameObject trap;
     protected int trapCount;//to store the number of trap the enemy is on
@@ -101,6 +104,8 @@ public class BaseEnemy : MonoBehaviour
             GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
             GameStats.score++;
             Destroy(this.gameObject);
+            GameObject bloodEffect = Instantiate(Blood, transform.position, Quaternion.identity);
+            GameObject.Destroy(bloodEffect,0.5f);
         }
         healthbar.fillAmount = currentHealth / maxHealth;
     }

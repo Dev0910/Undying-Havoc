@@ -241,6 +241,7 @@ MonoBehaviour:
   incrementInDamageEachWaveInPercentage: 10
   attackAfterSecondsOfContact: 1
   healthbar: {fileID: 1909178314825887456}
+  Blood: {fileID: 5664469046887157037, guid: 023acf05f7ebbd9479feb8670d8dd5c8, type: 3}
 --- !u!50 &7905979323850625812
 Rigidbody2D:
   serializedVersion: 4
