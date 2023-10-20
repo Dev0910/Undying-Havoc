@@ -26,7 +26,7 @@ public class GameStats : MonoBehaviour
     void Update()
     {
         goldText.text = " : " + currentGold;
-        scoreText.text = "Wave : " + score;
+        scoreText.text = "Score : " + score;
 
         if (score > highScore)
         {
