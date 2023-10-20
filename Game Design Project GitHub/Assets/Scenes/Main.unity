@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGold: 10000
   goldText: {fileID: 8016982268313795551}
-  score: 0
+  highScore: 0
   scoreText: {fileID: 348455690}
 --- !u!114 &1966874527
 MonoBehaviour:
