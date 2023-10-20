@@ -23,11 +23,32 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaayMusic(string name)
+    public void PlayMusic(string name)
     {
         Sound s = Array.Find(musicScound, x => x.name == name);
-            {
+        
+        if(s ==null)
+        {
+            Debug.Log("Sound not Found");
+        }
+        else
+        {
+            musicScource.clip = s.clip;
+            musicScource.Play();
+        }
+    }
 
+    public void PlaySFX(string name)
+    {
+        Sound s = Array.Find(sfxScound, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Sound not Found");
+        }
+        else
+        {
+            sfxScource.PlayOneShot(s.clip);
         }
     }
 
@@ -38,5 +59,5 @@ public class AudioManager : MonoBehaviour
 public class Sound
 {
     public string name;
-    public Sound clip;
+    public AudioClip clip;
 }
