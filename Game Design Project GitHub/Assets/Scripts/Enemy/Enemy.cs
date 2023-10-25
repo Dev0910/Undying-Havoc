@@ -24,9 +24,12 @@ public class Enemy : BaseEnemy
     private void Update()
     {
         FollowTarget(player.transform.position);//calling the follow function from the base class
-        if ((lastAttackTime + attackSpeed < Time.time) && (targetToAttack != null) && (timeFromContact + attackAfterSecondsOfContact < Time.time))//cheak if it can attack the building
+        if ((lastAttackTime + attackSpeed < Time.time) && (timeFromContact + attackAfterSecondsOfContact < Time.time))//cheak if it can attack the building
         {
-            Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+            if (targetToAttack != null)
+            {
+                Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+            }
         }
         Trap();
     }

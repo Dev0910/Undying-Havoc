@@ -47,12 +47,12 @@ public class BaseEnemy : MonoBehaviour
     protected float currentMoveSpeed;//update the speed in game
     protected GameObject player;//instance of player
     protected int collisionCount;//to count the collision
-    protected GameObject targetToAttack;//temprory store the building in contact
+    public GameObject targetToAttack;//temprory store the building in contact
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
     protected float timeFromContact;//to count the time from the time plyer made contact
 
-
+    
     
 
     //follow the target

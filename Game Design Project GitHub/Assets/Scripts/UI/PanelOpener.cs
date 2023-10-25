@@ -6,12 +6,19 @@ using UnityEngine.UI;
 public class PanelOpener : MonoBehaviour
 {
     public GameObject Panel;
+    private bool panelOpened;
     //public Text DispText;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyUp(KeyCode.B) && panelOpened)
         {
             Panel.SetActive(false);
+            panelOpened = false;
+        }
+        else if(Input.GetKeyUp(KeyCode.B) && !panelOpened)
+        {
+            Panel.SetActive(true);
+            panelOpened = true;
         }
     }
 
