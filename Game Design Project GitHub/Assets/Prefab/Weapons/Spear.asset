@@ -18,15 +18,19 @@ MonoBehaviour:
   colliderScale: {x: 0.15315925, y: 1.9271253}
   weaponPosition: {x: -0.288, y: -1.334, z: 1.0947101}
   weaponsData:
-  - weaponSprite: {fileID: 21300000, guid: c2aa52f2220b8884588f0b2516213ed7, type: 3}
+  - name: Wooden Spear
+    weaponSprite: {fileID: 21300000, guid: c2aa52f2220b8884588f0b2516213ed7, type: 3}
     cost: 100
     damage: 20
-  - weaponSprite: {fileID: 21300000, guid: 82cbd332424d78640b14d90b51b94d6f, type: 3}
+  - name: Iron Spear
+    weaponSprite: {fileID: 21300000, guid: 82cbd332424d78640b14d90b51b94d6f, type: 3}
     cost: 200
     damage: 40
-  - weaponSprite: {fileID: 21300000, guid: 1d34bfbaaed90ee4a85e2c5fb67a52db, type: 3}
+  - name: Gold Spear
+    weaponSprite: {fileID: 21300000, guid: 1d34bfbaaed90ee4a85e2c5fb67a52db, type: 3}
     cost: 400
     damage: 80
-  - weaponSprite: {fileID: 21300000, guid: 41811306681ecf849b4d653c2cc8ae94, type: 3}
+  - name: Diamond Spear
+    weaponSprite: {fileID: 21300000, guid: 41811306681ecf849b4d653c2cc8ae94, type: 3}
     cost: 800
     damage: 160

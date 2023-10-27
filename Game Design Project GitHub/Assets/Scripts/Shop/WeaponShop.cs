@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponShop : MonoBehaviour
 {
+    public ShopButtons[] shopButtons;
     public void BuyWeapon(int index)
     {
         
@@ -12,7 +13,7 @@ public class WeaponShop : MonoBehaviour
         bool canBuy = weaponSO.weaponsData[weaponSO.currentLevel].cost <= GameStats.currentGold ? true : false;
         if (canBuy && !weaponSO.isBought)
         {
-            print("weapon shold buy");
+            //print("weapon shold buy");
             weapon.BuyWeapon(index);
         }
         else if (canBuy && weaponSO.isBought && weapon.GetCostToUpgrade(weaponSO) <= GameStats.currentGold)

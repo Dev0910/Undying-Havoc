@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class BuildingBuleprint : MonoBehaviour
 {
+    [Header("Hover UI")]
+    [SerializeField] GameObject hoverUI;
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI sellingPriceText;
+    public TextMeshProUGUI upgradePriceText;
+
     [Header("Unity Things")]
     public BuildingScriptableObjects buildingScriptableObjects;
     public Sprite upgradedSprite;
@@ -98,12 +105,29 @@ public class BuildingBuleprint : MonoBehaviour
         {
             upgradedSprite = buildingData[currentLevel + 1].buildingSprite;
             upgradeCost = buildingData[currentLevel + 1].cost;
+            upgradePriceText.text = "Upgrade Price : " + upgradeCost;
         }
         else
         {
             upgradeCost = int.MaxValue;
+            upgradePriceText.text = "Max Level";
         }
+
+        //hover UI data
+        damageText.text = "Damage : " + damage;
+        sellingPriceText.text = "Selling Price : " + sellPrice;
         
+
+    }
+
+    protected void OnMouseEnter()
+    {
+        hoverUI.SetActive(true);
+    }
+
+    protected void OnMouseExit()
+    {
+        hoverUI.SetActive(false);
     }
 
 }

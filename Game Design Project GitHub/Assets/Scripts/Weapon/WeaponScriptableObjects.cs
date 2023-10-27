@@ -17,6 +17,7 @@ public class WeaponScriptableObjects : ScriptableObject
 public class WeaponData
 {
     //public string name;
+    public string name;
     public Sprite weaponSprite;
     public int cost;
     public float damage;

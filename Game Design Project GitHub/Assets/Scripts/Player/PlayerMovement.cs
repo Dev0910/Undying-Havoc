@@ -6,7 +6,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float startMoveSpeed = 5f;
+    public float increaseMoveSpeedBy = 1f;
+    public float costToIncreaseMoveSpeed = 200;
+    private float currentCostToIncreaseMoveSpeed;
+    private float currentMoveSpeed;
     public Rigidbody2D rb;
     public Camera cam;
     //public GameObject target;
@@ -14,7 +18,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 mousepos;
 
     private float rotationAngle = 45.0f;
-
+    private void Start()
+    {
+        currentMoveSpeed = startMoveSpeed;
+        currentCostToIncreaseMoveSpeed = costToIncreaseMoveSpeed;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -30,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
         //if (ScreenMannager.isPause) return;
         ////Movement 
         //rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
@@ -40,5 +48,17 @@ public class PlayerMovement : MonoBehaviour
         Vector2 lookDir = mousepos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
         rb.rotation = angle;
+    }
+
+    public void IncreaseMoveSpeed()
+    {
+        
+        if (GameStats.currentGold >= currentCostToIncreaseMoveSpeed)
+        {
+            GameStats.currentGold -= Mathf.RoundToInt(currentCostToIncreaseMoveSpeed);
+            currentMoveSpeed += increaseMoveSpeedBy;
+            currentCostToIncreaseMoveSpeed += currentCostToIncreaseMoveSpeed;
+            GameManager.Instance.uiManager.UpdatePlayerMoveSpeed(currentMoveSpeed, currentCostToIncreaseMoveSpeed);
+        }
     }
 }

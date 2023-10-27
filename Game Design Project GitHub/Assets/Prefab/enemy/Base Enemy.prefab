@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8364080403142211437}
   - component: {fileID: 2188630893667777333}
   - component: {fileID: 6632498901645093359}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EnemyGreenImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6378062742776983993}
   - component: {fileID: 1034157044001199432}
   - component: {fileID: 8258023360573501037}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Base Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -241,6 +241,7 @@ MonoBehaviour:
   attackAfterSecondsOfContact: 1
   healthbar: {fileID: 6632498901645093359}
   Blood: {fileID: 5664469046887157037, guid: 023acf05f7ebbd9479feb8670d8dd5c8, type: 3}
+  targetToAttack: {fileID: 0}
 --- !u!50 &8258023360573501037
 Rigidbody2D:
   serializedVersion: 4
@@ -279,7 +280,7 @@ GameObject:
   - component: {fileID: 7881207286506079243}
   - component: {fileID: 3875439382880547741}
   - component: {fileID: 7316894708362088030}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EnemyRedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +357,7 @@ GameObject:
   - component: {fileID: 2614589740694763323}
   - component: {fileID: 2438563239225334836}
   - component: {fileID: 8641732553376627729}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

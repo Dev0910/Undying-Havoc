@@ -17,27 +17,34 @@ public class Enemy : BaseEnemy
         collisionCount = 0;
         currentMoveSpeed = moveSpeed;
         trapTimer = 0;
-
+        timeFromContact = 0;
         //update UI
         healthbar.fillAmount = currentHealth / maxHealth;
     }
     private void Update()
     {
         FollowTarget(player.transform.position);//calling the follow function from the base class
-        if ((lastAttackTime + attackSpeed < Time.time) && (timeFromContact + attackAfterSecondsOfContact < Time.time))//cheak if it can attack the building
+        if ((lastAttackTime + attackSpeed < Time.time))//cheak if it can attack the building
         {
-            if (targetToAttack != null)
+            if (targetToAttack != null && (timeFromContact > attackAfterSecondsOfContact))
             {
                 Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
+                timeFromContact = 0;
             }
+            else
+            {
+                timeFromContact += Time.deltaTime;
+            }
+            
         }
         Trap();
+        
     }
 
     //cheak for collision for Player or Buildings
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        timeFromContact = Time.time;
+        timeFromContact = 0;
         targetToAttack = collision.gameObject;
         collisionCount++;
     }
@@ -48,6 +55,7 @@ public class Enemy : BaseEnemy
         collisionCount--;
         if(collisionCount <= 0)
         {
+            timeFromContact = 0;
             targetToAttack = null;
         }
     }

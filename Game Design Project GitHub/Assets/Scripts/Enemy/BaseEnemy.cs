@@ -87,7 +87,6 @@ public class BaseEnemy : MonoBehaviour
         {
             PlayerController pc = player.GetComponent<PlayerController>();
             pc.TakeDamage(damage);
-            Debug.Log(damage + " damage to " + target.name);
         }
         
     }

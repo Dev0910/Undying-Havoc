@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    
+    public ShopButtons[] shopButtons;
     public WeaponScriptableObjects[] weaponScriptableObjects;
     public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
@@ -55,17 +55,19 @@ public class Weapon : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1) && weaponScriptableObjects[0].isBought)
         {
             currentWeapon = weaponScriptableObjects[0];
-
+            GetWeaponData(currentWeapon.weaponsData, shopButtons[0]);
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2) && weaponScriptableObjects[1].isBought)
         {
             currentWeapon = weaponScriptableObjects[1];
+            GetWeaponData(currentWeapon.weaponsData, shopButtons[1]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponScriptableObjects[2].isBought)
         {
             currentWeapon = weaponScriptableObjects[2];
+            GetWeaponData(currentWeapon.weaponsData, shopButtons[2]);
         }
-        GetWeaponData(currentWeapon.weaponsData);
+        
     }
 
 
@@ -92,17 +94,8 @@ public class Weapon : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackrange); // This function helps to make the imaginary circle visible
     }
 
-    public void UpgradeWeapon(int index)
-    {
-        if (weaponScriptableObjects[index].currentLevel < weaponScriptableObjects[index].weaponsData.Length)
-        {
-            GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
-            weaponScriptableObjects[index].currentLevel++;
-        }
-        
-    }
 
-    void GetWeaponData(WeaponData[] weaponsData)
+    void GetWeaponData(WeaponData[] weaponsData,ShopButtons shopButton)
     {
         currentWeaponSpriite = weaponsData[currentWeapon.currentLevel].weaponSprite;
         costToBuy = weaponsData[currentWeapon.currentLevel].cost;
@@ -110,6 +103,11 @@ public class Weapon : MonoBehaviour
         if(currentWeapon.currentLevel < weaponsData.Length - 1)
         {
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
+            shopButton.UpdateButton(currentWeapon.weaponsData[currentWeapon.currentLevel].name, currentWeapon.currentLevel+1, damage, currentWeapon.weaponsData[currentWeapon.currentLevel +1].cost,false);
+        }
+        else
+        {
+            shopButton.UpdateButton(currentWeapon.weaponsData[currentWeapon.currentLevel].name, currentWeapon.currentLevel+1, damage, currentWeapon.weaponsData[currentWeapon.currentLevel].cost,true);
         }
 
         transform.localPosition = currentWeapon.weaponPosition;
@@ -117,7 +115,9 @@ public class Weapon : MonoBehaviour
         boxCollider2D.offset = currentWeapon.colliderOffSet;
         boxCollider2D.size = currentWeapon.colliderScale;
         spriteRenderer.sprite = currentWeaponSpriite;
-     }
+        
+    }
+
 
     public float GetCostToUpgrade(WeaponScriptableObjects weaponSO)
     {
@@ -135,10 +135,21 @@ public class Weapon : MonoBehaviour
 
     public void BuyWeapon(int index)
     {
-        print(this.name + " (" + transform.parent.name + ") : weapon with index " + index + " bought");
         weaponScriptableObjects[index].isBought = true;
         GameStats.currentGold -= weaponScriptableObjects[index].weaponsData[0].cost;//removing the cost
         currentWeapon = weaponScriptableObjects[index];
-        GetWeaponData(currentWeapon.weaponsData);
+        GetWeaponData(currentWeapon.weaponsData, shopButtons[index]);
+
+    }
+
+    public void UpgradeWeapon(int index)
+    {
+        if (weaponScriptableObjects[index].currentLevel < weaponScriptableObjects[index].weaponsData.Length)
+        {
+            GameStats.currentGold -= costToUpgrade;//removing the upgrade cost
+            weaponScriptableObjects[index].currentLevel++;
+            currentWeapon = weaponScriptableObjects[index];
+            GetWeaponData(currentWeapon.weaponsData, shopButtons[(int)index]);
+        }
     }
 }

@@ -33,7 +33,7 @@ public class DayAndNight : MonoBehaviour
         UpdateColor();
         StartCoroutine(StartTimer());
     }
-    private void MakePanalVisible()
+    private void MakeNight()
     {
         currentAlpha += speedOfAnimation;
         if(currentAlpha < 200)
@@ -48,7 +48,7 @@ public class DayAndNight : MonoBehaviour
 
     }
 
-    private void MakePanalDisappear()
+    private void MakeDay()
     {
         currentAlpha -= speedOfAnimation;
         if (currentAlpha > 0)
@@ -69,10 +69,9 @@ public class DayAndNight : MonoBehaviour
 
     IEnumerator StartTimer()
     {
-        //isNight = !isNight;
+        
         PanalAnimation();
         currentImage.sprite = isNight ? timeImage[0] : timeImage[1];
-        //transform.localScale = isNight ? new Vector3(1, 1, 1) : new Vector3(0.7f, 0.7f, 0.7f);
 
         while (currentTime >= 0)
         {
@@ -88,13 +87,15 @@ public class DayAndNight : MonoBehaviour
     {
         if (isNight)
         {
-            InvokeRepeating(nameof(MakePanalDisappear), 0, 0.01f);
+            InvokeRepeating(nameof(MakeDay), 0, 0.01f);
             isNight = false;
+            PlayerController playerController = GameManager.Instance.player.GetComponent<PlayerController>();
+            playerController.RegenrateHealth(timeBetweenDayAndNight);
         }
         else
         {
             currentWave++;
-            InvokeRepeating(nameof(MakePanalVisible), 0, 0.01f);
+            InvokeRepeating(nameof(MakeNight), 0, 0.01f);
             isNight = true;
             GameManager.Instance.spawnManager.SpawnWave();
         }
