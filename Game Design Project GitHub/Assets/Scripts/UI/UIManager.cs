@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public void UpdatePlayerHP(float maxHP)
     {
         playerHealthBar.fillAmount = PlayerController.currentHealth / maxHP;
-        playerHealthText.text = PlayerController.currentHealth + " / " + maxHP;
+        playerHealthText.text = Mathf.RoundToInt(PlayerController.currentHealth) + " / " + maxHP;
     }
     public void UpdatePlayerMaxHealth(int maxHealth,int cost)
     {
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdatePlayerMoveSpeed(float moveSpeed,float cost) 
     {
-        playerMoveSpeed.text = "Player Movement Speed : "+moveSpeed.ToString();
+        playerMoveSpeed.text = "Movement Speed : "+moveSpeed.ToString();
         costToUpgradeMoveSpeedText.text = "Cost : " + cost.ToString();
     }
 }

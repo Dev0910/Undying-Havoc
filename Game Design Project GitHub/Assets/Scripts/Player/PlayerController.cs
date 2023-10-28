@@ -5,12 +5,15 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerController : MonoBehaviour
 {
+    //[Header("Partical Effect")]
+    //[SerializeField] private GameObject deathEffect;
+
     [Header("Health")]
-    [SerializeField] private int startMaxHealth;
+    [SerializeField] private int startMaxHealth; 
     [SerializeField] private int costToUpgradeMaxHealth;
     private int currentCostToIncreaseMaxHealth;
     private int currentMaxHealth;
-    public static float currentHealth;  //playerHealth
+    public static float currentHealth;//playerHealth
     private UIManager uiManager;
     private float regenrateRate;
 
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = currentMaxHealth;
         currentCostToIncreaseMaxHealth = costToUpgradeMaxHealth;
         uiManager.UpdatePlayerHP(currentMaxHealth);
-        AudioManager.Instance.PlayMusic("Background");
+        //AudioManager.Instance.PlayMusic("Background");
 
         postProcessVolume = GameObject.Find("PostProcessing").GetComponent<PostProcessVolume>();
         postProcessVolume.profile.TryGetSettings<Vignette>(out vignette);
@@ -60,11 +63,20 @@ public class PlayerController : MonoBehaviour
         {
             currentHealth -= damage;
             Debug.Log("Game Over");
+            //GameObject e = Instantiate(deathEffect);
+            //Destroy(e,10f);
             Time.timeScale = 0f;
-            GameManager.Instance.sceneMenu.OnBtnClick("EndScene");
+            GameManager.Instance.mainScreen.LoadScene("EndScene");
+            //Invoke(nameof(ShowEndScreen), 1f);
+
+
         }
     }
-
+    //private void ShowEndScreen()
+    //{
+    //    GameManager.Instance.sceneMenu.OnBtnClick("EndScene");
+        
+    //}
     public void RegenrateHealth(float time)
     {
         float missingHealth = currentMaxHealth-currentHealth;

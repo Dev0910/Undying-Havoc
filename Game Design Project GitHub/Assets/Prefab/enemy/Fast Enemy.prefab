@@ -236,7 +236,7 @@ MonoBehaviour:
   moveSpeed: 1.5
   minimumDistanceFromPlayer: 0.5
   attackSpeed: 1
-  startDamage: 15
+  startDamage: 7.5
   currentDamage: 0
   incrementInDamageEachWaveInPercentage: 10
   attackAfterSecondsOfContact: 1

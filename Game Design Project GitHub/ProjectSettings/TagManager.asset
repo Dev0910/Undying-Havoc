@@ -22,7 +22,7 @@ TagManager:
   - Trap
   - Building
   - Enemy
-  - 
+  - Cursor
   - 
   - 
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 504067367
+    locked: 0
+  - name: Cursor
+    uniqueID: 1123294773
     locked: 0

@@ -70,6 +70,7 @@ public class BuildingShop : MonoBehaviour
     {
         buildingToPlace = null;
         customCurser.gameObject.SetActive(false);
+        //customCurser.GetComponent<SpriteRenderer>().sprite = customCurser.defaultSprite;
         Cursor.visible = true;
         GameManager.Instance.gridSystem.RemoveGrid();
 

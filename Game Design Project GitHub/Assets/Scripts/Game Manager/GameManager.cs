@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
     public DropAndCollectionManager dropAndCollectionManager;
     public GameStats gameStats;
     public UIManager uiManager;
-    public SceneMenue sceneMenu;
+    public MainScreenUi mainScreen;
     
     public GameObject player;
     public GameObject weaponHolder;
+
     
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
         dropAndCollectionManager = GetComponentInChildren<DropAndCollectionManager>();
         gameStats = GetComponentInChildren<GameStats>();
         uiManager = GetComponentInChildren<UIManager>();
-        sceneMenu = GetComponentInChildren<SceneMenue>();
+        mainScreen = GameObject.Find("Canvas").GetComponent<MainScreenUi>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
