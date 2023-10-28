@@ -81,7 +81,7 @@ public class BaseEnemy : MonoBehaviour
         {
             BuildingBuleprint bp =  target.GetComponent<BuildingBuleprint>();//creating an instance of the class BuildingBlueprint
             bp.TakeDamage(damage);//calling the function takedamage from the building script
-            Debug.Log(damage + " damage to " + target.name);
+            //Debug.Log(damage + " damage to " + target.name);
         }
         else if(target.gameObject.CompareTag("Player"))
         {

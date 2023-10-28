@@ -17,25 +17,11 @@ public class PanelOpener : MonoBehaviour
             panelOpened[i] = false;
         }
     }
-    private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.B) && panelOpened[0])
-        {
-            allPanel[0].SetActive(false);
-            panelOpened[0] = false;
-        }
-        else if(Input.GetKeyUp(KeyCode.B) && !panelOpened[0])
-        {
-            allPanel[0].SetActive(true);
-            panelOpened[0] = true;
-        }
-    }
-
     public void OpenPanal(int index)
     {
-        
         if (!panelOpened[index])
         {
+            if (MainScreenUi.GameIsPaused) return;
             allPanel[index].SetActive(true);
             panelOpened[index] = true;
 

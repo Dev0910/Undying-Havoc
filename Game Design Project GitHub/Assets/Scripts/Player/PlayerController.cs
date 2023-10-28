@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
             //GameObject e = Instantiate(deathEffect);
             //Destroy(e,10f);
             Time.timeScale = 0f;
-            GameManager.Instance.mainScreen.LoadScene("EndScene");
+            GameManager.Instance.mainScreenUI.LoadScene("EndScene");
             //Invoke(nameof(ShowEndScreen), 1f);
 
 
@@ -81,7 +81,10 @@ public class PlayerController : MonoBehaviour
     {
         float missingHealth = currentMaxHealth-currentHealth;
         regenrateRate = (missingHealth / (time * 0.8f))/2;
-        InvokeRepeating(nameof(GetHealth), 0f, 0.5f);
+        if(regenrateRate > 0)
+        {
+            InvokeRepeating(nameof(GetHealth), 0f, 0.5f);
+        }
     }
 
 

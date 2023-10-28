@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public DropAndCollectionManager dropAndCollectionManager;
     public GameStats gameStats;
     public UIManager uiManager;
-    public MainScreenUi mainScreen;
+    public MainScreenUi mainScreenUI;
     
     public GameObject player;
     public GameObject weaponHolder;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         dropAndCollectionManager = GetComponentInChildren<DropAndCollectionManager>();
         gameStats = GetComponentInChildren<GameStats>();
         uiManager = GetComponentInChildren<UIManager>();
-        mainScreen = GameObject.Find("Canvas").GetComponent<MainScreenUi>();
+        mainScreenUI = GameObject.Find("Canvas").GetComponent<MainScreenUi>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");

@@ -15,6 +15,7 @@ public class MainScreenUi : MonoBehaviour
 
     private void Start()
     {
+        GameIsPaused = false;
         allPanel[startPanalIndex].SetActive(false);
     }
     void Update()

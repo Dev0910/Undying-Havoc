@@ -152,8 +152,8 @@ MonoBehaviour:
   upgradedSprite: {fileID: 0}
   currentHealth: 0
   currentLevel: 0
-  cost: 50
-  sellPrice: 30
+  cost: 100
+  sellPrice: 50
   upgradeCost: 0
   damage: 10
   destructionEffect: {fileID: 0}
