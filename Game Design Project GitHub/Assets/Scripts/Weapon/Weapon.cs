@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Weapon : MonoBehaviour
 {
     public ShopButtons[] shopButtons;
     public WeaponScriptableObjects[] weaponScriptableObjects;
-    public float attackrange; // Range for the weapon
+    //public float attackrange; // Range for the weapon
     public LayerMask enemylayers; // Enemy Layer for attacking the enemy
     public Sprite currentWeaponSpriite; // Base weapon Sprite
     public int costToBuy; // cost to buy the weapon
@@ -31,7 +32,6 @@ public class Weapon : MonoBehaviour
         currentWeapon = null;
         boxCollider2D.enabled = false;
         spriteRenderer.sprite = null;
-
         for(int i=0;i<weaponScriptableObjects.Length;i++)
         {
             weaponScriptableObjects[i].isBought = false;
@@ -42,27 +42,28 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
         {
-            enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
+            BaseEnemy baseEnemy = enemyToAttack.GetComponent<BaseEnemy>();
+            baseEnemy.TakeDamage(damage);
         }
-        SwitchWeapon();
+        
     }
 
-    void SwitchWeapon()
+    public void SwitchWeapon(int numberPressed)
     {
         if(currentWeapon == null) { return; }
 
 
-        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponScriptableObjects[0].isBought)
+        if(numberPressed == 1 && weaponScriptableObjects[numberPressed-1].isBought)
         {
             currentWeapon = weaponScriptableObjects[0];
             GetWeaponData(currentWeapon.weaponsData, shopButtons[0]);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2) && weaponScriptableObjects[1].isBought)
+        else if(numberPressed == 2 && weaponScriptableObjects[numberPressed - 1].isBought)
         {
             currentWeapon = weaponScriptableObjects[1];
             GetWeaponData(currentWeapon.weaponsData, shopButtons[1]);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponScriptableObjects[2].isBought)
+        else if (numberPressed == 3 && weaponScriptableObjects[numberPressed - 1].isBought)
         {
             currentWeapon = weaponScriptableObjects[2];
             GetWeaponData(currentWeapon.weaponsData, shopButtons[2]);
@@ -86,14 +87,6 @@ public class Weapon : MonoBehaviour
             enemyToAttack = null;
         }
     }
-
-
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, attackrange); // This function helps to make the imaginary circle visible
-    }
-
 
     void GetWeaponData(WeaponData[] weaponsData,ShopButtons shopButton)
     {

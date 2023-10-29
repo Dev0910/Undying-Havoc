@@ -26,16 +26,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            transform.Rotate(Vector3.forward * rotationAngle);
-        }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
-
+    private void LateUpdate()
+    { 
+        if (Input.GetMouseButtonDown(0))
+        {
+            transform.Rotate(Vector3.forward* rotationAngle);
+        }
+        
+    }
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);

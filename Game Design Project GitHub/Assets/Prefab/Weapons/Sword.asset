@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  isBought: 1
+  isBought: 0
   currentLevel: 0
   colliderOffSet: {x: 0.04842037, y: 0.021913022}
   colliderScale: {x: 0.20127988, y: 1.3016453}
@@ -20,17 +20,17 @@ MonoBehaviour:
   weaponsData:
   - name: Wooden Sword
     weaponSprite: {fileID: 21300000, guid: 5d4f16422bd242f4ea33700b9019a9a9, type: 3}
-    cost: 400
-    damage: 60
+    cost: 200
+    damage: 40
   - name: Iron Sword
     weaponSprite: {fileID: 21300000, guid: 716a85cbbed9c0449bf162ecb2323a26, type: 3}
-    cost: 800
-    damage: 120
+    cost: 400
+    damage: 80
   - name: Gold Sword
     weaponSprite: {fileID: 21300000, guid: 6add945dc8e54a241944b013ee59e719, type: 3}
-    cost: 1600
-    damage: 240
+    cost: 800
+    damage: 160
   - name: Diamond Sword
     weaponSprite: {fileID: 21300000, guid: c21d9eabf2e62934995f627ef570b483, type: 3}
-    cost: 3200
-    damage: 480
+    cost: 1600
+    damage: 320

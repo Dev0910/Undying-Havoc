@@ -23,4 +23,9 @@ public class ShopButtons : MonoBehaviour
         }
         
     }
+
+    public void UpdatePrice(string _price)
+    {
+        price.text = _price;
+    }
 }
