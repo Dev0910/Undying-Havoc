@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LongRangeWeapon : MonoBehaviour
 {
+    public GrenateData[] grenateDatas;
+    public int currentlevel;
     public GameObject grenatePrefab;
     Granate grenate;
     public Text priceText;
@@ -17,6 +19,7 @@ public class LongRangeWeapon : MonoBehaviour
         grenate = grenatePrefab.GetComponent<Granate>();
         isBought = false;
         timer = 1f / fireRate;
+        currentlevel = 0;
     }
 
     private void Update()
@@ -24,6 +27,7 @@ public class LongRangeWeapon : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && isBought && timer<0)
         {
             GameObject temp = Instantiate(grenatePrefab,transform.position,grenatePrefab.transform.rotation);
+            temp.GetComponent<Granate>().GetDamage(grenateDatas[currentlevel].damage);
             temp.transform.parent = GameObject.Find("GrenateHolder").transform;
             timer = 1f / fireRate;
         }
@@ -45,4 +49,12 @@ public class LongRangeWeapon : MonoBehaviour
     //        priceText.text = "Bought";
     //    }
     //}
+
+
+}
+[System.Serializable]
+public class GrenateData
+{
+    public float damage;
+    public int price;
 }

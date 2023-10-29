@@ -15,6 +15,11 @@ public class Granate : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public LayerMask enemylayers;
 
+    public void GetDamage(float _damage)
+    {
+        damage = _damage;
+    }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,7 +41,7 @@ public class Granate : MonoBehaviour
         {
             speed = 0;
             StartCoroutine(Animation());
-            Invoke("Blast", 1f);
+            Invoke("Blast", 1.3f);
         }
     }
 

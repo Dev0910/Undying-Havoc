@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class WeaponShop : MonoBehaviour
@@ -34,11 +35,26 @@ public class WeaponShop : MonoBehaviour
         meleeWeapon.SetActive(false );
         longRangeWeapon.SetActive(true);
         LongRangeWeapon lrw = longRangeWeapon.GetComponent<LongRangeWeapon>();
-        if(GameStats.currentGold >= lrw.price && !lrw.isBought)
+        if (lrw.currentlevel >= lrw.grenateDatas.Length-1) 
         {
-            GameStats.currentGold -= lrw.price;
+
+            shopButtons[3].UpdateButton("Grenate", lrw.currentlevel + 1, lrw.grenateDatas[lrw.currentlevel].damage, lrw.grenateDatas[lrw.currentlevel].price, true);
+            return; 
+        }
+
+
+        if(GameStats.currentGold >= lrw.grenateDatas[lrw.currentlevel+1].price && !lrw.isBought)
+        {
+            GameStats.currentGold -= lrw.grenateDatas[lrw.currentlevel + 1].price;
             lrw.isBought = true;
-            shopButtons[3].UpdatePrice("Bought");
+            shopButtons[3].UpdateButton("Grenate", lrw.currentlevel + 2, lrw.grenateDatas[lrw.currentlevel+1].damage, lrw.grenateDatas[lrw.currentlevel + 1].price, false);
+            lrw.currentlevel++;
+        }
+        else if(GameStats.currentGold >= lrw.grenateDatas[lrw.currentlevel + 1].price && lrw.isBought)
+        {
+            GameStats.currentGold -= lrw.grenateDatas[lrw.currentlevel + 1].price;
+            shopButtons[3].UpdateButton("Grenate", lrw.currentlevel + 2, lrw.grenateDatas[lrw.currentlevel + 1].damage, lrw.grenateDatas[lrw.currentlevel + 1].price, false);
+            lrw.currentlevel++;
         }
         
     }

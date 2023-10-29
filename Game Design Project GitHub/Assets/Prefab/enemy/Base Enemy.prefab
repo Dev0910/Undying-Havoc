@@ -228,16 +228,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   currentHealth: 0
-  incrementInHpEachWaveInPercentage: 10
+  incrementInHpEachWaveInPercentage: 7.5
   startValueInGold: 5
   currentValueInGold: 0
-  incrementInGoldValueInPersentage: 10
+  incrementInGoldValueInPersentage: 7.5
   moveSpeed: 1
   minimumDistanceFromPlayer: 0.5
   attackSpeed: 1
   startDamage: 5
   currentDamage: 0
-  incrementInDamageEachWaveInPercentage: 10
+  incrementInDamageEachWaveInPercentage: 7.5
   attackAfterSecondsOfContact: 1
   healthbar: {fileID: 6632498901645093359}
   Blood: {fileID: 5664469046887157037, guid: 023acf05f7ebbd9479feb8670d8dd5c8, type: 3}

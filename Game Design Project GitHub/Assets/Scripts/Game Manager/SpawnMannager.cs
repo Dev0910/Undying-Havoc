@@ -14,8 +14,9 @@ public class SpawnMannager : MonoBehaviour
     
     public List<StoreEnemy> enemies = new List<StoreEnemy>();//To get the list of enemy from inspecter
 
-    private int waveValue;
+    public int waveValue;
     public int incrementInWaveValu = 10;//the Valu of wave increased each round
+    public int maxWaveValue;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();//to store the enemy to spawn each round
 
     private float waveDuration;//time between to waves
@@ -30,6 +31,7 @@ public class SpawnMannager : MonoBehaviour
     private void Start()
     {
         currentWave = 1;
+        waveValue = 0;
         player = GameManager.Instance.player;
         waveDuration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
     }
@@ -51,7 +53,7 @@ public class SpawnMannager : MonoBehaviour
     //Randomly choose enemy to spawn accordind to the wave value
     private void GetEnemysToSpawn()
     {
-        waveValue = incrementInWaveValu * currentWave;//increase the wave Value each wave
+        waveValue = incrementInWaveValu * currentWave <= maxWaveValue ? incrementInWaveValu * currentWave : maxWaveValue;//increase the wave Value each wave
 
         List<GameObject> generatedEnemies = new List<GameObject>();//temp list to store enemy
         //run the loop until waveValue 0
