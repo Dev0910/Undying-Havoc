@@ -51,7 +51,7 @@ public class BaseEnemy : MonoBehaviour
     protected Rigidbody2D rigidBody;
     protected float lastAttackTime;//temprory store the time last attacked
     protected float timeFromContact;//to count the time from the time plyer made contact
-
+    
     
     
 
@@ -69,6 +69,15 @@ public class BaseEnemy : MonoBehaviour
             direction = Vector2.zero;//set direction to zero
         }
         rigidBody.velocity = (direction.normalized) * currentMoveSpeed;//make it move in the direction of the enemy
+        LookAtPlayer();
+    }
+
+    //look at player
+    private void LookAtPlayer()
+    {
+        Vector2 lookDir = new Vector2(player.transform.position.x,player.transform.position.y) - rigidBody.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        rigidBody.rotation = angle;
     }
 
     //attack the building/Player

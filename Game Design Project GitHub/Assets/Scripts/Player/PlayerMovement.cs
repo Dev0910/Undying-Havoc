@@ -42,12 +42,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
-        //if (ScreenMannager.isPause) return;
-        ////Movement 
-        //rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        ////rotating the head
-        //if (Shooting.target == null) { return; }
         Vector2 lookDir = mousepos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
         rb.rotation = angle;
