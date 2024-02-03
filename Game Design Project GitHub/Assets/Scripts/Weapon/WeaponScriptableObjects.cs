@@ -21,5 +21,8 @@ public class WeaponData
     public Sprite weaponSprite;
     public int cost;
     public float damage;
+    public int damageOnWood;
+    public int damageOnStone;
+    public int damageOnIron;
 }
 

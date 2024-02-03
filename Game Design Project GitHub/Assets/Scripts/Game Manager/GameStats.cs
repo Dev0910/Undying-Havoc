@@ -9,6 +9,14 @@ public class GameStats : MonoBehaviour
     public static int currentGold;
     public Text goldText;
 
+    [Header("Resources")]
+    public int wood;
+    public Text woodText;
+    public int stone;
+    public Text stoneText;
+    public int iron;
+    public Text ironText;
+
     [Header("Score")]
     public static int score;
     public int highScore;
@@ -19,13 +27,15 @@ public class GameStats : MonoBehaviour
     {
         currentGold = startGold;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        score = 0;
+        score = 0;wood = 0;stone = 0;iron = 0;
+        woodText.text = ": 0";stoneText.text = ": 0";ironText.text = ": 0";
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        goldText.text = " : " + currentGold;
+        goldText.text = ": " + currentGold;
         scoreText.text = "Score : " + score;
 
         if (score > highScore)

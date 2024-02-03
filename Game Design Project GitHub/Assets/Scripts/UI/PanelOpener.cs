@@ -40,13 +40,5 @@ public class PanelOpener : MonoBehaviour
             allPanel[index].SetActive(false);
             panelOpened[index] = false;
         }
-        
     }
-
-    
-    /*public void SetText(string text)
-    {
-        DispText.text = text;
-    }*/
-
 }

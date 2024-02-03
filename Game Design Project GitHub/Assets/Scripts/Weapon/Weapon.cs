@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -16,9 +17,13 @@ public class Weapon : MonoBehaviour
     public float damage; // Damage dealt by weapon
     public Sprite upgradedSprite; // New sprite for Upgraded Weapon
     public int costToUpgrade; // cost to upgrade the weapon
+    public int damageOnWood; //damage that will be done on the tree
+    public int damageOnStone; //damage that will be done on the Rock
+    public int damageOnIron;//damage that will be done on the iron ore
     
     private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
     private GameObject enemyToAttack;
+    private GameObject resourcesInRange;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
 
@@ -29,6 +34,7 @@ public class Weapon : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
 
         enemyToAttack = null;
+        resourcesInRange = null;
         currentWeapon = null;
         boxCollider2D.enabled = false;
         spriteRenderer.sprite = null;
@@ -45,7 +51,12 @@ public class Weapon : MonoBehaviour
             BaseEnemy baseEnemy = enemyToAttack.GetComponent<BaseEnemy>();
             baseEnemy.TakeDamage(damage);
         }
-        
+        if (Input.GetKeyDown(KeyCode.Mouse0) && resourcesInRange != null)
+        {
+            Resources resources = resourcesInRange.GetComponent<Resources>();
+            CollectResources(resources);
+        }
+
     }
 
     public void SwitchWeapon(int numberPressed)
@@ -78,6 +89,10 @@ public class Weapon : MonoBehaviour
         {
             enemyToAttack = collision.gameObject;
         }
+        if(collision.gameObject.tag == "Resources")
+        {
+            resourcesInRange = collision.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -86,6 +101,10 @@ public class Weapon : MonoBehaviour
         {
             enemyToAttack = null;
         }
+        if (collision.gameObject.tag == "Resources")
+        {
+            resourcesInRange = null;
+        }
     }
 
     void GetWeaponData(WeaponData[] weaponsData,ShopButtons shopButton)
@@ -93,7 +112,10 @@ public class Weapon : MonoBehaviour
         currentWeaponSpriite = weaponsData[currentWeapon.currentLevel].weaponSprite;
         costToBuy = weaponsData[currentWeapon.currentLevel].cost;
         damage = weaponsData[currentWeapon.currentLevel].damage;
-        if(currentWeapon.currentLevel < weaponsData.Length - 1)
+        damageOnWood = weaponsData[currentWeapon.currentLevel].damageOnWood;
+        damageOnStone = weaponsData[currentWeapon.currentLevel].damageOnStone;
+        damageOnIron = weaponsData[currentWeapon.currentLevel].damageOnIron;
+        if (currentWeapon.currentLevel < weaponsData.Length - 1)
         {
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
             shopButton.UpdateButton(currentWeapon.weaponsData[currentWeapon.currentLevel].name, currentWeapon.currentLevel+1, damage, currentWeapon.weaponsData[currentWeapon.currentLevel +1].cost,false);
@@ -144,5 +166,40 @@ public class Weapon : MonoBehaviour
             currentWeapon = weaponScriptableObjects[index];
             GetWeaponData(currentWeapon.weaponsData, shopButtons[(int)index]);
         }
+    }
+
+    private void CollectResources(Resources resources)
+    {
+        EResources rName = resources.eResource;
+        Esource sourseName = resources.eSource;
+        if (resources.health <= 0) { return;}
+        GameStats gs = GameManager.Instance.gameStats;
+        switch (sourseName)
+        {
+            case Esource.None: break;
+                
+            case Esource.Tree:
+                {
+                    resources.health -= damageOnWood;
+                    gs.wood += damageOnWood;
+                    gs.woodText.text = ": " + gs.wood;
+                }break;
+            case Esource.Rock:
+                {
+                    resources.health -= damageOnStone;
+                    gs.stone += damageOnStone;
+                    gs.stoneText.text = ": " + gs.stone;
+                }
+                break;
+            case Esource.IronOre:
+                {
+                    resources.health -= damageOnIron;
+                    gs.iron += damageOnIron;
+                    gs.ironText.text = ": " + gs.iron;
+                }
+                break;
+        }
+        if(resources.health <= 0) { Destroy(resources.gameObject); }
+
     }
 }

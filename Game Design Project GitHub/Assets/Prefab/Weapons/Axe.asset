@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  isBought: 0
+  isBought: 1
   currentLevel: 0
   colliderOffSet: {x: 0.049999997, y: -0.06571624}
   colliderScale: {x: 0.15, y: 1.1985676}
@@ -22,15 +22,27 @@ MonoBehaviour:
     weaponSprite: {fileID: 21300000, guid: df738b0f24ed25b42a50b1df0d8b0caf, type: 3}
     cost: 50
     damage: 10
+    damageOnWood: 5
+    damageOnStone: 2
+    damageOnIron: 1
   - name: Iron Axe
     weaponSprite: {fileID: 21300000, guid: 6e243a262e7e1f74794f2821a2d79bdf, type: 3}
     cost: 100
     damage: 20
+    damageOnWood: 10
+    damageOnStone: 4
+    damageOnIron: 2
   - name: Gold Axe
     weaponSprite: {fileID: 21300000, guid: d454083e2608d6c4cb6ed1e0534b2e6c, type: 3}
     cost: 200
     damage: 40
+    damageOnWood: 20
+    damageOnStone: 8
+    damageOnIron: 4
   - name: Diamond Axe
     weaponSprite: {fileID: 21300000, guid: ed2a03e27ffd7d54ca12486380338eee, type: 3}
     cost: 400
     damage: 80
+    damageOnWood: 40
+    damageOnStone: 15
+    damageOnIron: 8
