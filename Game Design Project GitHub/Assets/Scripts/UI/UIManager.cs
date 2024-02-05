@@ -13,9 +13,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerMaxhealth;
     [SerializeField] private TextMeshProUGUI costToUpgradeMaxHelth;
 
+    [Header("Oxygen")]
+    [SerializeField] private Image oxygenBar;
+
+
     [Header("Player MoveSpeed")]
     [SerializeField] private TextMeshProUGUI playerMoveSpeed;
     [SerializeField] private TextMeshProUGUI costToUpgradeMoveSpeedText;
+
+    
     public void UpdatePlayerHP(float maxHP)
     {
         playerHealthBar.fillAmount = PlayerController.currentHealth / maxHP;
@@ -30,5 +36,10 @@ public class UIManager : MonoBehaviour
     {
         playerMoveSpeed.text = "Movement Speed : "+moveSpeed.ToString();
         costToUpgradeMoveSpeedText.text = "Cost : " + cost.ToString();
+    }
+    public void UpdateOxygenBar(float maxCapacity)
+    {
+        oxygenBar.fillAmount = PlayerController.currentOxygenLevel / maxCapacity;
+        //playerHealthText.text = Mathf.RoundToInt(PlayerController.currentHealth) + " / " + maxCapacity;
     }
 }

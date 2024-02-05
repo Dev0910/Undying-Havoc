@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,24 +15,39 @@ public class PlayerController : MonoBehaviour
     private int currentCostToIncreaseMaxHealth;
     private int currentMaxHealth;
     public static float currentHealth;//playerHealth
+
+    [Header("Oxygen")]
+    [SerializeField] private Image OxygenBar;
+    [SerializeField] private float startMaxOxygenCapacity;
+    [SerializeField] private int costToUpgradeMaxOxygenCapacity;
+    [SerializeField] private float oxygenDeplitionRate;
+    [SerializeField] private float oxygenRegainRate;
+    [SerializeField] private float damageWhenOxygenZero;
+    
+    private int currentCostToIncreaseMaxOxygenCapacity;
+    private int currentMaxOxygenCapacity;
+    private bool isInOxygenArea;
+    public static float currentOxygenLevel;
+
     private UIManager uiManager;
     private float regenrateRate;
-
-    float intensity;
-    PostProcessVolume postProcessVolume;
-    Vignette vignette;
+    private PostProcessVolume postProcessVolume;
+    private Vignette vignette;
 
 
     
     private void Start()
     {
         Time.timeScale = 1f;
+        isInOxygenArea = true;
         uiManager = GameManager.Instance.uiManager;
         currentMaxHealth = startMaxHealth;
         currentHealth = currentMaxHealth;
         currentCostToIncreaseMaxHealth = costToUpgradeMaxHealth;
         uiManager.UpdatePlayerHP(currentMaxHealth);
-        //AudioManager.Instance.PlayMusic("Background");
+
+        currentMaxOxygenCapacity = startMaxHealth;
+        currentOxygenLevel = currentMaxOxygenCapacity;
 
         postProcessVolume = GameObject.Find("PostProcessing").GetComponent<PostProcessVolume>();
         postProcessVolume.profile.TryGetSettings<Vignette>(out vignette);
@@ -43,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             vignette.enabled.Override(false);
         }
+        InvokeRepeating("OxygenCheak", 0.5f, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +70,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Oxygen Area"))
+        {
+            isInOxygenArea = false;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Oxygen Area"))
+        {
+            isInOxygenArea = true;
+        }
+    }
+
+
+    #region Health
     public void TakeDamage(float damage)
     {
         //AudioManager.Instance.PlaySFX("Player Damage 1");
@@ -69,14 +103,9 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.mainScreenUI.LoadScene("EndScene");
             //Invoke(nameof(ShowEndScreen), 1f);
 
-
         }
     }
-    //private void ShowEndScreen()
-    //{
-    //    GameManager.Instance.sceneMenu.OnBtnClick("EndScene");
-        
-    //}
+
     public void RegenrateHealth(float time)
     {
         float missingHealth = currentMaxHealth-currentHealth;
@@ -87,7 +116,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    //called every 0.5sec by the RegenrateHealth to regenrate the missing health
     private void GetHealth()
     {
         if(GameManager.Instance.dayAndNight.isNight)
@@ -126,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator TakeDamageEffect()
     {
-        intensity = 0.4f;
+        float intensity = 0.4f;
 
         vignette.enabled.Override(true);
         vignette.intensity.Override(intensity);
@@ -146,5 +175,25 @@ public class PlayerController : MonoBehaviour
         vignette.enabled.Override(false);
         yield break;
     }
+    #endregion
 
+    #region Oxygen
+    private void OxygenCheak()
+    {
+        if(isInOxygenArea && currentOxygenLevel<currentMaxOxygenCapacity)
+        {
+            currentOxygenLevel += (currentMaxOxygenCapacity * oxygenRegainRate) / 100;
+            currentOxygenLevel = currentOxygenLevel >= currentMaxOxygenCapacity?currentMaxOxygenCapacity:currentOxygenLevel;
+        }
+        else if(!isInOxygenArea)
+        {
+            currentOxygenLevel -= (currentMaxOxygenCapacity * oxygenDeplitionRate) / 100;
+            if(currentOxygenLevel <= 0)
+            {
+                TakeDamage(damageWhenOxygenZero);
+            }
+        }
+        GameManager.Instance.uiManager.UpdateOxygenBar(currentMaxOxygenCapacity);
+    }
+    #endregion
 }

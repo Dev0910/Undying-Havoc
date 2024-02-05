@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ResoursesSpawner : MonoBehaviour
 {
+    public static List<GameObject> resourseList = new List<GameObject>();
+
     public float startMinDistanceFromEachOrher = 10f;
     [SerializeField] private float respawnEvery = 30f;
     [SerializeField] private ResoursesList[] resoursesList;
@@ -22,36 +24,34 @@ public class ResoursesSpawner : MonoBehaviour
         InitalSpawn();
         currentMinDistance = startMinDistanceFromEachOrher;
         respawnTimmer = UnityEngine.Random.Range((respawnEvery - (respawnEvery/5)), (respawnEvery + respawnEvery/5));
+        StartCoroutine(ReSpawnResourses());
     }
-
-    // Update is called once per frame
-    void Update()
+    //Re-Spawns Resourses
+    IEnumerator ReSpawnResourses()
     {
-        if(respawnTimmer < 0)
-        {
-            bool hasSpawn = false;
-            while (!hasSpawn)
-            {
-                RandomSpawnPoints();
+        float waitForSec = UnityEngine.Random.Range((respawnEvery - (respawnEvery / 5)), (respawnEvery + respawnEvery / 5));
+        yield return new WaitForSeconds(waitForSec);
 
-                if (FindShortestDistance(spawnPos) > currentMinDistance)
-                {
-                    Instantiate(resoursesList[UnityEngine.Random.Range(0,resoursesList.Length)].resoursePrefab, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
-                    hasSpawn = true;
-                }
-                else
-                {
-                    currentMinDistance -= currentMinDistance > 0 ? 0.001f : 0;
-                }
-            }
-            respawnTimmer = UnityEngine.Random.Range((respawnEvery - (respawnEvery / 5)), (respawnEvery + respawnEvery / 5));
-        }
-        else
+        bool hasSpawn = false;
+        while (!hasSpawn)
         {
-            respawnTimmer -= Time.deltaTime;
+            RandomSpawnPoints();
+
+            if (FindShortestDistance(spawnPos) > currentMinDistance)
+            {
+                Instantiate(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePrefab, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+                hasSpawn = true;
+            }
+            else
+            {
+                currentMinDistance -= currentMinDistance > 0 ? 0.001f : 0;
+            }
         }
+
+        StartCoroutine(ReSpawnResourses());//calles itself to make it infinite
     }
 
+    //Called at the start of the game to spawn the firts few resourses;
     private void InitalSpawn()
     {
         for(int i = 0; i < resoursesList.Length; i++)
@@ -77,16 +77,17 @@ public class ResoursesSpawner : MonoBehaviour
                         currentMinDistance -= currentMinDistance > 0 ? 0.001f : 0;
                     }
                 }
-
             }
         }
     }
-
+    //Resets the spawn points to a Random 
     private void RandomSpawnPoints()
     {
         spawnPos.x = UnityEngine.Random.Range(-(mapDimensions.x / 2), (mapDimensions.x / 2));
         spawnPos.y = UnityEngine.Random.Range(-(mapDimensions.y / 2), (mapDimensions.y / 2));
     }
+
+    //Returns the shortest distance from the spawn point and other 
     private float FindShortestDistance(Vector2 spawnPos)
     {
         float shortestDistance = float.MaxValue;
@@ -104,10 +105,12 @@ public class ResoursesSpawner : MonoBehaviour
         return shortestDistance;
     }
 }
+
 [Serializable]
 public class ResoursesList
 {
     public Esource name;
+    //public static List<GameObject> spawnedResourses = new List<GameObject>();
     public GameObject resoursePrefab;
     public int numberOfSpawns;
 }

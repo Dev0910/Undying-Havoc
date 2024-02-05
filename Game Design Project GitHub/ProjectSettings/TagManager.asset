@@ -12,6 +12,7 @@ TagManager:
   - WeaponHolder
   - Trap
   - Resources
+  - Oxygen Area
   layers:
   - Default
   - TransparentFX
