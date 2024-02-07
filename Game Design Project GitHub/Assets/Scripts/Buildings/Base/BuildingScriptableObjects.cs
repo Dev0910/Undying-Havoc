@@ -17,4 +17,7 @@ public class BuildingData
     public int cost;
     public int sellingPrice;
     public int damage;
+
+    [Header("Resourse Required")]
+    public List<SingleResourse> resourseList = new List<SingleResourse>();
 }

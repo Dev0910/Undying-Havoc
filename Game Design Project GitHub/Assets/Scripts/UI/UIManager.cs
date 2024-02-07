@@ -7,8 +7,9 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private float lerpAmount;
     [Header("Player Health")]
-    [SerializeField]private Image playerHealthBar;
+    [SerializeField] private Image playerHealthBar;
     [SerializeField] private TextMeshProUGUI playerHealthText;
     [SerializeField] private TextMeshProUGUI playerMaxhealth;
     [SerializeField] private TextMeshProUGUI costToUpgradeMaxHelth;
@@ -39,7 +40,10 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateOxygenBar(float maxCapacity)
     {
-        oxygenBar.fillAmount = PlayerController.currentOxygenLevel / maxCapacity;
+        float currentvelocity = 0.0f;
+        float temp = Mathf.SmoothDamp(oxygenBar.fillAmount, PlayerController.currentOxygenLevel / maxCapacity,ref currentvelocity, 100 * Time.deltaTime);
+        float temp2 = Mathf.Lerp(oxygenBar.fillAmount, PlayerController.currentOxygenLevel / maxCapacity, lerpAmount);
+        oxygenBar.fillAmount = temp2;
         //playerHealthText.text = Mathf.RoundToInt(PlayerController.currentHealth) + " / " + maxCapacity;
     }
 }

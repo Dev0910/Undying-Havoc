@@ -179,9 +179,10 @@ MonoBehaviour:
   startHealth: 60
   currentHealth: 0
   incrementInHpEachWaveInPercentage: 7.5
-  startValueInGold: 10
-  currentValueInGold: 0
-  incrementInGoldValueInPersentage: 7.5
+  bonesDropOnDeath:
+    resource: 4
+    prefab: {fileID: 4126543528904269074, guid: 44f170c456462d54da79396e142eefd3, type: 3}
+    amount: 1
   moveSpeed: 1.5
   minimumDistanceFromPlayer: 0.5
   attackSpeed: 1

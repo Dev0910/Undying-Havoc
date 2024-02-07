@@ -152,9 +152,11 @@ MonoBehaviour:
   upgradedSprite: {fileID: 0}
   currentHealth: 0
   currentLevel: 0
-  cost: 20
-  sellPrice: 10
-  upgradeCost: 0
+  resourseList:
+  - resource: 1
+    prefab: {fileID: 0}
+    amount: 10
+  sellAmount: 0
   damage: 0
   destructionEffect: {fileID: 5664469046887157037, guid: 1c97dfa0e8c4bca40981c8d49341785e, type: 3}
 --- !u!1001 &5945456357715563625

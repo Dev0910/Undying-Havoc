@@ -91,7 +91,7 @@ public class ResoursesSpawner : MonoBehaviour
     private float FindShortestDistance(Vector2 spawnPos)
     {
         float shortestDistance = float.MaxValue;
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Resources");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Sourse");
 
 
         foreach (GameObject target in targets)

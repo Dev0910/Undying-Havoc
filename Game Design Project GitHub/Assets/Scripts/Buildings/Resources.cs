@@ -13,12 +13,24 @@ public enum EResources
     None,
     Wood,
     Stone,
-    Iron
+    Iron,
+    Bone
 }
 public enum Esource
 {
     None,
     Tree,
     Rock,
-    IronOre
+    IronOre,
+    Monsters
 }
+
+[System.Serializable]
+public class SingleResourse
+{
+    public EResources resource;
+    public GameObject prefab;
+    public int amount;
+}
+
+

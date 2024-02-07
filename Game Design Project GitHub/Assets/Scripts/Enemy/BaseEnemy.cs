@@ -15,10 +15,11 @@ public class BaseEnemy : MonoBehaviour
     public float incrementInHpEachWaveInPercentage;
 
     [Header("Gold")]
-    public float startValueInGold;
-    public int currentValueInGold;
-    public float incrementInGoldValueInPersentage;
-    protected float maxValueInGold;
+    public SingleResourse bonesDropOnDeath;
+    //public float startValueInGold;
+    //public int currentAmountOfBone;
+    //public float incrementInBoneAmountInPersentage;
+    //protected float maxBoneAmount;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -109,7 +110,8 @@ public class BaseEnemy : MonoBehaviour
         }
         if(currentHealth <= 0)
         {
-            GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
+            //GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
+            DropResourses();
             GameStats.score++;
             Destroy(this.gameObject);
             GameObject bloodEffect = Instantiate(Blood, transform.position, Quaternion.identity);
@@ -171,17 +173,23 @@ public class BaseEnemy : MonoBehaviour
     {
         maxHealth = startHealth;
         maxDamage = startDamage;
-        maxValueInGold = startValueInGold;
 
         for(int i = 0;i < SpawnMannager.currentWave;i++)
         {
             maxHealth += (maxHealth * (incrementInHpEachWaveInPercentage / 100));
             maxDamage += (maxDamage * (incrementInDamageEachWaveInPercentage / 100));
-            maxValueInGold += (maxValueInGold * (incrementInGoldValueInPersentage / 100));
             
         }
         currentHealth = Mathf.Round(maxHealth * 100.00f) * 0.01f;
         currentDamage = Mathf.Round(maxDamage * 100.00f) * 0.01f;
-        currentValueInGold = Mathf.RoundToInt(maxValueInGold);
+    }
+
+    void DropResourses()
+    {
+        for(int i = 0;i<bonesDropOnDeath.amount;i++)
+        {
+            GameObject temp = Instantiate(bonesDropOnDeath.prefab, this.transform.position, Quaternion.identity);
+            temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
+        }
     }
 }

@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
         {
             enemyToAttack = collision.gameObject;
         }
-        if(collision.gameObject.tag == "Resources")
+        if(collision.gameObject.tag == "Sourse")
         {
             resourcesInRange = collision.gameObject;
         }
@@ -101,7 +101,7 @@ public class Weapon : MonoBehaviour
         {
             enemyToAttack = null;
         }
-        if (collision.gameObject.tag == "Resources")
+        if (collision.gameObject.tag == "Sourse")
         {
             resourcesInRange = null;
         }

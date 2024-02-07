@@ -11,8 +11,9 @@ TagManager:
   - Coin
   - WeaponHolder
   - Trap
-  - Resources
   - Oxygen Area
+  - Sourse
+  - Resours
   layers:
   - Default
   - TransparentFX

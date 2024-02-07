@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Coin"))
+        if (collision.CompareTag("Resours"))
         {
-            GameManager.Instance.dropAndCollectionManager.CollectGold(collision.gameObject);
+            GameManager.Instance.dropAndCollectionManager.CollectResources(collision.gameObject);
         }
     }
 
