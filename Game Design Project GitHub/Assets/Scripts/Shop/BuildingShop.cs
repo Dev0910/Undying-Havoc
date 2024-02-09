@@ -6,14 +6,7 @@ public class BuildingShop : MonoBehaviour
 {
     private GameObject buildingToPlace;
     public CustomCurser customCurser;
-    public SingleResourse[] buildingList;
-    //private void Start()
-    //{
-    //    foreach(GameObject building in buildingsList)
-    //    {
-    //        Instantiate(building).SetActive(false);
-    //    }
-    //}
+
 
     // Update is called once per frame
     void Update()
@@ -24,15 +17,15 @@ public class BuildingShop : MonoBehaviour
             //get the nearest tile by calling the get nearest tile function in grid system
             GameObject nearestTile = GameManager.Instance.gridSystem.GetNearestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             //cheak the comditions to place a building
-            if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == false && buildingToPlace.GetComponent<BuildingBuleprint>().CheakIfResourseAvailable(0))
+            if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == false && CheakIfResourseAvailable(buildingToPlace))
             {
-                buildingToPlace.GetComponent<BuildingBuleprint>().RemoveResourse(0);//take the cost of building
+                buildingToPlace.GetComponent<BuildingBuleprint>().RemoveResourse();//take the cost of building
                 GameObject temp = Instantiate(buildingToPlace, nearestTile.transform.position, Quaternion.identity);//spawn the building
                 temp.transform.parent = GameObject.Find("BuildingHolder").transform;
                 nearestTile.GetComponent<Tile>().isOccupied = true;//make the isOccupied tile true
 
                 //if you don't have the mony to buy the next building
-                if (!buildingToPlace.GetComponent<BuildingBuleprint>().CheakIfResourseAvailable(0))
+                if (!CheakIfResourseAvailable(buildingToPlace))
                 {
                     DeselectBuilding();
                 }
@@ -48,13 +41,13 @@ public class BuildingShop : MonoBehaviour
 
     //set the building to be bought on button click
     //this function is called by the buttons in UI
-    public void BuyBuilding(int index)
+    public void BuyBuilding(GameObject building)
     {
-        GameObject building = buildingList[index].prefab;
+        //GameObject building = buildingList[index];
         //cheaks the conditions to buy the building
         
         BuildingBuleprint bp = building.GetComponent<BuildingBuleprint>();
-        if (CheakIfResourseAvailable(0))
+        if (CheakIfResourseAvailable(building))
         {
             customCurser.gameObject.SetActive(true);
                 
@@ -80,38 +73,38 @@ public class BuildingShop : MonoBehaviour
 
         //gameObject.GetComponent<GridSystem>().RemoveGrid();
     }
-    public bool CheakIfResourseAvailable(int index)
+    public bool CheakIfResourseAvailable(GameObject building)
     {
         GameStats gs = GameManager.Instance.gameStats;
         bool result = false;
-
-        //foreach (SingleResourse resourse in buildingList)
+        List<SingleResourse> resourses = building.GetComponent<BuildingBuleprint>().resourseListToBuyBuilding;
+        foreach (SingleResourse resourse in resourses)
         {
-            switch (buildingList[index].resource)
+            switch (resourse.resource)
             {
                 case EResources.None: break;
 
                 case EResources.Wood:
                     {
-                        result = gs.wood >= buildingList[index].amount;
+                        result = gs.wood >= resourse.amount;
                     }
                     break;
 
                 case EResources.Stone:
                     {
-                        result = gs.stone >= buildingList[index].amount;
+                        result = gs.stone >= resourse.amount;
                     }
                     break;
 
                 case EResources.Bone:
                     {
-                        result = gs.bone >= buildingList[index].amount;
+                        result = gs.bone >= resourse.amount;
                     }
                     break;
 
                 case EResources.Iron:
                     {
-                        result = gs.iron >= buildingList[index].amount;
+                        result = gs.iron >= resourse.amount;
                     }
                     break;
             }

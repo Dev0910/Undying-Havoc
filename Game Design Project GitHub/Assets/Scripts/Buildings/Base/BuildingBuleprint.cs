@@ -9,11 +9,9 @@ public class BuildingBuleprint : MonoBehaviour
 {
     [Header("Hover UI")]
     [SerializeField] GameObject hoverUI;
-    public TextMeshProUGUI damageText;
-    public TextMeshProUGUI sellingPriceText;
-    public TextMeshProUGUI upgradePriceText;
 
     [Header("Unity Things")]
+    public GameObject childGameobejct;
     public BuildingScriptableObjects buildingScriptableObjects;
     public Sprite upgradedSprite;
 
@@ -27,8 +25,7 @@ public class BuildingBuleprint : MonoBehaviour
     //public int upgradeCost;
 
     [Header("Resourse Required")]
-    public List<SingleResourse> resourseList = new List<SingleResourse>();
-    public int sellAmount;
+    public List<SingleResourse> resourseListToBuyBuilding = new List<SingleResourse>();
 
     [Header("Attack")]
     public int damage;
@@ -44,21 +41,38 @@ public class BuildingBuleprint : MonoBehaviour
     protected Sprite currentBulletSprite;
 
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    //to sell the building 
+    //    if (ClickHandler.xDown && buildingData[currentLevel].sellResourseList.Count > 0)//taking refrence from the click Handler
+    //    {
+    //        SellBuilding();
+    //    }
+
+    //    //to upgrade the building
+    //    if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourseList.Count > 0)
+    //    {
+    //        UpgradeBuilding();
+    //    }
+    //}
+
+    private void Update()
     {
-        //to sell the building 
-        if(ClickHandler.xDown)//taking refrence from the click Handler
+        if(Input.GetMouseButtonDown(0))
         {
-            SellBuilding();
+            if (ClickHandler.xDown && buildingData[currentLevel].sellResourseList.Count > 0)//taking refrence from the click Handler
+            {
+                SellBuilding();
+            }
+
+            //to upgrade the building
+            if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourseList.Count > 0)
+            {
+                UpgradeBuilding();
+            }
         }
 
-        //to upgrade the building
-        if(ClickHandler.vDown && CheakIfResourseAvailable(currentLevel+1) && upgradedSprite != null)
-        {
-            UpgradeBuilding();
-        }
     }
-
 
     //function is called when building takes damage
     public void TakeDamage(float Damage)
@@ -103,26 +117,27 @@ public class BuildingBuleprint : MonoBehaviour
         currentSpriite = buildingData[currentLevel].buildingSprite;
         currentBulletSprite = buildingData[currentLevel].bulletSprite;
         currentHealth = buildingData[currentLevel].health;
-        //cost = buildingData[currentLevel].cost;
-        //sellPrice = buildingData[currentLevel].sellingPrice;
         damage = buildingData[currentLevel].damage;
         if (currentLevel < buildingData.Length - 1)
         {
             upgradedSprite = buildingData[currentLevel + 1].buildingSprite;
-            //upgradeCost = buildingData[currentLevel + 1].cost;
-            //upgradePriceText.text = "Upgrade Price : " + upgradeCost;
         }
         else
         {
-            //upgradeCost = int.MaxValue;
-            upgradePriceText.text = "Max Level";
+            //Display Max Level
         }
-
-        //hover UI data
-        damageText.text = "Damage : " + damage;
-        //sellingPriceText.text = "Selling Price : " + sellPrice;
         
+        if (buildingData[currentLevel].range > 0 && childGameobejct != null)
+        {
+            
+            if (childGameobejct.name == "Oxygen Generator")
+            {
 
+                childGameobejct.GetComponent<OxygenGenerator>().UpgradeRange();
+
+            }
+        }
+        
     }
 
     protected void OnMouseEnter()
@@ -149,7 +164,7 @@ public class BuildingBuleprint : MonoBehaviour
 
                 case EResources.Wood:
                 {
-                    result = gs.wood >= resourse.amount;
+                        result = gs.wood >= resourse.amount;
                 }break;
 
                 case EResources.Stone:
@@ -174,11 +189,48 @@ public class BuildingBuleprint : MonoBehaviour
         return result;
     }
 
+    public bool CheakIfResourseAvailable(EResources resource,int amount)
+    {
+        GameStats gs = GameManager.Instance.gameStats;
+        bool result = false;
+
+        switch (resource)
+        {
+            case EResources.None: break;
+
+            case EResources.Wood:
+                {
+                    result = gs.wood >= amount;
+                }
+                break;
+
+            case EResources.Stone:
+                {
+                    result = gs.stone >= amount;
+                }
+                break;
+
+            case EResources.Bone:
+                {
+                    result = gs.bone >= amount;
+                }
+                break;
+
+            case EResources.Iron:
+                {
+                    result = gs.iron >= amount;
+                }
+                break;
+        }
+        return result;
+    }
+
     public void AddResourse()
     {
         GameStats gs = GameManager.Instance.gameStats;
-        foreach (SingleResourse resourse in buildingData[currentLevel].resourseList)
+        foreach (SingleResourse resourse in buildingData[currentLevel].sellResourseList)
         {
+            int sellAmount = resourse.amount;
             switch (resourse.resource)
             {
                 case EResources.None: break;
@@ -207,6 +259,7 @@ public class BuildingBuleprint : MonoBehaviour
                     }
                     break;
             }
+            gs.UpdateResourses();
         }
     }
 
@@ -227,23 +280,94 @@ public class BuildingBuleprint : MonoBehaviour
 
                 case EResources.Stone:
                     {
-                        gs.stone += resourse.amount;
+                        gs.stone -= resourse.amount;
                     }
                     break;
 
                 case EResources.Bone:
                     {
-                        gs.bone += resourse.amount;
+                        gs.bone -= resourse.amount;
                     }
                     break;
 
                 case EResources.Iron:
                     {
-                        gs.iron += resourse.amount;
+                        gs.iron -= resourse.amount;
                     }
                     break;
             }
+            gs.UpdateResourses();
         }
     }
-#endregion
+    public void RemoveResourse()
+    {
+        GameStats gs = GameManager.Instance.gameStats;
+        foreach (SingleResourse resourse in resourseListToBuyBuilding)
+        {
+            switch (resourse.resource)
+            {
+                case EResources.None: break;
+
+                case EResources.Wood:
+                    {
+                        gs.wood -= resourse.amount;
+                    }
+                    break;
+
+                case EResources.Stone:
+                    {
+                        gs.stone -= resourse.amount;
+                    }
+                    break;
+
+                case EResources.Bone:
+                    {
+                        gs.bone -= resourse.amount;
+                    }
+                    break;
+
+                case EResources.Iron:
+                    {
+                        gs.iron -= resourse.amount;
+                    }
+                    break;
+            }
+            gs.UpdateResourses() ;
+        }
+    }
+
+    public void RemoveResourse(EResources resourse,int amount)
+    {
+        GameStats gs = GameManager.Instance.gameStats;
+        switch (resourse)
+        {
+            case EResources.None: break;
+
+            case EResources.Wood:
+                {
+                    gs.wood -= amount;
+                }
+                break;
+
+            case EResources.Stone:
+                {
+                    gs.stone -= amount;
+                }
+                break;
+
+            case EResources.Bone:
+                {
+                    gs.bone -= amount;
+                }
+                break;
+
+            case EResources.Iron:
+                {
+                    gs.iron -= amount;
+                }
+                break;
+        }
+        gs.UpdateResourses();
+    }
+    #endregion
 }

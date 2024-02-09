@@ -145,16 +145,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverUI: {fileID: 4903463792863949992}
-  damageText: {fileID: 8557512883772906948}
-  sellingPriceText: {fileID: 8423055457165036112}
-  upgradePriceText: {fileID: 7570322383040376931}
   buildingScriptableObjects: {fileID: 11400000, guid: 69d94f4106237354fbb52c3ebe1b1851, type: 2}
   upgradedSprite: {fileID: 0}
   currentHealth: 0
   currentLevel: 0
-  cost: 30
-  sellPrice: 0
-  upgradeCost: 0
+  resourseListToBuyBuilding:
+  - resource: 1
+    prefab: {fileID: 0}
+    amount: 15
+  sellAmount: 0
   damage: 0
   destructionEffect: {fileID: 5664469046887157037, guid: 1c97dfa0e8c4bca40981c8d49341785e, type: 3}
 --- !u!1001 &532068682326787999
@@ -312,36 +311,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4859054087546073911, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
   m_PrefabInstance: {fileID: 532068682326787999}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7570322383040376931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7957149968660019196, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
-  m_PrefabInstance: {fileID: 532068682326787999}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8423055457165036112 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8324620144207597007, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
-  m_PrefabInstance: {fileID: 532068682326787999}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8557512883772906948 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8187593622194887259, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
-  m_PrefabInstance: {fileID: 532068682326787999}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

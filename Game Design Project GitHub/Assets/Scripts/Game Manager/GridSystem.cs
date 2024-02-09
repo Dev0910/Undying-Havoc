@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridSystem : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GridSystem : MonoBehaviour
     public int height;
     public GameObject tilePrefab;
     public static GameObject[,] tileArray;
+    public Vector2[] markIsOccupiedManually;
 
     public static bool gridIsVisible;
     private Vector2 spawnPoint = new Vector2(-99.5f,-99.5f);
@@ -33,6 +35,13 @@ public class GridSystem : MonoBehaviour
         }
         spawnPoint = new Vector3(-99.5f, -99.5f);// reset the spawnpont
         gridIsVisible = false;
+        if (markIsOccupiedManually != null)
+        {
+            foreach (Vector2 position in markIsOccupiedManually)
+            {
+                MarkIsOccupiedAt(position);
+            }
+        }
     }
 
     public void UpDateGrid()
@@ -106,6 +115,11 @@ public class GridSystem : MonoBehaviour
             }
         }
         return nearestTile;//return the nearest tile
+    }
+
+    public void MarkIsOccupiedAt(Vector2 position)
+    {
+        GetNearestTile(position).GetComponent<Tile>().isOccupied=true;
     }
     
 

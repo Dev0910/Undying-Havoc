@@ -44,7 +44,7 @@ public class GameStats : MonoBehaviour
         bone = startBone;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         //score = 0;wood = 0;stone = 0;iron = 0;bone = 0;
-        woodText.text = ": " + wood; stoneText.text = ": " + stone; ironText.text = ": " + iron;boneText.text = ": " + bone;
+        UpdateResourses();
 
     }
 
@@ -59,5 +59,12 @@ public class GameStats : MonoBehaviour
             highScore = score;
             PlayerPrefs.SetInt("HighScore", score);
         }
+    }
+    public void UpdateResourses()
+    {
+        woodText.text = ": " + wood;
+        stoneText.text = ": " + stone;
+        ironText.text = ": " + iron;
+        boneText.text = ": " + bone;
     }
 }

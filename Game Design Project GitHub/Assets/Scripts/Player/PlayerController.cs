@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         //AudioManager.Instance.PlaySFX("Player Damage 1");
         currentHealth -= damage;
+        StopCoroutine(TakeDamageEffect());
         StartCoroutine(TakeDamageEffect());
         uiManager.UpdatePlayerHP(currentMaxHealth);
         if (currentHealth <= 0)

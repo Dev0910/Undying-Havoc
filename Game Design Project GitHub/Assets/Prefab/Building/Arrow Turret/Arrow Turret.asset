@@ -16,28 +16,45 @@ MonoBehaviour:
   - buildingSprite: {fileID: 21300000, guid: 5c24baab491457348ade03fbe6be7b92, type: 3}
     bulletSprite: {fileID: 21300000, guid: 59510bd22354dbc44a77319505baaf19, type: 3}
     health: 100
-    cost: 60
-    sellingPrice: 30
     damage: 20
-    resourseList: []
+    resourseList:
+    - resource: 4
+      prefab: {fileID: 0}
+      amount: 40
+    sellResourseList:
+    - resource: 1
+      prefab: {fileID: 0}
+      amount: 20
   - buildingSprite: {fileID: 21300000, guid: 643bd001f1518fd409476c5878bf63a7, type: 3}
     bulletSprite: {fileID: 21300000, guid: aa64bf9b718e94a4e926506d92590614, type: 3}
     health: 200
-    cost: 60
-    sellingPrice: 60
     damage: 40
-    resourseList: []
+    resourseList:
+    - resource: 2
+      prefab: {fileID: 0}
+      amount: 40
+    sellResourseList:
+    - resource: 4
+      prefab: {fileID: 0}
+      amount: 20
   - buildingSprite: {fileID: 21300000, guid: dec29061c9fb5a34e844ed692c832a5a, type: 3}
     bulletSprite: {fileID: 21300000, guid: e471127e71fd0d448bad91652f0ad4d0, type: 3}
     health: 400
-    cost: 120
-    sellingPrice: 120
     damage: 80
-    resourseList: []
+    resourseList:
+    - resource: 3
+      prefab: {fileID: 0}
+      amount: 40
+    sellResourseList:
+    - resource: 2
+      prefab: {fileID: 0}
+      amount: 20
   - buildingSprite: {fileID: 21300000, guid: af056d9e9598b094e8236f0f4096f449, type: 3}
     bulletSprite: {fileID: 21300000, guid: 50b8e19c5bd43e9488e4c7e7449bafbc, type: 3}
     health: 800
-    cost: 240
-    sellingPrice: 240
     damage: 160
     resourseList: []
+    sellResourseList:
+    - resource: 3
+      prefab: {fileID: 0}
+      amount: 20
