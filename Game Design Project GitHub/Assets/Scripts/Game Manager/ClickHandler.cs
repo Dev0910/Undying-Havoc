@@ -14,7 +14,7 @@ public class ClickHandler : MonoBehaviour
         meleeWeapon = GameObject.Find("Melee Weapon");
         longRangeWeapon = GameObject.Find("Long Range Weapon");
         meleeWeapon.SetActive(false);
-        longRangeWeapon.SetActive(false);
+        //longRangeWeapon.SetActive(false);
     }
     void Update()
     {

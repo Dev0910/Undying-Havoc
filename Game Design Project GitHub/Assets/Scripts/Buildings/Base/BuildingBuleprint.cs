@@ -189,42 +189,6 @@ public class BuildingBuleprint : MonoBehaviour
         return result;
     }
 
-    public bool CheakIfResourseAvailable(EResources resource,int amount)
-    {
-        GameStats gs = GameManager.Instance.gameStats;
-        bool result = false;
-
-        switch (resource)
-        {
-            case EResources.None: break;
-
-            case EResources.Wood:
-                {
-                    result = gs.wood >= amount;
-                }
-                break;
-
-            case EResources.Stone:
-                {
-                    result = gs.stone >= amount;
-                }
-                break;
-
-            case EResources.Bone:
-                {
-                    result = gs.bone >= amount;
-                }
-                break;
-
-            case EResources.Iron:
-                {
-                    result = gs.iron >= amount;
-                }
-                break;
-        }
-        return result;
-    }
-
     public void AddResourse()
     {
         GameStats gs = GameManager.Instance.gameStats;
@@ -336,38 +300,6 @@ public class BuildingBuleprint : MonoBehaviour
         }
     }
 
-    public void RemoveResourse(EResources resourse,int amount)
-    {
-        GameStats gs = GameManager.Instance.gameStats;
-        switch (resourse)
-        {
-            case EResources.None: break;
-
-            case EResources.Wood:
-                {
-                    gs.wood -= amount;
-                }
-                break;
-
-            case EResources.Stone:
-                {
-                    gs.stone -= amount;
-                }
-                break;
-
-            case EResources.Bone:
-                {
-                    gs.bone -= amount;
-                }
-                break;
-
-            case EResources.Iron:
-                {
-                    gs.iron -= amount;
-                }
-                break;
-        }
-        gs.UpdateResourses();
-    }
+    
     #endregion
 }

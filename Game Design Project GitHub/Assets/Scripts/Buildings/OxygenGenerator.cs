@@ -36,7 +36,7 @@ public class OxygenGenerator : BuildingBuleprint
     IEnumerator FuelCheak()
     {
         yield return new WaitForSeconds(0.25f);
-        if (CheakIfResourseAvailable(fuelResourse,amountPerRound))
+        if (GameManager.Instance.gameStats.CheakIfResourseAvailable(fuelResourse,amountPerRound))
         {
             StartCoroutine(UseFuel());
         }
@@ -55,7 +55,7 @@ public class OxygenGenerator : BuildingBuleprint
     IEnumerator UseFuel()
     {
         range.SetActive(true);
-        RemoveResourse(fuelResourse, amountPerRound);
+        GameManager.Instance.gameStats.RemoveResourse(fuelResourse, amountPerRound);
 
         for(float i = 1; i>=0; i-=0.01f)
         {

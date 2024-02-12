@@ -2,30 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class ShopButtons : MonoBehaviour
 {
-    public Text currentName;
-    public Text level;
-    public Text damage;
-    public Text price;
-    public void UpdateButton(string _name,int _level,float _damge,int _price,bool isMax)
-    {
-        if(!isMax)
-        {
-            currentName.text = _name;
-            level.text = "Level : " + _level;
-            damage.text = "Damage : " + _damge;
-            price.text = "Price : " + _price;
-        }
-        else
-        {
-            price.text = "Max Level";
-        }
-        
-    }
+    public TextMeshProUGUI currentName;
+    public Image currentImage;
+    public TextMeshProUGUI damageToMonsters;
+    public TextMeshProUGUI damageToTree;
+    public TextMeshProUGUI damageToRock;
+    public TextMeshProUGUI damageToIronore;
+    public Image currentResourseImage;
+    public TextMeshProUGUI priceAmount;
+    public Button buyButton;
 
-    public void UpdatePrice(string _price)
+    public void UpdateName(string _name,Sprite _currentImage)
     {
-        price.text = _price;
+        currentName.text = _name;
+        currentImage.sprite = _currentImage;
+    }
+    public void UpdateDamage(float _damage,int tree,int rock,int ironOre)
+    {
+        damageToMonsters.text = "Monster : " + _damage;
+        damageToTree.text = "Tree : " + tree;
+        damageToRock.text = "Rock : " + rock;
+        damageToIronore.text = "Iron Ore : " + ironOre;
+    }
+    public void UpdatePrices(EResources resourse,int price,bool isMax)
+    {
+        
+        if(isMax)
+        {
+            priceAmount.text = "Max Level";
+            buyButton.interactable = false;
+            currentResourseImage.sprite = null;
+            return;
+        }
+        buyButton.interactable = true;
+        //currentResourseImage.sprite = resourse;
+        priceAmount.text = ": " + price;
     }
 }

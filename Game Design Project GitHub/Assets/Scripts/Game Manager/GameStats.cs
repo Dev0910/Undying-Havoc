@@ -67,4 +67,105 @@ public class GameStats : MonoBehaviour
         ironText.text = ": " + iron;
         boneText.text = ": " + bone;
     }
+
+    public bool CheakIfResourseAvailable(EResources resource, int amount)
+    {
+        bool result = false;
+        switch (resource)
+        {
+            case EResources.None: break;
+
+            case EResources.Wood:
+                {
+                    result = wood >= amount;
+                }
+                break;
+
+            case EResources.Stone:
+                {
+                    result = stone >= amount;
+                }
+                break;
+
+            case EResources.Bone:
+                {
+                    result = bone >= amount;
+                }
+                break;
+
+            case EResources.Iron:
+                {
+                    result = iron >= amount;
+                }
+                break;
+        }
+        return result;
+    }
+
+    public void AddResourse(EResources resourse, int amount)
+    {
+        switch (resourse)
+        {
+            case EResources.None: break;
+
+            case EResources.Wood:
+                {
+                    wood += amount;
+                }
+                break;
+
+            case EResources.Stone:
+                {
+                    stone += amount;
+                }
+                break;
+
+            case EResources.Bone:
+                {
+                    bone += amount;
+                }
+                    break;
+
+            case EResources.Iron:
+                {
+                    iron += amount;
+                }
+                break;
+            }
+        UpdateResourses();
+
+    }
+
+    public void RemoveResourse(EResources resourse, int amount)
+    {
+        switch (resourse)
+        {
+            case EResources.None: break;
+
+            case EResources.Wood:
+                {
+                    wood -= amount;
+                }
+                break;
+
+            case EResources.Stone:
+                {
+                    stone -= amount;
+                }
+                break;
+
+            case EResources.Bone:
+                {
+                    bone -= amount;
+                }
+                break;
+
+            case EResources.Iron:
+                {
+                    iron -= amount;
+                }
+                break;
+        }
+        UpdateResourses();
+    }
 }
