@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,25 +27,25 @@ public class PlayerController : MonoBehaviour
     
     private int currentCostToIncreaseMaxOxygenCapacity;
     private int currentMaxOxygenCapacity;
-    private bool isInOxygenArea;
     public static float currentOxygenLevel;
 
     private UIManager uiManager;
     private float regenrateRate;
     private PostProcessVolume postProcessVolume;
     private Vignette vignette;
-
+    private OxygenGenerator oxygenGenerator;
 
     
     private void Start()
     {
         Time.timeScale = 1f;
-        isInOxygenArea = true;
+        //isInOxygenArea = true;
         uiManager = GameManager.Instance.uiManager;
         currentMaxHealth = startMaxHealth;
         currentHealth = currentMaxHealth;
         currentCostToIncreaseMaxHealth = costToUpgradeMaxHealth;
         uiManager.UpdatePlayerHP(currentMaxHealth);
+        oxygenGenerator = GameManager.Instance.oxygenGenerator;
 
         currentMaxOxygenCapacity = startMaxHealth;
         currentOxygenLevel = currentMaxOxygenCapacity;
@@ -61,7 +62,6 @@ public class PlayerController : MonoBehaviour
         }
         InvokeRepeating("OxygenCheak", 0.5f, 1f);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Resours"))
@@ -70,20 +70,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Oxygen Area"))
-        {
-            isInOxygenArea = false;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Oxygen Area"))
-        {
-            isInOxygenArea = true;
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Oxygen Area"))
+    //    {
+    //        isInOxygenArea = false;
+    //    }
+    //}
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Oxygen Area"))
+    //    {
+    //        isInOxygenArea = true;
+    //    }
+    //}
 
 
     #region Health
@@ -181,7 +181,9 @@ public class PlayerController : MonoBehaviour
     #region Oxygen
     private void OxygenCheak()
     {
-        if(isInOxygenArea && currentOxygenLevel<currentMaxOxygenCapacity)
+
+        bool isInOxygenArea = IsInOxygenArea();
+        if (isInOxygenArea && currentOxygenLevel<currentMaxOxygenCapacity)
         {
             currentOxygenLevel += (currentMaxOxygenCapacity * oxygenRegainRate) / 100;
             currentOxygenLevel = currentOxygenLevel >= currentMaxOxygenCapacity?currentMaxOxygenCapacity:currentOxygenLevel;
@@ -195,6 +197,21 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.Instance.uiManager.UpdateOxygenBar(currentMaxOxygenCapacity);
+    }
+
+    private bool IsInOxygenArea()
+    {
+        bool result = false;
+        float distance = Vector2.Distance(this.transform.position, oxygenGenerator.gameObject.transform.position)/2;
+        if(distance <= oxygenGenerator.range+(0.045*oxygenGenerator.range))
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+        return result;
     }
     #endregion
 }

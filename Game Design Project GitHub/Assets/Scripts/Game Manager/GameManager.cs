@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public MainScreenUi mainScreenUI;
     public ResoursesSpawner resoursesSpawner;
-    
+    public OxygenGenerator oxygenGenerator;
+
     public GameObject player;
     public GameObject weaponHolder;
 

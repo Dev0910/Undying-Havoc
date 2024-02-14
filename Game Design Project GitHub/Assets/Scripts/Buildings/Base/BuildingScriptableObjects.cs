@@ -11,6 +11,8 @@ public class BuildingScriptableObjects : ScriptableObject
 [System.Serializable]
 public class BuildingData
 {
+    public string name;
+    public string description;
     public Sprite buildingSprite;
     public Sprite bulletSprite;
     public int health;
@@ -18,8 +20,8 @@ public class BuildingData
     public float range;
 
     [Header("Resourse Required Upgrade")]
-    public List<SingleResourse> resourseList = new List<SingleResourse>();
+    public SingleResourse resourse;
 
     [Header("Resourse Recived On Selling The Building")]
-    public List<SingleResourse> sellResourseList = new List<SingleResourse>();
+    public SingleResourse sellResourse;
 }

@@ -7,6 +7,7 @@ public class Wall : BuildingBuleprint
     // Start is called before the first frame update
     void Start()
     {
+        childGameobejct = this.gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildingData = buildingScriptableObjects.buildingData;
         currentLevel = 0;

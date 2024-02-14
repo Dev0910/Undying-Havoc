@@ -20,6 +20,7 @@ public class ArrowTurret : BuildingBuleprint
 
     void Start()
     {
+        childGameobejct = this.gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildingData = buildingScriptableObjects.buildingData;
         currentLevel = 0;
@@ -29,7 +30,6 @@ public class ArrowTurret : BuildingBuleprint
         InvokeRepeating("UpdateTarget", 0f, 0.5f);//updating target every 0.5sec
         qbullet = new Queue<GameObject>();
     }
-
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);//creating array to store all the enemys
@@ -112,4 +112,6 @@ public class ArrowTurret : BuildingBuleprint
         return false;
 
     }
+
+
 }

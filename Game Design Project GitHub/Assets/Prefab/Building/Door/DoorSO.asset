@@ -13,48 +13,67 @@ MonoBehaviour:
   m_Name: DoorSO
   m_EditorClassIdentifier: 
   buildingData:
-  - buildingSprite: {fileID: 21300000, guid: de04a952b60ebb5469190814dd56638e, type: 3}
+  - name: Wooden Door
+    description: The Door not only shields you from monsters with up to 60 HP but
+      also allows you to pass through it.
+    buildingSprite: {fileID: 21300000, guid: de04a952b60ebb5469190814dd56638e, type: 3}
     bulletSprite: {fileID: 0}
     health: 60
     damage: 0
-    resourseList:
-    - resource: 4
+    range: 0
+    resourse:
+      resource: 4
       prefab: {fileID: 0}
       amount: 15
-    sellResourseList:
-    - resource: 1
+    sellResourse:
+      resource: 1
       prefab: {fileID: 0}
       amount: 10
-  - buildingSprite: {fileID: 21300000, guid: 22b01a14c44e13241885ddaf6a71fbe0, type: 3}
+  - name: Bone Door
+    description: The Door not only shields you from monsters with up to 150 HP but
+      also allows you to pass through it.
+    buildingSprite: {fileID: 21300000, guid: 22b01a14c44e13241885ddaf6a71fbe0, type: 3}
     bulletSprite: {fileID: 0}
     health: 150
     damage: 0
-    resourseList:
-    - resource: 2
+    range: 0
+    resourse:
+      resource: 2
       prefab: {fileID: 0}
       amount: 30
-    sellResourseList:
-    - resource: 4
+    sellResourse:
+      resource: 4
       prefab: {fileID: 0}
       amount: 10
-  - buildingSprite: {fileID: 21300000, guid: 589ae7b6651f4e542915f88eff1eb9c9, type: 3}
+  - name: Stone Door
+    description: The Door not only shields you from monsters with up to 300 HP but
+      also allows you to pass through it.
+    buildingSprite: {fileID: 21300000, guid: 589ae7b6651f4e542915f88eff1eb9c9, type: 3}
     bulletSprite: {fileID: 0}
     health: 300
     damage: 0
-    resourseList:
-    - resource: 3
+    range: 0
+    resourse:
+      resource: 3
       prefab: {fileID: 0}
       amount: 30
-    sellResourseList:
-    - resource: 2
+    sellResourse:
+      resource: 2
       prefab: {fileID: 0}
       amount: 15
-  - buildingSprite: {fileID: 21300000, guid: c45fdcfb1bfc6cd4facef3e8cbb9ad96, type: 3}
+  - name: Iron Door
+    description: The Door not only shields you from monsters with up to 500 HP but
+      also allows you to pass through it.
+    buildingSprite: {fileID: 21300000, guid: c45fdcfb1bfc6cd4facef3e8cbb9ad96, type: 3}
     bulletSprite: {fileID: 0}
-    health: 480
+    health: 500
     damage: 0
-    resourseList: []
-    sellResourseList:
-    - resource: 3
+    range: 0
+    resourse:
+      resource: 0
+      prefab: {fileID: 0}
+      amount: 0
+    sellResourse:
+      resource: 3
       prefab: {fileID: 0}
       amount: 15

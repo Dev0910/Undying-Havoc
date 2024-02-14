@@ -20,17 +20,33 @@ MonoBehaviour:
   weaponsData:
   - name: Wooden Sword
     weaponSprite: {fileID: 21300000, guid: 5d4f16422bd242f4ea33700b9019a9a9, type: 3}
-    cost: 200
+    resource: 1
+    cost: 40
     damage: 40
-  - name: Iron Sword
+    damageOnWood: 0
+    damageOnStone: 0
+    damageOnIron: 0
+  - name: Bone Sword
     weaponSprite: {fileID: 21300000, guid: 716a85cbbed9c0449bf162ecb2323a26, type: 3}
-    cost: 400
+    resource: 4
+    cost: 60
     damage: 80
-  - name: Gold Sword
+    damageOnWood: 0
+    damageOnStone: 0
+    damageOnIron: 0
+  - name: Stone Sword
     weaponSprite: {fileID: 21300000, guid: 6add945dc8e54a241944b013ee59e719, type: 3}
-    cost: 800
+    resource: 2
+    cost: 100
     damage: 160
-  - name: Diamond Sword
+    damageOnWood: 0
+    damageOnStone: 0
+    damageOnIron: 0
+  - name: Iron Sword
     weaponSprite: {fileID: 21300000, guid: c21d9eabf2e62934995f627ef570b483, type: 3}
-    cost: 1600
+    resource: 3
+    cost: 150
     damage: 320
+    damageOnWood: 0
+    damageOnStone: 0
+    damageOnIron: 0

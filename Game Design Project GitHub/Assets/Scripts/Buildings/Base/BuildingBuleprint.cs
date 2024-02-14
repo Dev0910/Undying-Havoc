@@ -17,6 +17,7 @@ public class BuildingBuleprint : MonoBehaviour
 
     [Header("Details")]
     public float currentHealth = 0f;
+    public float currentMaxHealth;
     public int currentLevel = 0;
 
     //[Header("Money")]
@@ -39,39 +40,20 @@ public class BuildingBuleprint : MonoBehaviour
     protected BuildingData[] buildingData;
     protected Sprite currentSpriite;
     protected Sprite currentBulletSprite;
-
-
-    //private void OnMouseDown()
-    //{
-    //    //to sell the building 
-    //    if (ClickHandler.xDown && buildingData[currentLevel].sellResourseList.Count > 0)//taking refrence from the click Handler
-    //    {
-    //        SellBuilding();
-    //    }
-
-    //    //to upgrade the building
-    //    if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourseList.Count > 0)
-    //    {
-    //        UpgradeBuilding();
-    //    }
-    //}
-
-    private void Update()
+    protected string currentName;
+    private void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0))
+        //to sell the building 
+        if (ClickHandler.xDown && buildingData[currentLevel].sellResourse.resource != EResources.None)//taking refrence from the click Handler
         {
-            if (ClickHandler.xDown && buildingData[currentLevel].sellResourseList.Count > 0)//taking refrence from the click Handler
-            {
-                SellBuilding();
-            }
-
-            //to upgrade the building
-            if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourseList.Count > 0)
-            {
-                UpgradeBuilding();
-            }
+            SellBuilding();
         }
 
+        //to upgrade the building
+        if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourse.resource != EResources.None)
+        {
+            UpgradeBuilding();
+        }
     }
 
     //function is called when building takes damage
@@ -80,7 +62,9 @@ public class BuildingBuleprint : MonoBehaviour
         if(currentHealth > 0)
         {
             currentHealth -= Damage;
+            hoverUI.GetComponent<HoverUI>().UpdateHealthBar(currentHealth / currentMaxHealth);
         }
+
         else if(currentHealth <= 0)
         {
             nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
@@ -91,18 +75,17 @@ public class BuildingBuleprint : MonoBehaviour
         }
     }
 
-    void SellBuilding()
+    public void SellBuilding()
     {
         AddResourse();//adding the selling price of the turret 
-        Destroy(this.gameObject);//destroying the building
-
         //change the isOccuied bool in the class Tile
         if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
         {
             nearestTile.GetComponent<Tile>().isOccupied = false;
         }
+        Destroy(this.gameObject);//destroying the building
     }
-    void UpgradeBuilding()
+    public void UpgradeBuilding()
     {
         RemoveResourse(currentLevel);//removing the upgrade cost
         currentLevel++;
@@ -114,30 +97,40 @@ public class BuildingBuleprint : MonoBehaviour
     //Get data from the scriptable object
     protected void GetData()
     {
+        HoverUI hoverUIScript = hoverUI.GetComponent<HoverUI>();
+
+        currentName = buildingData[currentLevel].name;
+        hoverUIScript.UpdateName(currentName);
+        hoverUIScript.UpdateDetails(buildingData[currentLevel].description);
+
         currentSpriite = buildingData[currentLevel].buildingSprite;
         currentBulletSprite = buildingData[currentLevel].bulletSprite;
-        currentHealth = buildingData[currentLevel].health;
+
+        currentMaxHealth = buildingData[currentLevel].health;
+        currentHealth = currentMaxHealth;
+        hoverUI.GetComponent<HoverUI>().UpdateHealthBar(currentHealth / currentMaxHealth);
+
         damage = buildingData[currentLevel].damage;
+
+        
         if (currentLevel < buildingData.Length - 1)
         {
             upgradedSprite = buildingData[currentLevel + 1].buildingSprite;
+            hoverUIScript.UpdateUpgradeCost(buildingData[currentLevel].resourse.resource, buildingData[currentLevel].resourse.amount);
         }
         else
         {
             //Display Max Level
         }
         
-        if (buildingData[currentLevel].range > 0 && childGameobejct != null)
+        if (childGameobejct.name == "Oxygen Generator")
         {
-            
-            if (childGameobejct.name == "Oxygen Generator")
-            {
-
-                childGameobejct.GetComponent<OxygenGenerator>().UpgradeRange();
-
-            }
+            childGameobejct.GetComponent<OxygenGenerator>().UpgradeRange();
         }
-        
+        else
+        {
+            hoverUIScript.UpdateSellingPrice(buildingData[currentLevel].sellResourse.resource, buildingData[currentLevel].sellResourse.amount);
+        }
     }
 
     protected void OnMouseEnter()
@@ -155,9 +148,8 @@ public class BuildingBuleprint : MonoBehaviour
     {
         GameStats gs = GameManager.Instance.gameStats;
         bool result = false;
-
-        foreach (SingleResourse resourse in buildingData[index].resourseList)
-        {
+        SingleResourse resourse = buildingData[index].resourse;
+        
             switch(resourse.resource)
             {
                 case EResources.None: break;
@@ -185,15 +177,14 @@ public class BuildingBuleprint : MonoBehaviour
                     }
                     break;
             }
-        }
         return result;
     }
 
     public void AddResourse()
     {
         GameStats gs = GameManager.Instance.gameStats;
-        foreach (SingleResourse resourse in buildingData[currentLevel].sellResourseList)
-        {
+        SingleResourse resourse = buildingData[currentLevel].sellResourse;
+
             int sellAmount = resourse.amount;
             switch (resourse.resource)
             {
@@ -224,14 +215,14 @@ public class BuildingBuleprint : MonoBehaviour
                     break;
             }
             gs.UpdateResourses();
-        }
     }
 
     public void RemoveResourse(int index)
     {
         GameStats gs = GameManager.Instance.gameStats;
-        foreach (SingleResourse resourse in buildingData[index].resourseList)
-        {
+        SingleResourse resourse = buildingData[index].resourse;
+        
+        
             switch (resourse.resource)
             {
                 case EResources.None: break;
@@ -261,7 +252,7 @@ public class BuildingBuleprint : MonoBehaviour
                     break;
             }
             gs.UpdateResourses();
-        }
+        
     }
     public void RemoveResourse()
     {

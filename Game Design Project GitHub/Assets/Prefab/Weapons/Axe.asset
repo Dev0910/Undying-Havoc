@@ -22,31 +22,31 @@ MonoBehaviour:
     weaponSprite: {fileID: 21300000, guid: df738b0f24ed25b42a50b1df0d8b0caf, type: 3}
     resource: 1
     cost: 10
-    damage: 10
+    damage: 5
     damageOnWood: 5
-    damageOnStone: 2
-    damageOnIron: 1
-  - name: Iron Axe
+    damageOnStone: 1
+    damageOnIron: 0
+  - name: Bone Axe
     weaponSprite: {fileID: 21300000, guid: 6e243a262e7e1f74794f2821a2d79bdf, type: 3}
     resource: 4
     cost: 20
-    damage: 20
+    damage: 10
     damageOnWood: 10
-    damageOnStone: 4
-    damageOnIron: 2
-  - name: Gold Axe
+    damageOnStone: 2
+    damageOnIron: 1
+  - name: Stone Axe
     weaponSprite: {fileID: 21300000, guid: d454083e2608d6c4cb6ed1e0534b2e6c, type: 3}
     resource: 2
     cost: 40
-    damage: 40
-    damageOnWood: 20
-    damageOnStone: 8
-    damageOnIron: 4
-  - name: Diamond Axe
+    damage: 20
+    damageOnWood: 15
+    damageOnStone: 4
+    damageOnIron: 2
+  - name: Iron Axe
     weaponSprite: {fileID: 21300000, guid: ed2a03e27ffd7d54ca12486380338eee, type: 3}
     resource: 3
     cost: 80
-    damage: 80
-    damageOnWood: 40
-    damageOnStone: 15
-    damageOnIron: 8
+    damage: 40
+    damageOnWood: 25
+    damageOnStone: 8
+    damageOnIron: 4

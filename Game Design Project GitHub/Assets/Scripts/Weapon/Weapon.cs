@@ -83,7 +83,12 @@ public class Weapon : MonoBehaviour
             currentWeapon = weaponScriptableObjects[2];
             GetWeaponData(currentWeapon.weaponsData, shopButtons[2]);
         }
-        
+        else if (numberPressed == 4 && weaponScriptableObjects[numberPressed - 1].isBought)
+        {
+            currentWeapon = weaponScriptableObjects[3];
+            GetWeaponData(currentWeapon.weaponsData, shopButtons[3]);
+        }
+
     }
 
 
@@ -125,17 +130,9 @@ public class Weapon : MonoBehaviour
         {
             upgradedSprite = weaponsData[currentWeapon.currentLevel].weaponSprite;
             costToUpgrade = weaponsData[currentWeapon.currentLevel + 1].cost;
-            shopButton.UpdatePrices(weaponsData[currentWeapon.currentLevel].resource, costToUpgrade, false);
-            
         }
-        else
-        {
-            shopButton.UpdatePrices(weaponsData[currentWeapon.currentLevel].resource, costToUpgrade, true);
-        }
+        UpdateShopPrices(weaponsData, shopButton);
 
-        shopButton.UpdateName(currentWeaponName, currentWeaponSpriite);
-        shopButton.UpdateDamage(damage,damageOnWood,damageOnStone,damageOnIron);
-        
         transform.localPosition = currentWeapon.weaponPosition;
         boxCollider2D.enabled = true;
         boxCollider2D.offset = currentWeapon.colliderOffSet;
@@ -143,8 +140,22 @@ public class Weapon : MonoBehaviour
         spriteRenderer.sprite = currentWeaponSpriite;
         
     }
+    private void UpdateShopPrices(WeaponData[] weaponsData, ShopButtons shopButton)
+    {
+        
+        if (currentWeapon.currentLevel < weaponsData.Length - 1)
+        {
+            WeaponData wd = weaponsData[currentWeapon.currentLevel + 1];
+            shopButton.UpdatePrices(wd.resource, costToUpgrade, false);
+            shopButton.UpdateName(wd.name, wd.weaponSprite);
+            shopButton.UpdateDamage(wd.damage, wd.damageOnWood, wd.damageOnStone, wd.damageOnIron);
 
-
+        }
+        else
+        {
+            shopButton.UpdatePrices(weaponsData[currentWeapon.currentLevel].resource, costToUpgrade, true);
+        }
+    }
     public bool CanBuyWeapon(WeaponScriptableObjects weaponSO)
     {
         bool canBuy = false;
@@ -161,8 +172,8 @@ public class Weapon : MonoBehaviour
         }
         return canBuy;
     }
-        public void BuyWeapon(int index)
-        {
+    public void BuyWeapon(int index)
+    {
         weaponScriptableObjects[index].isBought = true;
         GameManager.Instance.gameStats.RemoveResourse(weaponScriptableObjects[index].weaponsData[0].resource, weaponScriptableObjects[index].weaponsData[0].cost);
         currentWeapon = weaponScriptableObjects[index];

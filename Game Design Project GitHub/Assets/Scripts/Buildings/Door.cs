@@ -7,6 +7,7 @@ public class Door : BuildingBuleprint
     // Start is called before the first frame update
     void Start()
     {
+        childGameobejct = this.gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildingData = buildingScriptableObjects.buildingData;
         currentLevel = 0;
@@ -15,4 +16,5 @@ public class Door : BuildingBuleprint
         nearestTile = GameManager.Instance.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
 
     }
+
 }
