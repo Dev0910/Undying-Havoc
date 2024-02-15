@@ -30,10 +30,11 @@ public class PlayerController : MonoBehaviour
     public static float currentOxygenLevel;
 
     private UIManager uiManager;
-    private float regenrateRate;
+    [SerializeField]private float healthRegenrateRate;
     private PostProcessVolume postProcessVolume;
     private Vignette vignette;
     private OxygenGenerator oxygenGenerator;
+    private bool isHPRegainRunning;
 
     
     private void Start()
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
             vignette.enabled.Override(false);
         }
         InvokeRepeating("OxygenCheak", 0.5f, 1f);
+        isHPRegainRunning = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -107,38 +109,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void RegenrateHealth(float time)
+    private IEnumerator RegenrateHealth()
     {
-        float missingHealth = currentMaxHealth-currentHealth;
-        regenrateRate = (missingHealth / (time * 0.8f))/2;
-        if(regenrateRate > 0)
+        yield return new WaitForSeconds(1.0f);
+        if(!IsInOxygenArea())
         {
-            InvokeRepeating(nameof(GetHealth), 0f, 0.5f);
+            yield return null;
         }
-    }
-
-    //called every 0.5sec by the RegenrateHealth to regenrate the missing health
-    private void GetHealth()
-    {
-        if(GameManager.Instance.dayAndNight.isNight)
+        if (currentHealth + (healthRegenrateRate * currentHealth*0.01f) <= currentMaxHealth)
         {
-            CancelInvoke();
-            return;
-        }
-
-
-        if(currentHealth + regenrateRate <= currentMaxHealth)
-        {
-            currentHealth += regenrateRate;
+            currentHealth += healthRegenrateRate;
+            uiManager.UpdatePlayerHP(currentMaxHealth);
+            StartCoroutine(RegenrateHealth());
         }
         else
         {
             currentHealth = currentMaxHealth;
-            CancelInvoke();
+            uiManager.UpdatePlayerHP(currentMaxHealth);
+            isHPRegainRunning = false;
         }
-        uiManager.UpdatePlayerHP(currentMaxHealth);
+        
+        
     }
-
 
     public void IncreaseMaxHealth()
     {
@@ -188,8 +180,18 @@ public class PlayerController : MonoBehaviour
             currentOxygenLevel += (currentMaxOxygenCapacity * oxygenRegainRate) / 100;
             currentOxygenLevel = currentOxygenLevel >= currentMaxOxygenCapacity?currentMaxOxygenCapacity:currentOxygenLevel;
         }
+        else if(isInOxygenArea && currentOxygenLevel == currentMaxOxygenCapacity && currentHealth<currentMaxHealth && !isHPRegainRunning)
+        {
+            StartCoroutine(RegenrateHealth());
+            isHPRegainRunning = true;
+        }
         else if(!isInOxygenArea)
         {
+            if(isHPRegainRunning)
+            {
+                StopCoroutine(RegenrateHealth());
+                isHPRegainRunning= false;
+            }
             currentOxygenLevel -= (currentMaxOxygenCapacity * oxygenDeplitionRate) / 100;
             if(currentOxygenLevel <= 0)
             {

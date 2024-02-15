@@ -46,7 +46,7 @@ public class BaseEnemy : MonoBehaviour
 
 
     protected float currentMoveSpeed;//update the speed in game
-    protected GameObject player;//instance of player
+    protected GameObject target;//instance of player
     protected int collisionCount;//to count the collision
     public GameObject targetToAttack;//temprory store the building in contact
     protected Rigidbody2D rigidBody;
@@ -76,7 +76,7 @@ public class BaseEnemy : MonoBehaviour
     //look at player
     private void LookAtPlayer()
     {
-        Vector2 lookDir = new Vector2(player.transform.position.x,player.transform.position.y) - rigidBody.position;
+        Vector2 lookDir = new Vector2(target.transform.position.x,target.transform.position.y) - rigidBody.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rigidBody.rotation = angle;
     }
@@ -95,7 +95,7 @@ public class BaseEnemy : MonoBehaviour
         }
         else if(target.gameObject.CompareTag("Player"))
         {
-            PlayerController pc = player.GetComponent<PlayerController>();
+            PlayerController pc = target.GetComponent<PlayerController>();
             pc.TakeDamage(damage);
         }
         

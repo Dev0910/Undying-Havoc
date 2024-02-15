@@ -89,8 +89,8 @@ public class DayAndNight : MonoBehaviour
         {
             InvokeRepeating(nameof(MakeDay), 0, 0.01f);
             isNight = false;
-            PlayerController playerController = GameManager.Instance.player.GetComponent<PlayerController>();
-            playerController.RegenrateHealth(timeBetweenDayAndNight);
+            //PlayerController playerController = GameManager.Instance.player.GetComponent<PlayerController>();
+            //playerController.RegenrateHealth(timeBetweenDayAndNight);
         }
         else
         {

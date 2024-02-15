@@ -12066,7 +12066,7 @@ MonoBehaviour:
   currentImage: {fileID: 2049222848}
   currentWave: 0
   isNight: 0
-  timeBetweenDayAndNight: 30
+  timeBetweenDayAndNight: 15
 --- !u!114 &1966874524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20460,6 +20460,7 @@ MonoBehaviour:
   oxygenDeplitionRate: 5
   oxygenRegainRate: 10
   damageWhenOxygenZero: 2
+  healthRegenrateRate: 1
 --- !u!58 &9179292531613301799
 CircleCollider2D:
   m_ObjectHideFlags: 0

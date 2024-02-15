@@ -67,11 +67,19 @@ public class BuildingBuleprint : MonoBehaviour
 
         else if(currentHealth <= 0)
         {
-            nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
-            //this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
-            GameObject p = Instantiate(destructionEffect,transform.position, Quaternion.identity);
-            GameObject.Destroy(p,0.5f);
+            if (childGameobejct.name == "Oxygen Generator")
+            {
+                Time.timeScale = 0f;
+                GameManager.Instance.mainScreenUI.LoadScene("EndScene");
+            }
+            else 
+            {
+                nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
+                Destroy(this.gameObject);
+                GameObject p = Instantiate(destructionEffect, transform.position, Quaternion.identity);
+                GameObject.Destroy(p, 0.5f);
+            }
+
         }
     }
 

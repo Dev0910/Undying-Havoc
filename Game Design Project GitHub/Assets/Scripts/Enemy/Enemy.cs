@@ -10,76 +10,82 @@ public class Enemy : BaseEnemy
     {
         //set Instance
         rigidBody = GetComponent<Rigidbody2D>();
-        player = GameManager.Instance.player;
+        target = GameManager.Instance.oxygenGenerator.gameObject;
 
-        //reset values
-        GetData();
-        collisionCount = 0;
+        
+        GetData();//reset values
         currentMoveSpeed = moveSpeed;
-        trapTimer = 0;
-        timeFromContact = 0;
-        //update UI
-        healthbar.fillAmount = currentHealth / maxHealth;
+        
+        healthbar.fillAmount = currentHealth / maxHealth;//update UI
+    }
+
+    private void Start()
+    {
+        StartCoroutine(AttackTarget());
     }
     private void Update()
     {
-        FollowTarget(player.transform.position);//calling the follow function from the base class
-        if ((lastAttackTime + attackSpeed < Time.time))//cheak if it can attack the building
-        {
-            if (targetToAttack != null && (timeFromContact > attackAfterSecondsOfContact))
-            {
-                Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
-                timeFromContact = 0;
-            }
-            else
-            {
-                timeFromContact += Time.deltaTime;
-            }
-            
-        }
-        Trap();
-        
+        FollowTarget(target.transform.position);//calling the follow function from the base class
     }
 
     //cheak for collision for Player or Buildings
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        timeFromContact = 0;
-        targetToAttack = collision.gameObject;
-        collisionCount++;
+        if(collision.gameObject.CompareTag("Building") || collision.gameObject.CompareTag("Player"))
+        {
+            targetToAttack = collision.gameObject;
+        }
     }
 
     //cheak for exit from a collision
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collisionCount--;
-        if(collisionCount <= 0)
+        if(targetToAttack == null) 
         {
-            timeFromContact = 0;
+            return;
+        }
+        if(collision.gameObject.tag == targetToAttack.gameObject.tag)
+        {
             targetToAttack = null;
         }
     }
-
-
-    //cheak for Traps
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator AttackTarget()
     {
-        if(collision.gameObject.CompareTag("Trap"))
+        if (targetToAttack != null)
         {
-            trap=collision.gameObject;
-            trapCount++;
-        }
-    }
-    //cheak for exit from Traps
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Trap"))
-        {
-            trapCount--;
-            if (trapCount <= 0)
+            yield return new WaitForSeconds(2.5f);
+            if(targetToAttack != null)
             {
-                trap = null;
+                Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
             }
+            
         }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        StartCoroutine(AttackTarget());
     }
+
+    ////cheak for Traps
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.gameObject.CompareTag("Trap"))
+    //    {
+    //        trap=collision.gameObject;
+    //        trapCount++;
+    //    }
+    //}
+    ////cheak for exit from Traps
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Trap"))
+    //    {
+    //        trapCount--;
+    //        if (trapCount <= 0)
+    //        {
+    //            trap = null;
+    //        }
+    //    }
+    //}
 }
