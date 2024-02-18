@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
     
     private WeaponScriptableObjects currentWeapon;// Taking reference for the scriptable Objects
     private GameObject enemyToAttack;
-    private GameObject resourcesInRange;
+    private GameObject sourceInRange;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
 
@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
 
         enemyToAttack = null;
-        resourcesInRange = null;
+        sourceInRange = null;
         currentWeapon = null;
         boxCollider2D.enabled = false;
         spriteRenderer.sprite = null;
@@ -55,10 +55,10 @@ public class Weapon : MonoBehaviour
             BaseEnemy baseEnemy = enemyToAttack.GetComponent<BaseEnemy>();
             baseEnemy.TakeDamage(damage);
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && resourcesInRange != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && sourceInRange != null)
         {
-            Resources resources = resourcesInRange.GetComponent<Resources>();
-            CollectResources(resources);
+            Source source = sourceInRange.GetComponent<Source>();
+            CollectResources(source);
         }
 
     }
@@ -100,7 +100,7 @@ public class Weapon : MonoBehaviour
         }
         if(collision.gameObject.tag == "Sourse")
         {
-            resourcesInRange = collision.gameObject;
+            sourceInRange = collision.gameObject;
         }
     }
 
@@ -112,7 +112,7 @@ public class Weapon : MonoBehaviour
         }
         if (collision.gameObject.tag == "Sourse")
         {
-            resourcesInRange = null;
+            sourceInRange = null;
         }
     }
 
@@ -192,38 +192,27 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void CollectResources(Resources resources)
+    private void CollectResources(Source source)
     {
-        EResources rName = resources.eResource;
-        Esource sourseName = resources.eSource;
-        if (resources.health <= 0) { return;}
-        GameStats gs = GameManager.Instance.gameStats;
-        switch (sourseName)
+        switch (source.source)
         {
             case Esource.None: break;
-                
+
             case Esource.Tree:
                 {
-                    resources.health -= damageOnWood;
-                    gs.wood += damageOnWood;
-                    gs.woodText.text = ": " + gs.wood;
-                }break;
+                    source.DropResources(damageOnWood);
+                }
+                break;
             case Esource.Rock:
                 {
-                    resources.health -= damageOnStone;
-                    gs.stone += damageOnStone;
-                    gs.stoneText.text = ": " + gs.stone;
+                    source.DropResources(damageOnStone);
                 }
                 break;
             case Esource.IronOre:
                 {
-                    resources.health -= damageOnIron;
-                    gs.iron += damageOnIron;
-                    gs.ironText.text = ": " + gs.iron;
+                    source.DropResources(damageOnIron);
                 }
                 break;
         }
-        if(resources.health <= 0) { Destroy(resources.gameObject); }
-
     }
 }

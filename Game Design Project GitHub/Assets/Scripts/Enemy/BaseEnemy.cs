@@ -14,8 +14,10 @@ public class BaseEnemy : MonoBehaviour
     protected float maxHealth;
     public float incrementInHpEachWaveInPercentage;
 
-    [Header("Gold")]
-    public SingleResourse bonesDropOnDeath;
+    [Header("Resource")]
+    public GameObject resourcePrefab;
+    public ResourcesScriptableObject resourceSO;
+    public int resourceAmount;
     //public float startValueInGold;
     //public int currentAmountOfBone;
     //public float incrementInBoneAmountInPersentage;
@@ -186,10 +188,13 @@ public class BaseEnemy : MonoBehaviour
 
     void DropResourses()
     {
-        for(int i = 0;i<bonesDropOnDeath.amount;i++)
+        for(int i = 0;i<resourceAmount;i++)
         {
-            GameObject temp = Instantiate(bonesDropOnDeath.prefab, this.transform.position, Quaternion.identity);
+            GameObject temp = Instantiate(resourcePrefab, this.transform.position, Quaternion.identity);
             temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
+            temp.GetComponent<Resource>().ChangeSprite();
+            temp.GetComponent<Resource>().SetAmount(1);
+            temp.GetComponent<Resource>().AddForce();
         }
     }
 }

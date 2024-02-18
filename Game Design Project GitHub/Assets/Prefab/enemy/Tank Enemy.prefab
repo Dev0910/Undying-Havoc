@@ -328,7 +328,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 504067367
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 00e97ad21ee7edf478f5d7b66127678c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -356,10 +356,9 @@ MonoBehaviour:
   startHealth: 400
   currentHealth: 0
   incrementInHpEachWaveInPercentage: 7.5
-  bonesDropOnDeath:
-    resource: 4
-    prefab: {fileID: 4126543528904269074, guid: 44f170c456462d54da79396e142eefd3, type: 3}
-    amount: 5
+  resourcePrefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
+  resourceSO: {fileID: 11400000, guid: 4d42dfc12ae4f654a80ff33bc952284a, type: 2}
+  resourceAmount: 5
   moveSpeed: 0.8
   minimumDistanceFromPlayer: 0.5
   attackSpeed: 1

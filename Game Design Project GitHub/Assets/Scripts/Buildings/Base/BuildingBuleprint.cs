@@ -26,7 +26,7 @@ public class BuildingBuleprint : MonoBehaviour
     //public int upgradeCost;
 
     [Header("Resourse Required")]
-    public List<SingleResourse> resourseListToBuyBuilding = new List<SingleResourse>();
+    public SingleResourse resourceRequiredToBuild;
 
     [Header("Attack")]
     public int damage;
@@ -265,38 +265,38 @@ public class BuildingBuleprint : MonoBehaviour
     public void RemoveResourse()
     {
         GameStats gs = GameManager.Instance.gameStats;
-        foreach (SingleResourse resourse in resourseListToBuyBuilding)
-        {
-            switch (resourse.resource)
+        SingleResourse resource = resourceRequiredToBuild;
+        
+            switch (resource.resource)
             {
                 case EResources.None: break;
 
                 case EResources.Wood:
                     {
-                        gs.wood -= resourse.amount;
+                        gs.wood -= resource.amount;
                     }
                     break;
 
                 case EResources.Stone:
                     {
-                        gs.stone -= resourse.amount;
+                        gs.stone -= resource.amount;
                     }
                     break;
 
                 case EResources.Bone:
                     {
-                        gs.bone -= resourse.amount;
+                        gs.bone -= resource.amount;
                     }
                     break;
 
                 case EResources.Iron:
                     {
-                        gs.iron -= resourse.amount;
+                        gs.iron -= resource.amount;
                     }
                     break;
             }
             gs.UpdateResourses() ;
-        }
+        
     }
 
     

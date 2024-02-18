@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resources : MonoBehaviour
+public class ResourceManager : MonoBehaviour
+{
+    public List<ResourcesScriptableObject> allresource = new List<ResourcesScriptableObject>();
+}
+public class ResourceSourses : MonoBehaviour
 {
     public EResources eResource;
     public Esource eSource;
@@ -29,8 +33,5 @@ public enum Esource
 public class SingleResourse
 {
     public EResources resource;
-    public GameObject prefab;
     public int amount;
 }
-
-

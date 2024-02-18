@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 281055684730131567}
   - component: {fileID: 250812793356635109}
   - component: {fileID: 3053723520686434963}
-  - component: {fileID: 568189895943619785}
+  - component: {fileID: 7026771800655844665}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Sourse
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &568189895943619785
+--- !u!114 &7026771800655844665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5401611050919121785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e53c325cb6ec584c994f6722b212448, type: 3}
+  m_Script: {fileID: 11500000, guid: c3f7c2a592a7b7c4cac983811473768a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eResource: 1
-  eSource: 1
+  source: 1
+  Resources: 1
+  resourcesScriptableObject: {fileID: 11400000, guid: 6983d477a957c7b41aa0b6b04c756fc5, type: 2}
+  resourcePrefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
   health: 100

@@ -20,7 +20,7 @@ public class DropAndCollectionManager : MonoBehaviour
     //        temperory = qcoin.Dequeue();
     //        temperory.SetActive(true);
     //        temperory.transform.position = spawnPosition;
-            
+
     //    }
     //    else
     //    {
@@ -31,7 +31,7 @@ public class DropAndCollectionManager : MonoBehaviour
     //    {
     //        temperory.GetComponent<Coin>().coinValue = amount;
     //    }
-        
+
     //}
 
     //public void CollectGold(GameObject _coin)
@@ -41,17 +41,39 @@ public class DropAndCollectionManager : MonoBehaviour
     //    _coin.SetActive(false);
     //    qcoin.Enqueue(_coin);
     //}
+
     public void CollectResources(GameObject _resource)
     {
-        switch (_resource.GetComponent<Resources>().eResource)
+        switch (_resource.GetComponent<Resource>().resource.resourceName)
         {
             case EResources.None: break;
 
             case EResources.Bone:
                 {
-                    GameManager.Instance.gameStats.bone++;
+                    GameManager.Instance.gameStats.bone += _resource.GetComponent<Resource>().amount;
                     Destroy(_resource.gameObject);
                     GameManager.Instance.gameStats.boneText.text = ": " + GameManager.Instance.gameStats.bone;
+                    break;
+                }
+            case EResources.Wood:
+                {
+                    GameManager.Instance.gameStats.wood += _resource.GetComponent<Resource>().amount;
+                    Destroy(_resource.gameObject);
+                    GameManager.Instance.gameStats.woodText.text = ": " + GameManager.Instance.gameStats.wood;
+                    break;
+                }
+            case EResources.Stone:
+                {
+                    GameManager.Instance.gameStats.stone += _resource.GetComponent<Resource>().amount;
+                    Destroy(_resource.gameObject);
+                    GameManager.Instance.gameStats.stoneText.text = ": " + GameManager.Instance.gameStats.stone;
+                    break;
+                }
+            case EResources.Iron:
+                {
+                    GameManager.Instance.gameStats.iron += _resource.GetComponent<Resource>().amount;
+                    Destroy(_resource.gameObject);
+                    GameManager.Instance.gameStats.ironText.text = ": " + GameManager.Instance.gameStats.iron;
                     break;
                 }
         }

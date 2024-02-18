@@ -77,38 +77,37 @@ public class BuildingShop : MonoBehaviour
     {
         GameStats gs = GameManager.Instance.gameStats;
         bool result = false;
-        List<SingleResourse> resourses = building.GetComponent<BuildingBuleprint>().resourseListToBuyBuilding;
-        foreach (SingleResourse resourse in resourses)
-        {
-            switch (resourse.resource)
+        SingleResourse resource = building.GetComponent<BuildingBuleprint>().resourceRequiredToBuild;
+        
+            switch (resource.resource)
             {
                 case EResources.None: break;
 
                 case EResources.Wood:
                     {
-                        result = gs.wood >= resourse.amount;
+                        result = gs.wood >= resource.amount;
                     }
                     break;
 
                 case EResources.Stone:
                     {
-                        result = gs.stone >= resourse.amount;
+                        result = gs.stone >= resource.amount;
                     }
                     break;
 
                 case EResources.Bone:
                     {
-                        result = gs.bone >= resourse.amount;
+                        result = gs.bone >= resource.amount;
                     }
                     break;
 
                 case EResources.Iron:
                     {
-                        result = gs.iron >= resourse.amount;
+                        result = gs.iron >= resource.amount;
                     }
                     break;
             }
-        }
+        
         return result;
     }
 }

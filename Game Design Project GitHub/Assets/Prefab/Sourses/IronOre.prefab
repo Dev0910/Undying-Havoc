@@ -130,9 +130,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8367194814434473180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e53c325cb6ec584c994f6722b212448, type: 3}
+  m_Script: {fileID: 11500000, guid: c3f7c2a592a7b7c4cac983811473768a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eResource: 3
-  eSource: 3
+  source: 3
+  Resources: 3
+  resourcesScriptableObject: {fileID: 11400000, guid: 3ca44451dc3fb324ea1cd2aece1131cd, type: 2}
+  resourcePrefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
   health: 100
