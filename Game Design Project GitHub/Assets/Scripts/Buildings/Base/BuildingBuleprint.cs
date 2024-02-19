@@ -48,9 +48,8 @@ public class BuildingBuleprint : MonoBehaviour
         {
             SellBuilding();
         }
-
         //to upgrade the building
-        if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourse.resource != EResources.None)
+        else if (ClickHandler.vDown && CheakIfResourseAvailable(currentLevel) && buildingData[currentLevel].resourse.resource != EResources.None)
         {
             UpgradeBuilding();
         }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class OxygenGenerator : BuildingBuleprint
 {
     [Header("Fuel Related")]
+    public GameObject inventoryUI;
     public float waitForSecBeforeStarting;
     public EResources fuelResourse;
     public float timePerRoundinMin;
@@ -33,7 +34,17 @@ public class OxygenGenerator : BuildingBuleprint
         range = _range;
         rangeGO.transform.localScale = new Vector3(_range, _range, _range);
     }
-
+    private void OnMouseDown()
+    {
+        if(inventoryUI.activeInHierarchy)
+        {
+            inventoryUI.SetActive(false);
+        }
+        else
+        {
+            inventoryUI.SetActive(true);
+        }
+    }
     IEnumerator FuelCheak()
     {
         yield return new WaitForSeconds(0.25f);
