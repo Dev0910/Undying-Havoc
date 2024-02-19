@@ -12,13 +12,15 @@ public class OxygenGenerator : BuildingBuleprint
     public int[] amountPerRound;
     public Image fuelBar;
     public float range;
-    private bool isOxygenArea;
+    public bool isOxygenAreaUp;
     [SerializeField]private GameObject rangeGO;
+
+    private InventoryManager inventoryManager;
     // Start is called before the first frame update
     void Start()
     {
         childGameobejct = this.gameObject;
-        isOxygenArea = true;
+        isOxygenAreaUp = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildingData = buildingScriptableObjects.buildingData;
         currentLevel = 0;
@@ -26,6 +28,8 @@ public class OxygenGenerator : BuildingBuleprint
         spriteRenderer.sprite = currentSpriite;
         Invoke("StartFuelUsage", waitForSecBeforeStarting);
         rangeGO = GameObject.Find("Range");
+        inventoryUI.SetActive(false);
+        inventoryManager = gameObject.GetComponent<InventoryManager>();
     }
 
     public void UpgradeRange()
@@ -48,7 +52,7 @@ public class OxygenGenerator : BuildingBuleprint
     IEnumerator FuelCheak()
     {
         yield return new WaitForSeconds(0.25f);
-        if (GameManager.Instance.gameStats.CheakIfResourseAvailable(fuelResourse, amountPerRound[currentLevel]))
+        if (inventoryManager.currentResource.amount >= amountPerRound[currentLevel] && inventoryManager.currentResource.resource != EResources.None)
         {
             StartCoroutine(UseFuel());
         }
@@ -66,9 +70,17 @@ public class OxygenGenerator : BuildingBuleprint
 
     IEnumerator UseFuel()
     {
+        
         rangeGO.SetActive(true);
-        GameManager.Instance.gameStats.RemoveResourse(fuelResourse, amountPerRound[currentLevel]);
+        isOxygenAreaUp = true;
 
+        inventoryManager.currentResource.amount -= amountPerRound[currentLevel];
+        inventoryManager.UpdateDisplayText();
+        if(inventoryManager.currentResource.amount <= 0)
+        {
+            inventoryManager.currentResource.resource = EResources.None;
+            inventoryManager.UpdateDisplayImage();
+        }
         for(float i = 1; i>=0; i-=0.01f)
         {
             yield return new WaitForSeconds((timePerRoundinMin*60) / 100);
@@ -84,9 +96,10 @@ public class OxygenGenerator : BuildingBuleprint
         //wait for sec
         //then remove Area
         yield return new WaitForSeconds(0.2f);
-        if (isOxygenArea)
+        if (isOxygenAreaUp)
         {
             rangeGO.SetActive(false);
+            isOxygenAreaUp = false;
         }
 
         StartCoroutine(FuelCheak());

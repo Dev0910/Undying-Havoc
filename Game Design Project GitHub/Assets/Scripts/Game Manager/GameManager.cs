@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public MainScreenUi mainScreenUI;
     public ResoursesSpawner resoursesSpawner;
     public OxygenGenerator oxygenGenerator;
+    public ResourceManager resourceManager;
 
     public GameObject player;
     public GameObject weaponHolder;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         uiManager = GetComponentInChildren<UIManager>();
         mainScreenUI = GameObject.Find("Canvas").GetComponent<MainScreenUi>();
         resoursesSpawner = GetComponentInChildren<ResoursesSpawner>();
+        resourceManager = GetComponentInChildren<ResourceManager>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");

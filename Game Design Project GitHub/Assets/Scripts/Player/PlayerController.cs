@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
     {
         bool result = false;
         float distance = Vector2.Distance(this.transform.position, oxygenGenerator.gameObject.transform.position)/2;
-        if(distance <= oxygenGenerator.range+(0.045*oxygenGenerator.range))
+        if(distance <= oxygenGenerator.range+(0.045*oxygenGenerator.range) && oxygenGenerator.isOxygenAreaUp)
         {
             result = true;
         }
@@ -213,6 +213,8 @@ public class PlayerController : MonoBehaviour
         {
             result = false;
         }
+        
+
         return result;
     }
     #endregion
