@@ -8,10 +8,12 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private float lerpAmount;
+
     [Header("Player Health")]
     [SerializeField] private Image playerHealthBar;
     [SerializeField] private TextMeshProUGUI playerHealthText;
     [SerializeField] private TextMeshProUGUI playerMaxhealth;
+    [SerializeField] private Image resourceToUpgradeMaxHelth;
     [SerializeField] private TextMeshProUGUI costToUpgradeMaxHelth;
 
     [Header("Oxygen")]
@@ -20,6 +22,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Player MoveSpeed")]
     [SerializeField] private TextMeshProUGUI playerMoveSpeed;
+    [SerializeField] private Image resourceToUpgradeMoveSpeedImage;
     [SerializeField] private TextMeshProUGUI costToUpgradeMoveSpeedText;
 
     
@@ -28,15 +31,17 @@ public class UIManager : MonoBehaviour
         playerHealthBar.fillAmount = PlayerController.currentHealth / maxHP;
         playerHealthText.text = Mathf.RoundToInt(PlayerController.currentHealth) + " / " + maxHP;
     }
-    public void UpdatePlayerMaxHealth(int maxHealth,int cost)
+    public void UpdatePlayerMaxHealth(int maxHealth, EResources resources, int amount)
     {
-        playerMaxhealth.text ="Max Health : " + (maxHealth+100).ToString();
-        costToUpgradeMaxHelth.text = "Cost : " + cost.ToString();
+        playerMaxhealth.text ="Max Health : " + (maxHealth).ToString();
+        resourceToUpgradeMaxHelth.sprite = GameManager.Instance.resourceManager.GetResourceSprite(resources);
+        costToUpgradeMaxHelth.text = " : " + amount.ToString();
     }
-    public void UpdatePlayerMoveSpeed(float moveSpeed,float cost) 
+    public void UpdatePlayerMoveSpeed(float moveSpeed,EResources resources,int amount) 
     {
         playerMoveSpeed.text = "Movement Speed : "+moveSpeed.ToString();
-        costToUpgradeMoveSpeedText.text = "Cost : " + cost.ToString();
+        resourceToUpgradeMoveSpeedImage.sprite = GameManager.Instance.resourceManager.GetResourceSprite(resources);
+        costToUpgradeMoveSpeedText.text = " : "+ amount.ToString();
     }
     public void UpdateOxygenBar(float maxCapacity)
     {

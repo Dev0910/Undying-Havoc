@@ -11,9 +11,8 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private GameObject deathEffect;
 
     [Header("Health")]
-    [SerializeField] private int startMaxHealth; 
-    [SerializeField] private int costToUpgradeMaxHealth;
-    private int currentCostToIncreaseMaxHealth;
+    [SerializeField] private List<PlayerMaxHealthLevels> maxHealthLevels;
+    private int currentLevel;
     private int currentMaxHealth;
     public static float currentHealth;//playerHealth
 
@@ -41,14 +40,14 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 1f;
         //isInOxygenArea = true;
+        currentLevel = 0;
         uiManager = GameManager.Instance.uiManager;
-        currentMaxHealth = startMaxHealth;
+        currentMaxHealth = maxHealthLevels[0].maxHealth;
         currentHealth = currentMaxHealth;
-        currentCostToIncreaseMaxHealth = costToUpgradeMaxHealth;
         uiManager.UpdatePlayerHP(currentMaxHealth);
         oxygenGenerator = GameManager.Instance.oxygenGenerator;
 
-        currentMaxOxygenCapacity = startMaxHealth;
+        currentMaxOxygenCapacity = maxHealthLevels[0].maxHealth;
         currentOxygenLevel = currentMaxOxygenCapacity;
 
         postProcessVolume = GameObject.Find("PostProcessing").GetComponent<PostProcessVolume>();
@@ -134,16 +133,18 @@ public class PlayerController : MonoBehaviour
 
     public void IncreaseMaxHealth()
     {
-        if(GameStats.currentGold>=currentCostToIncreaseMaxHealth)
+        if (GameManager.Instance.gameStats.CheakIfResourseAvailable(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount) && currentLevel <= maxHealthLevels.Count)
         {
-            GameStats.currentGold -= currentCostToIncreaseMaxHealth;
-            currentMaxHealth += 100;
+            GameManager.Instance.gameStats.RemoveResourse(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount);
+            currentMaxHealth = maxHealthLevels[currentLevel].maxHealth;
             currentHealth = currentMaxHealth;
-            currentCostToIncreaseMaxHealth += currentCostToIncreaseMaxHealth;
-            uiManager.UpdatePlayerMaxHealth(currentMaxHealth, currentCostToIncreaseMaxHealth);
-            uiManager.UpdatePlayerHP(currentMaxHealth);
+            currentLevel++;
+            if(currentLevel+1 < maxHealthLevels.Count)
+            {
+                uiManager.UpdatePlayerMaxHealth(maxHealthLevels[currentLevel+1].maxHealth, maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount);
+            }
+            uiManager.UpdatePlayerHP((int)currentHealth);
         }
-        
     }
 
     private IEnumerator TakeDamageEffect()
@@ -218,4 +219,11 @@ public class PlayerController : MonoBehaviour
         return result;
     }
     #endregion
+}
+[System.Serializable]
+public class PlayerMaxHealthLevels
+{
+    public string name;
+    public int maxHealth;
+    public SingleResourse resourseToUpgrade;
 }

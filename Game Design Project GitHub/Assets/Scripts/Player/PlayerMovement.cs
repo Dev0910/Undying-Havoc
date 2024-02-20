@@ -6,11 +6,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float startMoveSpeed = 5f;
-    public float increaseMoveSpeedBy = 1f;
-    public float costToIncreaseMoveSpeed = 200;
-    private float currentCostToIncreaseMoveSpeed;
+    public List<MoveSpeedLevels> moveSpeedLevels;
     private float currentMoveSpeed;
+    private int currentLevel;
+    private float moveSpeed;
     public Rigidbody2D rb;
     public Camera cam;
     //public GameObject target;
@@ -20,8 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private float rotationAngle = 45.0f;
     private void Start()
     {
-        currentMoveSpeed = startMoveSpeed;
-        currentCostToIncreaseMoveSpeed = costToIncreaseMoveSpeed;
+        currentLevel = 1;
+        currentMoveSpeed = moveSpeedLevels[currentLevel].speed;
+        
     }
     // Update is called once per frame
     void Update()
@@ -49,13 +49,22 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncreaseMoveSpeed()
     {
-        
-        if (GameStats.currentGold >= currentCostToIncreaseMoveSpeed)
+        if (GameManager.Instance.gameStats.CheakIfResourseAvailable(moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount) && currentLevel<=moveSpeedLevels.Count)
         {
-            GameStats.currentGold -= Mathf.RoundToInt(currentCostToIncreaseMoveSpeed);
-            currentMoveSpeed += increaseMoveSpeedBy;
-            currentCostToIncreaseMoveSpeed += currentCostToIncreaseMoveSpeed;
-            GameManager.Instance.uiManager.UpdatePlayerMoveSpeed(currentMoveSpeed, currentCostToIncreaseMoveSpeed);
+            GameManager.Instance.gameStats.RemoveResourse(moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount);
+            currentMoveSpeed = moveSpeedLevels[currentLevel].speed;
+            currentLevel++;
+            if(currentLevel < moveSpeedLevels.Count)
+            {
+                GameManager.Instance.uiManager.UpdatePlayerMoveSpeed(moveSpeedLevels[currentLevel].speed, moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount);
+            }
         }
     }
+}
+[System.Serializable]
+public class MoveSpeedLevels
+{
+    public string name;
+    public float speed;
+    public SingleResourse resourceToUpgrade;
 }
