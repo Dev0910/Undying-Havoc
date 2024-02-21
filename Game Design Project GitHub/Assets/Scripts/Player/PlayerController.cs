@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
             isHPRegainRunning = true;
         }
         //if not in O2 area 
-        else if(IsInOxygenArea())
+        else if(!IsInOxygenArea())
         {
             //stop the hp regain
             if(isHPRegainRunning)
