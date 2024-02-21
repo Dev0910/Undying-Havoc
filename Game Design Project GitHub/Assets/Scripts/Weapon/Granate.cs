@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+//not used in the current game 
 public class Granate : MonoBehaviour
 {
     private Vector2 targetPos;

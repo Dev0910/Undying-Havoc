@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Arrow/Bulled shooted by the turret
 public class Arrow : MonoBehaviour
 {
     public Transform target;

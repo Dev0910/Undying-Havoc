@@ -26,29 +26,37 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //stores the input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        //normalize the input
         movement = movement.normalized;
+        //stores the mouse position
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
     private void LateUpdate()
     { 
+        // called on mouse clicked
         if (Input.GetMouseButtonDown(0))
         {
-            transform.Rotate(Vector3.forward* rotationAngle);
+            transform.Rotate(Vector3.forward * rotationAngle);
         }
         
     }
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);//moves the player
+
+        //set the player rotation accoring to the mouse posotion
         Vector2 lookDir = mousepos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
         rb.rotation = angle;
     }
 
+    //called by the buttons in the shop to increase the move speed
     public void IncreaseMoveSpeed()
     {
+        //cheak if the resource required to upgrade are there of not
         if (GameManager.Instance.gameStats.CheakIfResourseAvailable(moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount) && currentLevel<=moveSpeedLevels.Count)
         {
             currentLevel++;
@@ -61,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+//a class to store all the levels of the move speed
 [System.Serializable]
 public class MoveSpeedLevels
 {

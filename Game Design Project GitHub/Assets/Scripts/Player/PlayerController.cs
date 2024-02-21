@@ -91,10 +91,11 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         //AudioManager.Instance.PlaySFX("Player Damage 1");
-        currentHealth -= damage;
-        StopCoroutine(TakeDamageEffect());
-        StartCoroutine(TakeDamageEffect());
-        uiManager.UpdatePlayerHP(currentMaxHealth);
+        currentHealth -= damage;//take the damage 
+        StopCoroutine(TakeDamageEffect());//stop the ongoing effects
+        StartCoroutine(TakeDamageEffect());//start the damage effect
+        uiManager.UpdatePlayerHP(currentMaxHealth);//update the player health bar
+        //stop the game if the player dies
         if (currentHealth <= 0)
         {
             currentHealth -= damage;
@@ -108,13 +109,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //regenrate health if the player is in O2 area and O2 bar is full
     private IEnumerator RegenrateHealth()
     {
         yield return new WaitForSeconds(1.0f);
-        if(!IsInOxygenArea())
+        if(!IsInOxygenArea())//return if not in oxygen area
         {
             yield return null;
         }
+        //increase the health by 1%
         if (currentHealth + (healthRegenrateRate * currentHealth*0.01f) <= currentMaxHealth)
         {
             currentHealth += healthRegenrateRate;
@@ -131,8 +134,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    //Called by the button in the shop to increase the max health
     public void IncreaseMaxHealth()
     {
+        //cheak if the resources are avalable
         if (GameManager.Instance.gameStats.CheakIfResourseAvailable(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount) && currentLevel <= maxHealthLevels.Count)
         {
             GameManager.Instance.gameStats.RemoveResourse(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount);
@@ -148,6 +153,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //damage effect
     private IEnumerator TakeDamageEffect()
     {
         float intensity = 0.4f;
@@ -173,28 +179,33 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Oxygen
+    //caleed every 1 sec to cheak if the player is in the O2 area
     private void OxygenCheak()
     {
-
-        bool isInOxygenArea = IsInOxygenArea();
-        if (isInOxygenArea && currentOxygenLevel<currentMaxOxygenCapacity)
+        // if in area and O2 level below max level the regain O2
+        if (IsInOxygenArea() && currentOxygenLevel<currentMaxOxygenCapacity)
         {
             currentOxygenLevel += (currentMaxOxygenCapacity * oxygenRegainRate) / 100;
             currentOxygenLevel = currentOxygenLevel >= currentMaxOxygenCapacity?currentMaxOxygenCapacity:currentOxygenLevel;
         }
-        else if(isInOxygenArea && currentOxygenLevel == currentMaxOxygenCapacity && currentHealth<currentMaxHealth && !isHPRegainRunning)
+        //if in oxygen area and O2 level is max and player hp is not max REGAIN Player HP
+        else if(IsInOxygenArea() && currentOxygenLevel == currentMaxOxygenCapacity && currentHealth<currentMaxHealth && !isHPRegainRunning)
         {
             StartCoroutine(RegenrateHealth());
             isHPRegainRunning = true;
         }
-        else if(!isInOxygenArea)
+        //if not in O2 area 
+        else if(IsInOxygenArea())
         {
+            //stop the hp regain
             if(isHPRegainRunning)
             {
                 StopCoroutine(RegenrateHealth());
                 isHPRegainRunning= false;
             }
+            //decrease the O2
             currentOxygenLevel -= (currentMaxOxygenCapacity * oxygenDeplitionRate) / 100;
+            //player takes damage if the O2 is 0
             if(currentOxygenLevel <= 0)
             {
                 TakeDamage(damageWhenOxygenZero);
@@ -203,6 +214,7 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.uiManager.UpdateOxygenBar(currentMaxOxygenCapacity);
     }
 
+    //return ture or false on the bases of player beening in the oxygen area
     private bool IsInOxygenArea()
     {
         bool result = false;
@@ -221,6 +233,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 }
+//class to store all the health levels
 [System.Serializable]
 public class PlayerMaxHealthLevels
 {

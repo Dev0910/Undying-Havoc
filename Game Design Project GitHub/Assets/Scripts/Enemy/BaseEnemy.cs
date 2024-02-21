@@ -18,10 +18,6 @@ public class BaseEnemy : MonoBehaviour
     public GameObject resourcePrefab;
     public ResourcesScriptableObject resourceSO;
     public int resourceAmount;
-    //public float startValueInGold;
-    //public int currentAmountOfBone;
-    //public float incrementInBoneAmountInPersentage;
-    //protected float maxBoneAmount;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -171,6 +167,7 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    //get data after evert round
     protected void GetData()
     {
         maxHealth = startHealth;
@@ -186,6 +183,7 @@ public class BaseEnemy : MonoBehaviour
         currentDamage = Mathf.Round(maxDamage * 100.00f) * 0.01f;
     }
 
+    //Drop resources at the poit if Death
     void DropResourses()
     {
         for(int i = 0;i<resourceAmount;i++)

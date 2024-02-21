@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//not used in the current game 
 public class LongRangeWeapon : MonoBehaviour
 {
     public GrenateData[] grenateDatas;

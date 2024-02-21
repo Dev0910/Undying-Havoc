@@ -19,7 +19,7 @@ public class BuildingData
     public int damage;
     public float range;
 
-    [Header("Resourse Required Upgrade")]
+    [Header("Resourse Required To Upgrade")]
     public SingleResourse resourse;
 
     [Header("Resourse Recived On Selling The Building")]

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class ResoursesSpawner : MonoBehaviour
 {
-    public static List<GameObject> resourseList = new List<GameObject>();
+    [SerializeField] private static List<GameObject> resourseList = new List<GameObject>();
 
-    public float startMinDistanceFromEachOrher = 10f;
+    [SerializeField] private float startMinDistanceFromEachOrher = 10f;
     [SerializeField] private float respawnEvery = 30f;
     [SerializeField] private ResoursesList[] resoursesList;
 
@@ -94,10 +94,10 @@ public class ResoursesSpawner : MonoBehaviour
     private float FindShortestDistance(Vector2 spawnPos)
     {
         float shortestDistance = float.MaxValue;
-        GameObject[] SourceList = GameObject.FindGameObjectsWithTag("Sourse");
-        GameObject[] BuildingList = GameObject.FindGameObjectsWithTag("Building");
+        GameObject[] SourceList = GameObject.FindGameObjectsWithTag("Sourse");//store all the sources
+        GameObject[] BuildingList = GameObject.FindGameObjectsWithTag("Building");//to store all the buildings
 
-
+        //caluculate the shortest distance to a building
         foreach (GameObject target in SourceList)
         {
             float distance = Vector2.Distance(spawnPos, target.transform.position);

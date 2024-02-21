@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     {
         displayImage.sprite = GameManager.Instance.resourceManager.GetResourceSprite(currentResource.resource);
     }
-
+    //remove all the resource in the building 
     public void ClearResource()
     {
         GameManager.Instance.gameStats.AddResourse(currentResource.resource,currentResource.amount);
@@ -34,8 +34,10 @@ public class InventoryManager : MonoBehaviour
         UpdateDisplayImage();
         UpdateDisplayText();
     }
+    //called by the buttons to add wood to the inventory
     public void AddWood(int _amount)
     {
+        print("Add Wood");
         if(currentResource.resource == EResources.Bone) { return; }
 
         if(GameManager.Instance.gameStats.CheakIfResourseAvailable(EResources.Wood, _amount) && currentResource.amount + _amount <= 100)
@@ -45,9 +47,10 @@ public class InventoryManager : MonoBehaviour
             currentResource.resource = EResources.Wood;
         }
     }
-
+    //called by the buttons to add stone to the inevtory
     public void AddBone(int _amount)
     {
+        print("Add Bone");
         if (currentResource.resource == EResources.Wood) { return; }
 
         if (GameManager.Instance.gameStats.CheakIfResourseAvailable(EResources.Bone, _amount) && currentResource.amount + _amount <= 100)

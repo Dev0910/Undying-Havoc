@@ -20,11 +20,6 @@ public class BuildingBuleprint : MonoBehaviour
     public float currentMaxHealth;
     public int currentLevel = 0;
 
-    //[Header("Money")]
-    //public int cost;
-    //public int sellPrice;
-    //public int upgradeCost;
-
     [Header("Resourse Required")]
     public SingleResourse resourceRequiredToBuild;
 
@@ -41,6 +36,8 @@ public class BuildingBuleprint : MonoBehaviour
     protected Sprite currentSpriite;
     protected Sprite currentBulletSprite;
     protected string currentName;
+
+
     private void OnMouseDown()
     {
         //to sell the building 
@@ -58,19 +55,23 @@ public class BuildingBuleprint : MonoBehaviour
     //function is called when building takes damage
     public void TakeDamage(float Damage)
     {
+        //Update the hover Ui if the health is not 0
         if(currentHealth > 0)
         {
             currentHealth -= Damage;
             hoverUI.GetComponent<HoverUI>().UpdateHealthBar(currentHealth / currentMaxHealth);
         }
 
+        //called if the health is 0
         else if(currentHealth <= 0)
         {
+            //Stop the game if the building is Oxygen Generator
             if (childGameobejct.name == "Oxygen Generator")
             {
                 Time.timeScale = 0f;
                 GameManager.Instance.mainScreenUI.LoadScene("EndScene");
             }
+            //else destroy the building
             else 
             {
                 nearestTile.GetComponent<Tile>().isOccupied = false;//change the is Occuied bool in the class Tile
@@ -85,6 +86,7 @@ public class BuildingBuleprint : MonoBehaviour
     public void SellBuilding()
     {
         AddResourse();//adding the selling price of the turret 
+
         //change the isOccuied bool in the class Tile
         if (nearestTile != null && nearestTile.GetComponent<Tile>().isOccupied == true)
         {
@@ -150,6 +152,7 @@ public class BuildingBuleprint : MonoBehaviour
         hoverUI.SetActive(false);
     }
 
+    //Make simple operations like cheaking,adding,removing in the resources according to the functions requirement
     #region Resourse Calculations
     public bool CheakIfResourseAvailable(int index)
     {

@@ -10,6 +10,7 @@ public class Source : MonoBehaviour
     public GameObject resourcePrefab;
     public int health;
 
+    // drop the resources according to the source
     public void DropResources(int _amount)
     {
         if (health <= 0) { return; }

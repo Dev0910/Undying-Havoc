@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// the gameobject resource
 public class Resource : MonoBehaviour
 {
     public ResourcesScriptableObject resource;
@@ -16,6 +17,7 @@ public class Resource : MonoBehaviour
     {
         amount = _amount;
     }
+    // to move it in a randon direction
     public void AddForce()
     {
         Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));

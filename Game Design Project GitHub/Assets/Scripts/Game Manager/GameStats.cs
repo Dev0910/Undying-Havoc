@@ -68,6 +68,7 @@ public class GameStats : MonoBehaviour
         boneText.text = ": " + bone;
     }
 
+    //returns true or false after cheaking if the resource are avalable or not
     public bool CheakIfResourseAvailable(EResources resource, int amount)
     {
         bool result = false;
@@ -101,7 +102,7 @@ public class GameStats : MonoBehaviour
         }
         return result;
     }
-
+    //add the resources to the games 
     public void AddResourse(EResources resourse, int amount)
     {
         switch (resourse)
@@ -135,7 +136,7 @@ public class GameStats : MonoBehaviour
         UpdateResourses();
 
     }
-
+    //removes resources from the game
     public void RemoveResourse(EResources resourse, int amount)
     {
         switch (resourse)

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//not currently used
 public class TrapBlueprint : BuildingBuleprint
 {
-    
-
     [Header("Trap Details")]
     public EType trapType;
     public float enemySpeed = 0.5f;

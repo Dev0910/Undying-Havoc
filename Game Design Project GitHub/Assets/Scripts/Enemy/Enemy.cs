@@ -53,7 +53,8 @@ public class Enemy : BaseEnemy
     {
         if (targetToAttack != null)
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(attackAfterSecondsOfContact);
+            //need to cheak it twice because the target to attack can leave the range in the it is waiting
             if(targetToAttack != null)
             {
                 Attack(targetToAttack, currentDamage);//calling the function from the base class and giving the object to be attacked and the damage to be delt
@@ -64,8 +65,11 @@ public class Enemy : BaseEnemy
         {
             yield return new WaitForSeconds(0.5f);
         }
+        //loop it self
         StartCoroutine(AttackTarget());
     }
+
+    //used in case the traps are used
 
     ////cheak for Traps
     //private void OnTriggerEnter2D(Collider2D collision)

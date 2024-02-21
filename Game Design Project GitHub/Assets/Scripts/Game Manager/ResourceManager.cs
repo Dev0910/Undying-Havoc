@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// just a script to initialize all the enums and class 
 public class ResourceManager : MonoBehaviour
 {
     public List<ResourcesScriptableObject> allresource = new List<ResourcesScriptableObject>();

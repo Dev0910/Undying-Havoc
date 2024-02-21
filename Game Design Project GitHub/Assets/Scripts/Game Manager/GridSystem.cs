@@ -35,6 +35,7 @@ public class GridSystem : MonoBehaviour
         }
         spawnPoint = new Vector3(-99.5f, -99.5f);// reset the spawnpont
         gridIsVisible = false;
+        //to manuly mark few tiles as occupied
         if (markIsOccupiedManually != null)
         {
             foreach (Vector2 position in markIsOccupiedManually)
@@ -117,6 +118,7 @@ public class GridSystem : MonoBehaviour
         return nearestTile;//return the nearest tile
     }
 
+    //to mark few tiles as occupied
     public void MarkIsOccupiedAt(Vector2 position)
     {
         GetNearestTile(position).GetComponent<Tile>().isOccupied=true;
