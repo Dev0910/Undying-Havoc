@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationAngle = 45.0f;
     private void Start()
     {
-        currentLevel = 1;
+        currentLevel = 0;
         currentMoveSpeed = moveSpeedLevels[currentLevel].speed;
         
     }
@@ -51,12 +51,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.gameStats.CheakIfResourseAvailable(moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount) && currentLevel<=moveSpeedLevels.Count)
         {
+            currentLevel++;
             GameManager.Instance.gameStats.RemoveResourse(moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount);
             currentMoveSpeed = moveSpeedLevels[currentLevel].speed;
-            currentLevel++;
-            if(currentLevel < moveSpeedLevels.Count)
+            if (moveSpeedLevels[currentLevel].resourceToUpgrade.resource!=EResources.None)
             {
-                GameManager.Instance.uiManager.UpdatePlayerMoveSpeed(moveSpeedLevels[currentLevel].speed, moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount);
+                GameManager.Instance.uiManager.UpdatePlayerMoveSpeed(moveSpeedLevels[currentLevel+1].speed, moveSpeedLevels[currentLevel].resourceToUpgrade.resource, moveSpeedLevels[currentLevel].resourceToUpgrade.amount);
             }
         }
     }

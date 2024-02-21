@@ -13913,13 +13913,13 @@ MonoBehaviour:
   resoursesList:
   - name: 1
     resoursePrefab: {fileID: 5401611050919121785, guid: 3ac10d9ac63bd5045a898a810adb76f9, type: 3}
-    numberOfSpawns: 100
+    numberOfSpawns: 1000
   - name: 2
     resoursePrefab: {fileID: 2493225183415712695, guid: 10f9e39384db4d84fa55bdd798d983bb, type: 3}
-    numberOfSpawns: 100
+    numberOfSpawns: 1000
   - name: 3
     resoursePrefab: {fileID: 8367194814434473180, guid: 2a32af65f0e2e7d4f91e9b2c1ab976e8, type: 3}
-    numberOfSpawns: 100
+    numberOfSpawns: 1000
 --- !u!114 &1966874529
 MonoBehaviour:
   m_ObjectHideFlags: 0

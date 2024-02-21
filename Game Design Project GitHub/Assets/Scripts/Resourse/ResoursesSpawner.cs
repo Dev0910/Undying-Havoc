@@ -15,17 +15,19 @@ public class ResoursesSpawner : MonoBehaviour
     private Vector2 mapDimensions;
     float currentMinDistance;
     Vector2 spawnPos;
-    private float respawnTimmer;
+    //private float respawnTimmer;
     // Start is called before the first frame update
     void Start()
     {
         mapDimensions = GameObject.Find("Map").transform.lossyScale;
         mapDimensions -= new Vector2(10, 10);
-        InitalSpawn();
         currentMinDistance = startMinDistanceFromEachOrher;
-        respawnTimmer = UnityEngine.Random.Range((respawnEvery - (respawnEvery/5)), (respawnEvery + respawnEvery/5));
+        //respawnTimmer = UnityEngine.Random.Range((respawnEvery - (respawnEvery/5)), (respawnEvery + respawnEvery/5));
         StartCoroutine(ReSpawnResourses());
+        InitalSpawn();
+
     }
+
     //Re-Spawns Resourses
     IEnumerator ReSpawnResourses()
     {
@@ -52,7 +54,7 @@ public class ResoursesSpawner : MonoBehaviour
     }
 
     //Called at the start of the game to spawn the firts few resourses;
-    private void InitalSpawn()
+    void InitalSpawn()
     {
         for(int i = 0; i < resoursesList.Length; i++)
         {
@@ -77,6 +79,7 @@ public class ResoursesSpawner : MonoBehaviour
                         currentMinDistance -= currentMinDistance > 0 ? 0.001f : 0;
                     }
                 }
+                //yield return null;
             }
         }
     }
@@ -91,10 +94,19 @@ public class ResoursesSpawner : MonoBehaviour
     private float FindShortestDistance(Vector2 spawnPos)
     {
         float shortestDistance = float.MaxValue;
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Sourse");
+        GameObject[] SourceList = GameObject.FindGameObjectsWithTag("Sourse");
+        GameObject[] BuildingList = GameObject.FindGameObjectsWithTag("Building");
 
 
-        foreach (GameObject target in targets)
+        foreach (GameObject target in SourceList)
+        {
+            float distance = Vector2.Distance(spawnPos, target.transform.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+            }
+        }
+        foreach (GameObject target in BuildingList)
         {
             float distance = Vector2.Distance(spawnPos, target.transform.position);
             if (distance < shortestDistance)

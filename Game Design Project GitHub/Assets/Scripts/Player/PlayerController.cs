@@ -136,14 +136,15 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.gameStats.CheakIfResourseAvailable(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount) && currentLevel <= maxHealthLevels.Count)
         {
             GameManager.Instance.gameStats.RemoveResourse(maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount);
+            currentLevel++;
             currentMaxHealth = maxHealthLevels[currentLevel].maxHealth;
             currentHealth = currentMaxHealth;
-            currentLevel++;
-            if(currentLevel+1 < maxHealthLevels.Count)
+            if (maxHealthLevels[currentLevel].resourseToUpgrade.resource != EResources.None)
             {
                 uiManager.UpdatePlayerMaxHealth(maxHealthLevels[currentLevel+1].maxHealth, maxHealthLevels[currentLevel].resourseToUpgrade.resource, maxHealthLevels[currentLevel].resourseToUpgrade.amount);
             }
             uiManager.UpdatePlayerHP((int)currentHealth);
+            
         }
     }
 
