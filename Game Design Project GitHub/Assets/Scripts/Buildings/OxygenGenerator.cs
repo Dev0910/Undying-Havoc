@@ -41,7 +41,7 @@ public class OxygenGenerator : BuildingBuleprint
     }
     //private void OnMouseDown()
     //{
-    //    if(inventoryUI.activeInHierarchy)
+    //    if (inventoryUI.activeInHierarchy)
     //    {
     //        inventoryUI.SetActive(false);
     //    }

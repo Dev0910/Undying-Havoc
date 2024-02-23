@@ -4,11 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameStats : MonoBehaviour
 {
-    [Header("Gold")]
-    public int startGold = 1000;
-    public static int currentGold;
-    public Text goldText;
-
     [Header("Wood")]
     [SerializeField] int startWood;
     public int wood;
@@ -37,7 +32,6 @@ public class GameStats : MonoBehaviour
 
     void Start()
     {
-        currentGold = startGold;
         wood = startWood;
         stone = startStone;
         iron = startIron;
@@ -51,7 +45,6 @@ public class GameStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = ": " + currentGold;
         scoreText.text = "Score : " + score;
 
         if (score > highScore)

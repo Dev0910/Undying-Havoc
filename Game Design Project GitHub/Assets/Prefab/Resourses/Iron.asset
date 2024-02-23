@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: 
   resourceName: 3
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 13294aafdeff56e4e9d39d0a47381603, type: 3}
