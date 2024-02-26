@@ -13,7 +13,7 @@ public class Source : MonoBehaviour
     // drop the resources according to the source
     public void DropResources(int _amount)
     {
-        if (health <= 0) { return; }
+        if (health <= 0 || _amount <= 0) { return; }
         GameStats gs = GameManager.Instance.gameStats;
         switch (source)
         {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class OxygenGenerator : BuildingBuleprint
 {
     [Header("Fuel Related")]
+    public GameObject mainUi;
     public GameObject inventoryUI;
     public float waitForSecBeforeStarting;
     public EResources fuelResourse;
@@ -31,7 +32,13 @@ public class OxygenGenerator : BuildingBuleprint
         inventoryUI.SetActive(false);
         inventoryManager = gameObject.GetComponent<InventoryManager>();
     }
+    private void Update()
+    {
+        if(Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.E))
+        {
 
+        }
+    }
     //caleed by the base class when the building is upgraded to upgrade the range of the oxygen area
     public void UpgradeRange()
     {
@@ -39,17 +46,7 @@ public class OxygenGenerator : BuildingBuleprint
         range = _range;
         rangeGO.transform.localScale = new Vector3(_range, _range, _range);
     }
-    //private void OnMouseDown()
-    //{
-    //    if (inventoryUI.activeInHierarchy)
-    //    {
-    //        inventoryUI.SetActive(false);
-    //    }
-    //    else
-    //    {
-    //        inventoryUI.SetActive(true);
-    //    }
-    //}
+
     //Cheaks if there is fuel in the oxygen genrataor 
     IEnumerator FuelCheak()
     {
@@ -66,6 +63,20 @@ public class OxygenGenerator : BuildingBuleprint
         }
 
     }
+    private void OnMouseDown()
+    {
+        if (!inventoryUI.activeInHierarchy && ClickHandler.eDown)
+        {
+            inventoryUI.SetActive(true);
+            mainUi.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+        else
+        {
+            inventoryUI.SetActive(false);
+            mainUi.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+    }
+
     //Initaly called by the start function just to give it a delat
     void StartFuelUsage()
     {
@@ -111,5 +122,11 @@ public class OxygenGenerator : BuildingBuleprint
         }
         //loop back to the fuel cheak
         StartCoroutine(FuelCheak());
+    }
+
+    public void CloseInventoryUI()
+    {
+        inventoryUI.SetActive(false);
+        mainUi.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }

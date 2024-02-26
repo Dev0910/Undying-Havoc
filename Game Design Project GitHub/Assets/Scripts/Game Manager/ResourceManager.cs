@@ -17,7 +17,7 @@ public class ResourceManager : MonoBehaviour
             {
                 if(resourceSo.resourceName == eResource)
                 {
-                    resourceSo.sprite = _sprite;
+                    _sprite = resourceSo.sprite;
                     break;
                 }
             }

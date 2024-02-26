@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  isBought: 0
-  currentLevel: 0
-  colliderOffSet: {x: 0, y: 0}
-  colliderScale: {x: 0, y: 0}
-  weaponPosition: {x: 0, y: 0, z: 0}
+  isBought: 1
+  currentLevel: 3
+  colliderOffSet: {x: 0.017502248, y: 0.03428027}
+  colliderScale: {x: 0.26311612, y: 1.3263798}
+  weaponPosition: {x: 0.103, y: -1.15, z: 1.0947101}
   weaponsData:
   - name: Wooden Pickaxe
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: e9ce4d9e0d97e31429e37041a544c65b, type: 3}
     resource: 1
     cost: 20
     damage: 5
@@ -27,7 +27,7 @@ MonoBehaviour:
     damageOnStone: 5
     damageOnIron: 2
   - name: Bone Pickaxe
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: 33ac88ccd203484498466d90ddc538bd, type: 3}
     resource: 4
     cost: 30
     damage: 10
@@ -35,7 +35,7 @@ MonoBehaviour:
     damageOnStone: 10
     damageOnIron: 5
   - name: Stone Pickaxe
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: bd6451fad94b81d4e825746c972b9072, type: 3}
     resource: 2
     cost: 50
     damage: 20
@@ -43,7 +43,7 @@ MonoBehaviour:
     damageOnStone: 15
     damageOnIron: 10
   - name: Iron Pickaxe
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: 1ad45405af181be42b19cba30b107cdd, type: 3}
     resource: 3
     cost: 100
     damage: 40
