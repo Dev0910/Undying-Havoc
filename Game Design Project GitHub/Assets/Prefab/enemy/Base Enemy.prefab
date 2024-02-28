@@ -177,16 +177,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   currentHealth: 0
-  incrementInHpEachWaveInPercentage: 7.5
+  incrementInHpEachWaveInPercentage: 5
   resourcePrefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
   resourceSO: {fileID: 11400000, guid: 4d42dfc12ae4f654a80ff33bc952284a, type: 2}
-  resourceAmount: 1
+  resourceAmount: 5
   moveSpeed: 1
   minimumDistanceFromPlayer: 0.5
   attackSpeed: 1
   startDamage: 5
   currentDamage: 0
-  incrementInDamageEachWaveInPercentage: 7.5
+  incrementInDamageEachWaveInPercentage: 5
   attackAfterSecondsOfContact: 1
   healthbar: {fileID: 6632498901645093359}
   Blood: {fileID: 5664469046887157037, guid: 023acf05f7ebbd9479feb8670d8dd5c8, type: 3}

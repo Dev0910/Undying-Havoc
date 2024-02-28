@@ -177,6 +177,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2826271847800566169, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
+      propertyPath: m_text
+      value: ': 00'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826271847800566169, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5809539108104142936, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
       propertyPath: m_text
       value: The turret offers defense against monsters with a maximum of 100 HP
@@ -269,6 +277,14 @@ PrefabInstance:
     - target: {fileID: 7156750438603443645, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423249951143644405, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 156.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423249951143644405, guid: 8d5047caaa20c594da3a7917ae9df65a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

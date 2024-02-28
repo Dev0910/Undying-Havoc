@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && sourceInRange != null)
         {
             Source source = sourceInRange.GetComponent<Source>();
-            CollectResources(source);
+            DropResources(source);
         }
 
     }
@@ -192,7 +192,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void CollectResources(Source source)
+    private void DropResources(Source source)
     {
         switch (source.source)
         {

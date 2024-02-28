@@ -54,6 +54,9 @@ TagManager:
   - name: Building
     uniqueID: 3543754709
     locked: 0
+  - name: Resource
+    uniqueID: 1153071985
+    locked: 0
   - name: Player
     uniqueID: 3873623519
     locked: 0

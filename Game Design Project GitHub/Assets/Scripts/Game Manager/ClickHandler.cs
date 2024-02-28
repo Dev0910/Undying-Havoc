@@ -6,7 +6,6 @@ public class ClickHandler : MonoBehaviour
 {
     public static bool xDown;
     public static bool vDown;
-    public static bool eDown;
     public GameObject meleeWeapon;
     
 
@@ -23,8 +22,6 @@ public class ClickHandler : MonoBehaviour
         if (Input.GetKey(KeyCode.X)) { xDown = true; } else if (!Input.GetKey(KeyCode.X)) { xDown = false; }
         //cheak for V input
         if (Input.GetKey(KeyCode.V)) { vDown = true; } else if (!Input.GetKey(KeyCode.V)) { vDown = false; }
-        //cheak foe E input
-        if (Input.GetKey(KeyCode.E)) { eDown = true; } else if (!Input.GetKey(KeyCode.E)) { eDown = false; }
 
         //switch weapon according to the number pressed
 

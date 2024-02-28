@@ -50,6 +50,10 @@ public class BuildingBuleprint : MonoBehaviour
         {
             UpgradeBuilding();
         }
+        else if(!ClickHandler.vDown && !ClickHandler.xDown && childGameobejct.name == "Oxygen Generator")
+        {
+            childGameobejct.GetComponent<OxygenGenerator>().SwitchInventoryUI();
+        }
     }
 
     //function is called when building takes damage
@@ -125,11 +129,11 @@ public class BuildingBuleprint : MonoBehaviour
         if (currentLevel < buildingData.Length - 1)
         {
             upgradedSprite = buildingData[currentLevel + 1].buildingSprite;
-            hoverUIScript.UpdateUpgradeCost(buildingData[currentLevel].resourse.resource, buildingData[currentLevel].resourse.amount);
+            hoverUIScript.UpdateUpgradeCost(buildingData[currentLevel].resourse.resource, buildingData[currentLevel].resourse.amount,false);
         }
         else
         {
-            //Display Max Level
+            hoverUIScript.UpdateUpgradeCost(buildingData[currentLevel].resourse.resource, buildingData[currentLevel].resourse.amount, true);
         }
         
         if (childGameobejct.name == "Oxygen Generator")

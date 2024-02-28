@@ -22,7 +22,6 @@ public class Source : MonoBehaviour
             case Esource.Tree:
                 {
                     health -= _amount;
-                    //gs.wood += _amount;
                     gs.woodText.text = ": " + gs.wood;
                     SpawnResource(_amount);
 
@@ -31,7 +30,6 @@ public class Source : MonoBehaviour
             case Esource.Rock:
                 {
                     health -= _amount;
-                    //gs.stone += _amount;
                     SpawnResource(_amount);
                     gs.stoneText.text = ": " + gs.stone;
                 }
@@ -39,7 +37,6 @@ public class Source : MonoBehaviour
             case Esource.IronOre:
                 {
                     health -= _amount;
-                    //gs.iron += _amount;
                     gs.ironText.text = ": " + gs.iron;
                     SpawnResource(_amount);
                 }

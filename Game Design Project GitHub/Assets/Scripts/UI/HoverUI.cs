@@ -28,55 +28,22 @@ public class HoverUI : MonoBehaviour
     public void UpdateSellingPrice(EResources resource,int price)
     {
         sellprice.text = ": " + price.ToString();
-        switch(resource)
-        {
-            case EResources.Wood:
-                {
-
-                }break;
-            case EResources.Stone:
-                {
-
-                }
-                break;
-            case EResources.Iron:
-                {
-
-                }
-                break;
-            case EResources.Bone:
-                {
-
-                }
-                break;
-        }
+        sellResourseImage.sprite = GameManager.Instance.resourceManager.GetResourceSprite(resource);
     }
 
-    public void UpdateUpgradeCost(EResources resource, int cost)
+    public void UpdateUpgradeCost(EResources resource, int cost,bool isMax)
     {
-        upgradecost.text = ": " + cost.ToString();
-        switch (resource)
+        if(isMax)
         {
-            case EResources.Wood:
-                {
-
-                }
-                break;
-            case EResources.Stone:
-                {
-
-                }
-                break;
-            case EResources.Iron:
-                {
-
-                }
-                break;
-            case EResources.Bone:
-                {
-
-                }
-                break;
+            upgradecost.text = "Max Level";
+            upgradeResourseImage.gameObject.SetActive(false);
         }
+        else
+        {
+            upgradeResourseImage.gameObject.SetActive(true);
+            upgradecost.text = ": " + cost.ToString();
+            upgradeResourseImage.sprite = GameManager.Instance.resourceManager.GetResourceSprite(resource);
+        }
+
     }
 }

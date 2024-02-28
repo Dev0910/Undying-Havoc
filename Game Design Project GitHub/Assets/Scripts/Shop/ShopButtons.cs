@@ -34,11 +34,16 @@ public class ShopButtons : MonoBehaviour
         {
             priceAmount.text = "Max Level";
             buyButton.interactable = false;
-            currentResourseImage.sprite = null;
+            currentResourseImage.gameObject.SetActive(false);
             return;
         }
-        buyButton.interactable = true;
-        //currentResourseImage.sprite = resourse;
-        priceAmount.text = ": " + price;
+        else
+        {
+            buyButton.interactable = true;
+            currentResourseImage.gameObject.SetActive(true);
+            currentResourseImage.sprite = GameManager.Instance.resourceManager.GetResourceSprite(resourse);
+            priceAmount.text = ": " + price;
+        }
+
     }
 }
