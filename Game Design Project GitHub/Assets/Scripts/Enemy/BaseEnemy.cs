@@ -190,9 +190,8 @@ public class BaseEnemy : MonoBehaviour
         {
             GameObject temp = Instantiate(resourcePrefab, this.transform.position, Quaternion.identity);
             temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
-            temp.GetComponent<Resource>().ChangeSprite();
             temp.GetComponent<Resource>().SetAmount(1);
-            temp.GetComponent<Resource>().AddForce();
+            temp.GetComponent<Resource>().ResetResource();
         }
     }
 }

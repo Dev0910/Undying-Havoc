@@ -51,7 +51,6 @@ public class Source : MonoBehaviour
         temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
         temp.GetComponent<Resource>().resource = resourcesScriptableObject;
         temp.GetComponent<Resource>().SetAmount(_amount);
-        temp.GetComponent<Resource>().AddForce();
-        temp.GetComponent<Resource>().ChangeSprite();
+        temp.GetComponent<Resource>().ResetResource();
     }
 }
