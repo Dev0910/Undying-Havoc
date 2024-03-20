@@ -70,5 +70,10 @@ public class StartScreenUI : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
     }
+
+    public void LoadSeneByName(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
     
 }

@@ -39,6 +39,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             musicScource.clip = s.clip;
+            musicScource.loop = true;
             musicScource.Play();
         }
     }
