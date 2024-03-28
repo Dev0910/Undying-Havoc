@@ -1,3 +1,4 @@
+using CustomPool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class StoreEnemy
 {
-    public GameObject enemyPrefab;
+    public Pool enemyPool;
+    public EEnemy enemyType;
     public int cost;
 }
 public class SpawnMannager : MonoBehaviour
@@ -17,7 +19,7 @@ public class SpawnMannager : MonoBehaviour
     public int waveValue;
     public int incrementInWaveValu = 10;//the Valu of wave increased each round
     public int maxWaveValue;
-    public List<GameObject> enemiesToSpawn = new List<GameObject>();//to store the enemy to spawn each round
+    public List<StoreEnemy> enemiesToSpawn = new List<StoreEnemy>();//to store the enemy to spawn each round
 
     private float waveDuration;//time between to waves
     public float spawnEnemySecondsBeforeDay;
@@ -34,6 +36,10 @@ public class SpawnMannager : MonoBehaviour
         waveValue = 0;
         player = GameManager.Instance.player;
         waveDuration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
+        foreach (StoreEnemy enemy in enemies)
+        {
+            PoolOperator.InitalSpawn(enemy.enemyPool, this.transform);
+        }
     }
 
     //start of the wave
@@ -55,7 +61,7 @@ public class SpawnMannager : MonoBehaviour
     {
         waveValue = incrementInWaveValu * currentWave <= maxWaveValue ? incrementInWaveValu * currentWave : maxWaveValue;//increase the wave Value each wave
 
-        List<GameObject> generatedEnemies = new List<GameObject>();//temp list to store enemy
+        List<StoreEnemy> generatedEnemies = new List<StoreEnemy>();//temp list to store enemy
         //run the loop until waveValue 0
         while (waveValue > 0)
         {
@@ -64,7 +70,7 @@ public class SpawnMannager : MonoBehaviour
 
             if (waveValue - randEnemyCost >= 0)//cheak if we the the value to get the enemy
             {
-                generatedEnemies.Add(enemies[randEnemyId].enemyPrefab);//add the enemy to the temp list
+                generatedEnemies.Add(enemies[randEnemyId]);//add the enemy to the temp list
                 waveValue -= randEnemyCost;//remove the value of the enmey from the total value
             }
             else if (waveValue <= 0)//break the loop if the wave Valu is over
@@ -78,11 +84,12 @@ public class SpawnMannager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemy = enemiesToSpawn[enemySpawnIndex];//temprory store the enemy to spawn
+        GameObject enemy = PoolOperator.TakeFromList(enemiesToSpawn[enemySpawnIndex].enemyPool);//temprory store the enemy to spawn
         float randomAngle = Random.Range(0f, 360f);//chose a random Angle at which the enemy will be spawned
         Vector2 spawnPosition = player.transform.position + (Quaternion.Euler(0, 0, randomAngle) * Vector2.right * spawnRadius);//I don't Know
-        GameObject e = Instantiate(enemy, spawnPosition, Quaternion.identity);//spawn the enemy
-        e.transform.parent = GameObject.Find("EnemyHolder").transform;
+        //GameObject e = Instantiate(enemy, spawnPosition, Quaternion.identity);//spawn the enemy
+        enemy.transform.position = spawnPosition;
+        //e.transform.parent = GameObject.Find("EnemyHolder").transform;
         if(enemySpawnIndex >= enemiesToSpawn.Count-1)
         {
             enemySpawnIndex = 0;//reset index
@@ -91,6 +98,16 @@ public class SpawnMannager : MonoBehaviour
         else
         {
             enemySpawnIndex++;//increase the spawn index
+        }
+    }
+    public void AddToList(GameObject _enemy , EEnemy _enemyType)
+    {
+        foreach(StoreEnemy enemy in enemies)
+        {
+            if(enemy.enemyType == _enemyType)
+            {
+                PoolOperator.AddToList(_enemy,enemy.enemyPool);
+            }
         }
     }
     

@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resource: {fileID: 11400000, guid: 4d42dfc12ae4f654a80ff33bc952284a, type: 2}
+  collider2D: {fileID: 1172747781392564460}
   amount: 0
   dropForce: 200
   animationTime: 2
@@ -182,7 +183,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

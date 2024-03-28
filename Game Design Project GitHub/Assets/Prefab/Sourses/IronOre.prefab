@@ -136,5 +136,5 @@ MonoBehaviour:
   source: 3
   Resources: 3
   resourcesScriptableObject: {fileID: 11400000, guid: 3ca44451dc3fb324ea1cd2aece1131cd, type: 2}
-  resourcePrefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
+  resourcePrefab: {fileID: 0}
   health: 100

@@ -723,6 +723,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67448547}
   m_CullTransparentMesh: 1
+--- !u!1 &72997480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72997481}
+  - component: {fileID: 72997482}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &72997481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72997480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.041147448, y: 0.39848667, z: -0.039185274}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &72997482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72997480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea0d7ff339e7ff4bad06b66790080bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - name: 1
+    prefab: {fileID: 3300150250650095056, guid: 2bbb9efa4f9d13143b306c33596034e3, type: 3}
+    initialSpawnNumber: 100
+    list: []
+  - name: 2
+    prefab: {fileID: 6024176537133862097, guid: 03f4bd8b86329d84a8296841d250d1b5, type: 3}
+    initialSpawnNumber: 25
+    list: []
 --- !u!1 &89509890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,37 +4332,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499365295}
   m_CullTransparentMesh: 1
---- !u!1 &510878551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 510878552}
-  m_Layer: 0
-  m_Name: GrenateHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &510878552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510878551}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1683247304}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7232,37 +7254,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822556438}
   m_CullTransparentMesh: 1
---- !u!1 &825831122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 825831123}
-  m_Layer: 0
-  m_Name: CoinHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &825831123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 825831122}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1683247304}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831984966
 GameObject:
   m_ObjectHideFlags: 0
@@ -12085,10 +12076,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 98345155}
-  - {fileID: 825831123}
   - {fileID: 407829683}
   - {fileID: 274357681}
-  - {fileID: 510878552}
   - {fileID: 365041443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14092,12 +14081,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - enemyPrefab: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
+  - enemyPool:
+      name: 0
+      prefab: {fileID: 1873336292684052267, guid: d281004c57536804583fef9d49233390, type: 3}
+      initialSpawnNumber: 20
+      list: []
+    enemyType: 1
     cost: 1
-  - enemyPrefab: {fileID: 8998734048793481822, guid: a3c7884fb8b1d0f49b6ad21b066e7c75, type: 3}
-    cost: 5
-  - enemyPrefab: {fileID: 2361591490497355261, guid: 8cd566e0ca0c5bd45ad35582571bbd0e, type: 3}
+  - enemyPool:
+      name: 0
+      prefab: {fileID: 2361591490497355261, guid: 8cd566e0ca0c5bd45ad35582571bbd0e, type: 3}
+      initialSpawnNumber: 20
+      list: []
+    enemyType: 2
     cost: 2
+  - enemyPool:
+      name: 0
+      prefab: {fileID: 8998734048793481822, guid: a3c7884fb8b1d0f49b6ad21b066e7c75, type: 3}
+      initialSpawnNumber: 10
+      list: []
+    enemyType: 3
+    cost: 5
   waveValue: 0
   incrementInWaveValu: 3
   maxWaveValue: 50
@@ -14234,13 +14238,25 @@ MonoBehaviour:
   respawnEvery: 10
   resoursesList:
   - name: 1
-    resoursePrefab: {fileID: 5401611050919121785, guid: 3ac10d9ac63bd5045a898a810adb76f9, type: 3}
+    resoursePool:
+      name: 0
+      prefab: {fileID: 5401611050919121785, guid: 3ac10d9ac63bd5045a898a810adb76f9, type: 3}
+      initialSpawnNumber: 250
+      list: []
     numberOfSpawns: 200
   - name: 2
-    resoursePrefab: {fileID: 2493225183415712695, guid: 10f9e39384db4d84fa55bdd798d983bb, type: 3}
+    resoursePool:
+      name: 0
+      prefab: {fileID: 2493225183415712695, guid: 10f9e39384db4d84fa55bdd798d983bb, type: 3}
+      initialSpawnNumber: 150
+      list: []
     numberOfSpawns: 100
   - name: 3
-    resoursePrefab: {fileID: 8367194814434473180, guid: 2a32af65f0e2e7d4f91e9b2c1ab976e8, type: 3}
+    resoursePool:
+      name: 0
+      prefab: {fileID: 8367194814434473180, guid: 2a32af65f0e2e7d4f91e9b2c1ab976e8, type: 3}
+      initialSpawnNumber: 100
+      list: []
     numberOfSpawns: 50
 --- !u!114 &1966874529
 MonoBehaviour:
@@ -27605,3 +27621,4 @@ SceneRoots:
   - {fileID: 1683247304}
   - {fileID: 1970100378}
   - {fileID: 5159801922426178069}
+  - {fileID: 72997481}

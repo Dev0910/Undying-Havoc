@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomPool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 
 public class BaseEnemy : MonoBehaviour
 {
+    public EEnemy enemyType;
     [Header("Health")]
     public float startHealth;
     public float currentHealth;
@@ -15,7 +17,7 @@ public class BaseEnemy : MonoBehaviour
     public float incrementInHpEachWaveInPercentage;
 
     [Header("Resource")]
-    public GameObject resourcePrefab;
+    //public GameObject resourcePrefab;
     public ResourcesScriptableObject resourceSO;
     public int resourceAmount;
 
@@ -102,7 +104,7 @@ public class BaseEnemy : MonoBehaviour
     //take damage from buildings/Player
     public void TakeDamage(float damage)
     {
-        if (currentHealth  > 0)
+        if (currentHealth > 0)
         {
             currentHealth -= damage;
         }
@@ -111,7 +113,8 @@ public class BaseEnemy : MonoBehaviour
             //GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
             DropResourses();
             GameStats.score++;
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            GameManager.Instance.spawnManager.AddToList(this.gameObject, enemyType);
             GameObject bloodEffect = Instantiate(Blood, transform.position, Quaternion.identity);
             GameObject.Destroy(bloodEffect,0.5f);
         }
@@ -188,10 +191,22 @@ public class BaseEnemy : MonoBehaviour
     {
         for(int i = 0;i<resourceAmount;i++)
         {
-            GameObject temp = Instantiate(resourcePrefab, this.transform.position, Quaternion.identity);
-            temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
-            temp.GetComponent<Resource>().SetAmount(1);
-            temp.GetComponent<Resource>().ResetResource();
+            //Instantiate(resourcePrefab, this.transform.position, Quaternion.identity);
+            GameObject temp = PoolManager.Instance.TakeFromPool(EPool.Resource);
+            temp.transform.position = this.transform.position;
+            //temp.transform.parent = GameObject.Find("ResourcesHolder").transform;
+            Resource resource = temp.GetComponent<Resource>();
+            resource.resource = resourceSO;
+            resource.SetAmount(1);
+            resource.ResetResource();
         }
     }
+}
+
+public enum EEnemy
+{
+    none,
+    Base,
+    Fast,
+    Tank
 }

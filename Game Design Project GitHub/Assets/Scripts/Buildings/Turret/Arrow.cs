@@ -22,7 +22,8 @@ public class Arrow : MonoBehaviour
         if (target == null)//if there is no target
         {
             gameObject.SetActive(false);
-            ArrowTurret.qbullet.Enqueue(gameObject);//add to the bullet queue
+            //ArrowTurret.qbullet.Enqueue(gameObject);//add to the bullet queue
+            PoolManager.Instance.AddToPool(this.gameObject, EPool.Bullet);
             return;
         }
 
@@ -52,6 +53,7 @@ public class Arrow : MonoBehaviour
         //Destroy(gameObject);
 
         gameObject.SetActive(false);
-        ArrowTurret.qbullet.Enqueue(gameObject);//adding to the bullet queue
+        //ArrowTurret.qbullet.Enqueue(gameObject);//adding to the bullet queue
+        PoolManager.Instance.AddToPool(this.gameObject,EPool.Bullet);
     }
 }

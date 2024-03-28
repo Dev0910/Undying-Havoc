@@ -16,7 +16,7 @@ public class ArrowTurret : BuildingBuleprint
     public string enemyTag = "Enemy";
     public GameObject bulletPrefab;
 
-    public static Queue<GameObject> qbullet;//creating the bullet queue for object pooling
+    //public static Queue<GameObject> qbullet;//creating the bullet queue for object pooling
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class ArrowTurret : BuildingBuleprint
         spriteRenderer.sprite = currentSpriite;
         nearestTile = GameManager.Instance.gridSystem.GetNearestTile(this.transform.position);//geting the nearest tile by calling the function in class GridSystem
         InvokeRepeating("UpdateTarget", 0f, 0.5f);//updating target every 0.5sec
-        qbullet = new Queue<GameObject>();
+        //qbullet = new Queue<GameObject>();
     }
     void UpdateTarget()
     {
@@ -82,35 +82,15 @@ public class ArrowTurret : BuildingBuleprint
     {
         GameObject bulletGO;//temporary gameobject
 
-        if (CheakQueue())//if the bullet queue is not empty
-        {
-            bulletGO = qbullet.Dequeue();//take the first bullet from the queue
-            bulletGO.SetActive(true);//set it active
-            bulletGO.transform.position = transform.position;//change the position to the turret position
-        }
-        else//if it is empty spawn a new bullet
-        {
-            bulletGO = (GameObject)Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
-            bulletGO.transform.parent = this.transform;//set the turret as the bullet's parent
-        }
-        
+        bulletGO = PoolManager.Instance.TakeFromPool(EPool.Bullet);//take the first bullet from the queue
+        bulletGO.transform.position = transform.position;//change the position to the turret position
+
         Arrow arrow = bulletGO.GetComponent<Arrow>();//creating an instance of the bullet script
 
         if (arrow != null)
         {
             arrow.seek(target,currentBulletSprite,damage);//giving target to the bullet
         }
-    }
-
-    //return if the queue is empty or not
-    bool CheakQueue()
-    {
-        if (qbullet.Count > 0)
-        {
-            return true;
-        }
-        return false;
-
     }
 
 

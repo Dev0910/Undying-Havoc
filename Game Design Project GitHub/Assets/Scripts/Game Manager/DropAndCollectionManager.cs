@@ -16,31 +16,32 @@ public class DropAndCollectionManager : MonoBehaviour
             case EResources.Bone:
                 {
                     GameManager.Instance.gameStats.bone += _resource.GetComponent<Resource>().amount;
-                    Destroy(_resource.gameObject);
+                    //Destroy(_resource.gameObject);
                     GameManager.Instance.gameStats.boneText.text = ": " + GameManager.Instance.gameStats.bone;
                     break;
                 }
             case EResources.Wood:
                 {
                     GameManager.Instance.gameStats.wood += _resource.GetComponent<Resource>().amount;
-                    Destroy(_resource.gameObject);
+                    //Destroy(_resource.gameObject);
                     GameManager.Instance.gameStats.woodText.text = ": " + GameManager.Instance.gameStats.wood;
                     break;
                 }
             case EResources.Stone:
                 {
                     GameManager.Instance.gameStats.stone += _resource.GetComponent<Resource>().amount;
-                    Destroy(_resource.gameObject);
+                    //Destroy(_resource.gameObject);
                     GameManager.Instance.gameStats.stoneText.text = ": " + GameManager.Instance.gameStats.stone;
                     break;
                 }
             case EResources.Iron:
                 {
                     GameManager.Instance.gameStats.iron += _resource.GetComponent<Resource>().amount;
-                    Destroy(_resource.gameObject);
+                    //Destroy(_resource.gameObject);
                     GameManager.Instance.gameStats.ironText.text = ": " + GameManager.Instance.gameStats.iron;
                     break;
                 }
         }
+        PoolManager.Instance.AddToPool(_resource.gameObject,EPool.Resource);
     }
 }

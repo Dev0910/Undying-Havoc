@@ -1,3 +1,4 @@
+using CustomPool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ public class ResoursesSpawner : MonoBehaviour
         currentMinDistance = startMinDistanceFromEachOrher;
         //respawnTimmer = UnityEngine.Random.Range((respawnEvery - (respawnEvery/5)), (respawnEvery + respawnEvery/5));
         StartCoroutine(ReSpawnResourses());
+        foreach(ResoursesList resourses in resoursesList)
+        {
+            PoolOperator.InitalSpawn(resourses.resoursePool, this.transform);
+        }
         InitalSpawn();
 
     }
@@ -41,7 +46,9 @@ public class ResoursesSpawner : MonoBehaviour
 
             if (FindShortestDistance(spawnPos) > currentMinDistance)
             {
-                Instantiate(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePrefab, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+                //Instantiate(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePool, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+                GameObject temp = PoolOperator.TakeFromList(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePool);
+                temp.transform.position = spawnPos;
                 hasSpawn = true;
             }
             else
@@ -60,7 +67,9 @@ public class ResoursesSpawner : MonoBehaviour
         {
 
             RandomSpawnPoints();
-            Instantiate(resoursesList[i].resoursePrefab, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+            //Instantiate(, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+            GameObject temp1 = PoolOperator.TakeFromList(resoursesList[i].resoursePool);
+            temp1.transform.position = spawnPos;
 
             for (int j = 1; j < resoursesList[i].numberOfSpawns; j++)
             {
@@ -71,7 +80,9 @@ public class ResoursesSpawner : MonoBehaviour
                     
                     if (FindShortestDistance(spawnPos) > currentMinDistance)
                     {
-                        Instantiate(resoursesList[i].resoursePrefab, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
+                        //Instantiate(resoursesList[i].resoursePrefab, spawnPos, Quaternion.identity);
+                        GameObject temp2 = PoolOperator.TakeFromList(resoursesList[i].resoursePool);
+                        temp2.transform.position = spawnPos;
                         hasSpawn = true;
                     }
                     else
@@ -116,6 +127,17 @@ public class ResoursesSpawner : MonoBehaviour
         }
         return shortestDistance;
     }
+
+    public void AddToList(GameObject _gameObject, Esource esource)
+    {
+        foreach(ResoursesList _resoursesList in resoursesList)
+        {
+            if(esource == _resoursesList.name)
+            {
+                PoolOperator.AddToList(_gameObject,_resoursesList.resoursePool);
+            }
+        }
+    }
 }
 
 [Serializable]
@@ -123,6 +145,6 @@ public class ResoursesList
 {
     public Esource name;
     //public static List<GameObject> spawnedResourses = new List<GameObject>();
-    public GameObject resoursePrefab;
+    public Pool resoursePool;
     public int numberOfSpawns;
 }

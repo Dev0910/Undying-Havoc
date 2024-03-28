@@ -31,6 +31,7 @@ public class OxygenGenerator : BuildingBuleprint
         rangeGO = GameObject.Find("Range");
         inventoryUI.SetActive(false);
         inventoryManager = gameObject.GetComponent<InventoryManager>();
+        InvokeRepeating("HealthCheak", 1.0f, 1.0f);
     }
     //caleed by the base class when the building is upgraded to upgrade the range of the oxygen area
     public void UpgradeRange()
@@ -132,6 +133,15 @@ public class OxygenGenerator : BuildingBuleprint
         }
         //loop back to the fuel cheak
         StartCoroutine(FuelCheak());
+    }
+
+    private void HealthCheak()
+    {
+        if(isOxygenAreaUp && currentHealth < currentMaxHealth)
+        {
+            currentMaxHealth += 1.0f;
+            Mathf.Clamp(currentMaxHealth, 0.0f, currentMaxHealth);
+        }
     }
 
     public void CloseInventoryUI()
