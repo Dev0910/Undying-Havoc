@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
     {
         foreach (var pool in pools)
         {
-            PoolOperator.InitalSpawn(pool,this.transform);
+            pool.InitalSpawn(this.transform);
         }
     }
     public void AddToPool(GameObject _gameobject,EPool poolType)
@@ -31,7 +31,7 @@ public class PoolManager : MonoBehaviour
         {
             if(pool.name == poolType)
             {
-                PoolOperator.AddToList(_gameobject,pool);
+                pool.AddToList(_gameobject);
             }
         }
     }
@@ -41,7 +41,7 @@ public class PoolManager : MonoBehaviour
         {
             if (pool.name == poolType)
             {
-                return PoolOperator.TakeFromList(pool);
+                return pool.TakeFromList();
             }
         }
         return null;

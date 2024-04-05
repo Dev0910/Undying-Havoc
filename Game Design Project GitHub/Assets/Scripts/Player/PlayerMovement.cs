@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
     private void LateUpdate()
     { 
         // called on mouse clicked
-        if (Input.GetMouseButtonDown(0))
-        {
-            transform.Rotate(Vector3.forward * rotationAngle);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    transform.Rotate(Vector3.forward * rotationAngle);
+        //}
         
     }
     private void FixedUpdate()
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         //set the player rotation accoring to the mouse posotion
         Vector2 lookDir = mousepos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
-        rb.rotation = angle;
+        //rb.rotation = angle;
     }
 
     //called by the buttons in the shop to increase the move speed

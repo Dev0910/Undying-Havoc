@@ -60,13 +60,35 @@ namespace CustomPool
     }
 
     [System.Serializable]
-    public class Pool
+    public class Pool:IPool
     {
         public EPool name;
         public GameObject prefab;
         public int initialSpawnNumber;
         public List<GameObject> list;
         internal GameObject placeHolder;
+
+        public void InitalSpawn(Transform parent)
+        {
+            PoolOperator.InitalSpawn(this, parent);
+        }
+        public GameObject TakeFromList()
+        {
+            GameObject temp = PoolOperator.TakeFromList(this);
+            return temp;
+        }
+        public void AddToList(GameObject gameObject)
+        {
+            PoolOperator.AddToList(gameObject, this);
+        }
+    }
+
+    public interface IPool
+    {
+        public void InitalSpawn(Transform parent);
+        public GameObject TakeFromList();
+        public void AddToList(GameObject gameObject);
+
     }
 }
 

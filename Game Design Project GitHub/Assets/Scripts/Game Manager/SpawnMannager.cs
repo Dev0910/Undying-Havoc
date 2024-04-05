@@ -38,7 +38,7 @@ public class SpawnMannager : MonoBehaviour
         waveDuration = GameManager.Instance.dayAndNight.timeBetweenDayAndNight;
         foreach (StoreEnemy enemy in enemies)
         {
-            PoolOperator.InitalSpawn(enemy.enemyPool, this.transform);
+            enemy.enemyPool.InitalSpawn(this.transform);
         }
     }
 
@@ -84,7 +84,8 @@ public class SpawnMannager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemy = PoolOperator.TakeFromList(enemiesToSpawn[enemySpawnIndex].enemyPool);//temprory store the enemy to spawn
+        //GameObject enemy = PoolOperator.TakeFromList(enemiesToSpawn[enemySpawnIndex].enemyPool);//temprory store the enemy to spawn
+        GameObject enemy = enemiesToSpawn[enemySpawnIndex].enemyPool.TakeFromList();
         float randomAngle = Random.Range(0f, 360f);//chose a random Angle at which the enemy will be spawned
         Vector2 spawnPosition = player.transform.position + (Quaternion.Euler(0, 0, randomAngle) * Vector2.right * spawnRadius);//I don't Know
         //GameObject e = Instantiate(enemy, spawnPosition, Quaternion.identity);//spawn the enemy
@@ -106,7 +107,8 @@ public class SpawnMannager : MonoBehaviour
         {
             if(enemy.enemyType == _enemyType)
             {
-                PoolOperator.AddToList(_enemy,enemy.enemyPool);
+                //PoolOperator.AddToList(_enemy,enemy.enemyPool);
+                enemy.enemyPool.AddToList(_enemy);
             }
         }
     }

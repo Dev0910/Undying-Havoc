@@ -22,14 +22,17 @@ public class Weapon : MonoBehaviour
     private GameObject sourceInRange;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
-
+    private bool isAttacking;
+    private Animator playerAnimator;
     
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        playerAnimator = GetComponentInParent<Animator>();
 
         enemyToAttack = null;
+        isAttacking = false;
         sourceInRange = null;
         currentWeapon = null;
         boxCollider2D.enabled = false;
@@ -42,10 +45,12 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0))// && enemyToAttack != null
         {
-            BaseEnemy baseEnemy = enemyToAttack.GetComponent<BaseEnemy>();
-            baseEnemy.TakeDamage(damage);
+            isAttacking = true;
+            playerAnimator.SetTrigger("Attack");
+            CancelInvoke("IsAttackingFalse");
+            Invoke("IsAttackingFalse", 0.2f);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && sourceInRange != null)
         {
@@ -54,7 +59,10 @@ public class Weapon : MonoBehaviour
         }
 
     }
-
+    private void IsAttackingFalse()
+    {
+        isAttacking = false;
+    }
     public void SwitchWeapon(int numberPressed)
     {
         if(currentWeapon == null) { return; }
@@ -86,22 +94,31 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            enemyToAttack = collision.gameObject;
-        }
-        if(collision.gameObject.tag == "Sourse")
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    enemyToAttack = collision.gameObject;
+        //}
+        if (collision.gameObject.tag == "Sourse")
         {
             sourceInRange = collision.gameObject;
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && isAttacking)
+        {
+            BaseEnemy baseEnemy = collision.gameObject.GetComponent<BaseEnemy>();
+            baseEnemy.TakeDamage(damage);
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            enemyToAttack = null;
-        }
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    enemyToAttack = null;
+        //}
         if (collision.gameObject.tag == "Sourse")
         {
             sourceInRange = null;

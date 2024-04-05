@@ -27,7 +27,7 @@ public class ResoursesSpawner : MonoBehaviour
         StartCoroutine(ReSpawnResourses());
         foreach(ResoursesList resourses in resoursesList)
         {
-            PoolOperator.InitalSpawn(resourses.resoursePool, this.transform);
+            resourses.resoursePool.InitalSpawn(this.transform);
         }
         InitalSpawn();
 
@@ -47,7 +47,7 @@ public class ResoursesSpawner : MonoBehaviour
             if (FindShortestDistance(spawnPos) > currentMinDistance)
             {
                 //Instantiate(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePool, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
-                GameObject temp = PoolOperator.TakeFromList(resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePool);
+                GameObject temp = resoursesList[UnityEngine.Random.Range(0, resoursesList.Length)].resoursePool.TakeFromList();
                 temp.transform.position = spawnPos;
                 hasSpawn = true;
             }
@@ -68,7 +68,7 @@ public class ResoursesSpawner : MonoBehaviour
 
             RandomSpawnPoints();
             //Instantiate(, spawnPos, Quaternion.identity).transform.parent = GameObject.Find("ResourcesHolder").transform;
-            GameObject temp1 = PoolOperator.TakeFromList(resoursesList[i].resoursePool);
+            GameObject temp1 = resoursesList[i].resoursePool.TakeFromList();
             temp1.transform.position = spawnPos;
 
             for (int j = 1; j < resoursesList[i].numberOfSpawns; j++)
@@ -81,7 +81,7 @@ public class ResoursesSpawner : MonoBehaviour
                     if (FindShortestDistance(spawnPos) > currentMinDistance)
                     {
                         //Instantiate(resoursesList[i].resoursePrefab, spawnPos, Quaternion.identity);
-                        GameObject temp2 = PoolOperator.TakeFromList(resoursesList[i].resoursePool);
+                        GameObject temp2 = resoursesList[i].resoursePool.TakeFromList();
                         temp2.transform.position = spawnPos;
                         hasSpawn = true;
                     }
@@ -134,7 +134,7 @@ public class ResoursesSpawner : MonoBehaviour
         {
             if(esource == _resoursesList.name)
             {
-                PoolOperator.AddToList(_gameObject,_resoursesList.resoursePool);
+                _resoursesList.resoursePool.AddToList(_gameObject);
             }
         }
     }
