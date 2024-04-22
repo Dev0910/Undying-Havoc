@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBought: 0
   currentLevel: 0
-  colliderOffSet: {x: 0.04842037, y: 0.021913022}
-  colliderScale: {x: 0.20127988, y: 1.3016453}
+  colliderOffSet: {x: -0.38107234, y: -0.059827298}
+  colliderScale: {x: 1.0602653, y: 1.4924531}
   weaponPosition: {x: -0.297, y: -0.945, z: 1.0947101}
   weaponsData:
   - name: Wooden Sword

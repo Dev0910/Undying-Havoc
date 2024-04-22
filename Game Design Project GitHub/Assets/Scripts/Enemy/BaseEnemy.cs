@@ -108,7 +108,7 @@ public class BaseEnemy : MonoBehaviour
         {
             currentHealth -= damage;
         }
-        if(currentHealth <= 0)
+        if(currentHealth <= 0 && this.gameObject.activeInHierarchy)
         {
             //GameManager.Instance.dropAndCollectionManager.DropGold(this.transform.position,currentValueInGold);
             DropResourses();

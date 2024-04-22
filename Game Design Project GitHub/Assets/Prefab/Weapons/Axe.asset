@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  isBought: 1
-  currentLevel: 3
-  colliderOffSet: {x: 0.049999997, y: -0.06571624}
-  colliderScale: {x: 0.15, y: 1.1985676}
+  isBought: 0
+  currentLevel: 0
+  colliderOffSet: {x: -0.38107312, y: -0.059827745}
+  colliderScale: {x: 1.0602667, y: 1.2710222}
   weaponPosition: {x: -0.27, y: -1.06, z: 1.0947101}
   weaponsData:
   - name: Wooden Axe

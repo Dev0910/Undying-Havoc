@@ -45,12 +45,13 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))// && enemyToAttack != null
+        if (Input.GetKeyDown(KeyCode.Mouse0) && enemyToAttack != null)
         {
-            isAttacking = true;
-            playerAnimator.SetTrigger("Attack");
-            CancelInvoke("IsAttackingFalse");
-            Invoke("IsAttackingFalse", 0.2f);
+            //isAttacking = true;
+            //playerAnimator.SetTrigger("Attack");
+            //CancelInvoke("IsAttackingFalse");
+            //Invoke("IsAttackingFalse", 0.2f);
+            enemyToAttack.GetComponent<BaseEnemy>().TakeDamage(damage);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && sourceInRange != null)
         {
@@ -106,10 +107,10 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" && isAttacking)
+        if (collision.gameObject.tag == "Enemy")
         {
-            BaseEnemy baseEnemy = collision.gameObject.GetComponent<BaseEnemy>();
-            baseEnemy.TakeDamage(damage);
+            //BaseEnemy baseEnemy = collision.gameObject.GetComponent<BaseEnemy>();
+            enemyToAttack = collision.gameObject;
         }
     }
 

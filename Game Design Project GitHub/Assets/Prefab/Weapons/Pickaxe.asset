@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6d9189c5370aa41b79486ebf0e6eb9, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  isBought: 1
-  currentLevel: 3
-  colliderOffSet: {x: 0.017502248, y: 0.03428027}
-  colliderScale: {x: 0.26311612, y: 1.3263798}
+  isBought: 0
+  currentLevel: 0
+  colliderOffSet: {x: -0.4364301, y: 0.012137294}
+  colliderScale: {x: 1.1709809, y: 1.3928092}
   weaponPosition: {x: 0.103, y: -1.15, z: 1.0947101}
   weaponsData:
   - name: Wooden Pickaxe

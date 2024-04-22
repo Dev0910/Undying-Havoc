@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
@@ -8,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public List<MoveSpeedLevels> moveSpeedLevels;
     private float currentMoveSpeed;
+    private Animator animator;
     private int currentLevel;
     private float moveSpeed;
     public Rigidbody2D rb;
@@ -16,10 +18,17 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     Vector2 mousepos;
 
-    private float rotationAngle = 45.0f;
+    [Header("Attack Animation")]
+    [SerializeField] private float animationDuration;
+    [SerializeField] private float angleOfRotation;
+
+
+    private float attackRotationAngle = 0;
     private void Start()
     {
         currentLevel = 0;
+        attackRotationAngle = 0;
+        animator = GetComponent<Animator>();
         currentMoveSpeed = moveSpeedLevels[currentLevel].speed;
         
     }
@@ -35,13 +44,16 @@ public class PlayerMovement : MonoBehaviour
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
     private void LateUpdate()
-    { 
+    {
         // called on mouse clicked
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    transform.Rotate(Vector3.forward * rotationAngle);
-        //}
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            //animator.SetTrigger("Attack");
+            //transform.Rotate(Vector3.forward * rotationAngle);
+            //StopCoroutine("AttackAnimation");
+            StartCoroutine("AttackAnimation");
+        }
+
     }
     private void FixedUpdate()
     {
@@ -50,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
         //set the player rotation accoring to the mouse posotion
         Vector2 lookDir = mousepos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
-        //rb.rotation = angle;
+        angle += attackRotationAngle;
+        rb.rotation = angle;
     }
 
     //called by the buttons in the shop to increase the move speed
@@ -68,11 +81,25 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    IEnumerator AttackAnimation()
+    {
+        attackRotationAngle = 0;
+        for (int i = 0; i  < angleOfRotation; i++)
+        {
+            yield return new WaitForSeconds(animationDuration / (angleOfRotation * 2));
+            attackRotationAngle = i;
+        }
+        for (int i = (int)angleOfRotation; i >= 0; i--)
+        {
+            yield return new WaitForSeconds(animationDuration / (angleOfRotation * 2));
+            attackRotationAngle = i;
+        }
+    }
 }
 
 //a class to store all the levels of the move speed
 [System.Serializable]
-public class MoveSpeedLevels
+public struct MoveSpeedLevels
 {
     public string name;
     public float speed;
