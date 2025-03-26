@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class MainScreenUi : MonoBehaviour
 {
@@ -41,8 +42,8 @@ public class MainScreenUi : MonoBehaviour
 
     public void Resume()
     {
-        allPanel[pausePanalIndex].SetActive(false);
         Time.timeScale = 1f;
+        allPanel[pausePanalIndex].SetActive(false);
         GameIsPaused = false;
     }
 
@@ -51,7 +52,6 @@ public class MainScreenUi : MonoBehaviour
         allPanel[pausePanalIndex].SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        
     }
 
     public void LoadScene(string scene)
@@ -68,8 +68,8 @@ public class MainScreenUi : MonoBehaviour
     }
     public void ClosePanal()
     {
-        isAnyOtherPanelOpened = false;
         panalOpened.SetActive(false);
+        isAnyOtherPanelOpened = false;
     }
 
 }

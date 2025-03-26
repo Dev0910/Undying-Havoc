@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class StartScreenUI : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class StartScreenUI : MonoBehaviour
             if (i == startPanalIndex)
             {
                 allPanel[i].SetActive(true);
+                allPanel[i].transform.localScale = Vector2.zero;
+                allPanel[i].transform.DOScale(Vector2.one, 0.5f).SetEase(Ease.OutBounce);
                 panelOpened[i] = true;
                 currentPanalIndex = i;
             }
@@ -48,15 +51,19 @@ public class StartScreenUI : MonoBehaviour
         if (!panelOpened[index])
         {
             allPanel[index].SetActive(true);
+            allPanel[index].transform.localScale = Vector2.zero;
+            allPanel[index].transform.DOScale(Vector2.one, 0.5f).SetEase(Ease.OutBounce);
             panelOpened[index] = true;
             currentPanalIndex = index;
         }
         else
         {
-
-            allPanel[index].SetActive(false);
-            panelOpened[index] = false;
-            currentPanalIndex = startPanalIndex;
+            allPanel[index].transform.DOScale(Vector2.zero, 0.3f).SetEase(Ease.Flash).OnComplete(() =>
+            {
+                allPanel[index].SetActive(false);
+                panelOpened[index] = false;
+                currentPanalIndex = startPanalIndex;
+            });
         }
 
     }
@@ -75,5 +82,5 @@ public class StartScreenUI : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
-    
+
 }
