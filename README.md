@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/media/undying-havoc-icon.webp" alt="Wooden fortress and turret icon for Undying Havoc" width="180">
+</p>
+
 <h1 align="center">Undying Havoc</h1>
 
 <p align="center">
